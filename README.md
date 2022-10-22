@@ -3,7 +3,22 @@ This is a [Next.js](https://nextjs.org/) project
 This project uses:
 NextJS + TailwindCSS + PWA + Redux Toolkit + Auth0
 
+## Prerequisites
+
+1. NodeJS installed
+2. `pnpm` installed
+
+
 ## Getting Started
+
+Get the project
+```bash
+git clone https://github.com/Shubhrajyoti-Dey-FrosTiK/tpc-portal-frontend.git
+```
+Get into the project
+```
+cd tpc-portal-frontend
+```
 
 Install the packages
 
