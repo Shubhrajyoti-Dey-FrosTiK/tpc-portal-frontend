@@ -1,7 +1,13 @@
+// Firebase
 import firebase from "firebase/compat/app";
-
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+// Constants
 import { ERROR } from "../constants/codes.js";
+
+// Redux
+import { store } from "../store/store.js";
+import { setUserToken } from "../store/states/userSlice.js";
 
 const provider = new GoogleAuthProvider();
 
@@ -19,8 +25,19 @@ export const handleLoginWithGoogle = async () => {
   try {
     const auth = getAuth(firebase.initializeApp(FirebaseCredentials));
     try {
-      return await signInWithPopup(auth, provider);
+      auth.onAuthStateChanged(async function (user) {
+        if (user) {
+          // User is already logged in
+          console.log(await user.getIdToken());
+          const userIdToken = await user.getIdToken();
+          store.dispatch(setUserToken(userIdToken));
+        } else {
+          // Log in the user using the Popup
+          await signInWithPopup(auth, provider);
+        }
+      });
     } catch (error) {
+      console.log("hello");
       return { error: error.message };
     }
   } catch (error) {

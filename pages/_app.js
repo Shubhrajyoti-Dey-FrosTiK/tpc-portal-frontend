@@ -3,7 +3,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 
 // Store
 import { Provider } from "react-redux";
-import store from "../store/store.js";
+import { persistor, store } from "../store/store.js";
 
 // Libraries
 import { useEffect } from "react";
@@ -13,6 +13,7 @@ import Nav from "../components/Nav/Nav";
 
 // Constants
 import { NAV } from "../constants/nav";
+import { PersistGate } from "redux-persist/integration/react";
 
 export function reportWebVitals(metric) {
   console.log(metric);
@@ -24,11 +25,13 @@ function MyApp({ Component, pageProps }) {
   }, []);
   return (
     <Provider store={store}>
-      <Nav sideNavOptions={NAV}>
-        <ThemeProvider>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </Nav>
+      <PersistGate persistor={persistor}>
+        <Nav sideNavOptions={NAV}>
+          <ThemeProvider>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </Nav>
+      </PersistGate>
     </Provider>
   );
 }
