@@ -1,0 +1,14 @@
+Index: react/package.json
+===================================================================
+--- react/package.json
++++ react/package.json
+@@ -23,8 +23,9 @@
+     ".": {
+       "react-server": "./react.shared-subset.js",
+       "default": "./index.js"
+     },
++    "./cjs/react.production.min":"./cjs/react.production.min.js",
+     "./package.json": "./package.json",
+     "./jsx-runtime": "./jsx-runtime.js",
+     "./jsx-dev-runtime": "./jsx-dev-runtime.js"
+   },

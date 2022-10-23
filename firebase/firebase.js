@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app";
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { ERROR } from "../constants/codes";
+import { ERROR } from "../constants/codes.js";
 
 const provider = new GoogleAuthProvider();
 
