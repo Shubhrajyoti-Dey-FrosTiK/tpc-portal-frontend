@@ -11,6 +11,7 @@ import { COLOR } from "../../constants/colors";
 // Components
 import AddIcon from "../../assets/icons/AddIcon.jsx";
 import MinusIcon from "../../assets/icons/MinusIcon.jsx";
+import { Fragment } from "react/cjs/react.production.min";
 
 function ListRenderer({ list }) {
   const [open, setOpen] = useState(1);
@@ -23,7 +24,7 @@ function ListRenderer({ list }) {
       {list.map((listItem, index) => {
         if (listItem.subOptions.length)
           return (
-            <div className="mt-2 mb-2" key={`NavOption_${index}`}>
+            <div className="mt-2 mb-2" key={`NavOption_${Math.random()}`}>
               <div className="font-medium">
                 <a
                   className="hs-collapse-toggle inline-flex items-center gap-x-2 text-blue-600 w-full"
@@ -67,18 +68,20 @@ function ListRenderer({ list }) {
           );
         else
           return (
-            <Tooltip
-              content="Material Tailwind"
-              animate={{
-                mount: { scale: 1, y: 0 },
-                unmount: { scale: 0, y: 25 },
-              }}
-              placement="right"
-            >
-              <Typography className="font-medium cursor-pointer">
-                {listItem.label}
-              </Typography>
-            </Tooltip>
+            <Fragment key={`NavOption_${Math.random()}`}>
+              <Tooltip
+                content="Material Tailwind"
+                animate={{
+                  mount: { scale: 1, y: 0 },
+                  unmount: { scale: 0, y: 25 },
+                }}
+                placement="right"
+              >
+                <Typography className="font-medium cursor-pointer">
+                  {listItem.label}
+                </Typography>
+              </Tooltip>
+            </Fragment>
           );
       })}
     </div>
