@@ -7,7 +7,18 @@ NextJS + TailwindCSS + PWA + Redux Toolkit + Auth0
 
 1. NodeJS installed
 2. `pnpm` installed
+3. GCP + Firebase Account (To test Google Login Auth)
 
+### GCP Instructions: (Only needed to test out Google Login)
+Go to [Google Cloud Platform](https://cloud.google.com/free?utm_source=google&utm_medium=cpc&utm_campaign=japac-IN-all-en-dr-bkws-all-all-trial-e-dr-1009882&utm_content=text-ad-none-none-DEV_c-CRE_602265494289-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20GCP%20~%20General_%20Core%20Brand-KWID_43700071544383203-kwd-87853815-userloc_9303972&utm_term=KW_gcp-ST_gcp&gclid=CjwKCAjwzNOaBhAcEiwAD7Tb6Cy6XBPxKzJAl9MZScou50IE9ErgCA1-gSZ-7WZWpxCVvvcWdLYpDRoC21sQAvD_BwE&gclsrc=aw.ds) offial website and just make an account. 
+
+### Firebase Instructions: (Only needed to test out Google Login)
+1. Go to [Firebase](https://firebase.google.com/?gclid=CjwKCAjwzNOaBhAcEiwAD7Tb6OFQKrEZ6GJ1_Owmhir9UBS0bWhgOLUmbvMc_Ca8dYhP7ZLaP_TlGhoCImcQAvD_BwE&gclsrc=aw.ds) and create an account there with the same email Id.
+2. Create a project in Firebase.
+3. Select `Authentication` in dashboard and configure the project. Here you will get all the `sensitive` credentials. Now if you check youe GCP account now it will also create `API Keys`, `Service Account`, `OAuth Credentials` in the Credentials.
+4. Now go to `Authentication` again after the project is created.
+5. Click on `Google Login` and grant it. 
+6. Add `localhost:3000` to the authorized domains which can be found on the `Settings`.
 
 ## Getting Started
 
@@ -18,6 +29,21 @@ git clone https://github.com/Shubhrajyoti-Dey-FrosTiK/tpc-portal-frontend.git
 Get into the project
 ```
 cd tpc-portal-frontend
+```
+Make `.env` file
+```
+touch .env
+```
+
+Now populate the `.env` file with the following data which you got while making the `Authenticaiton` project on `Firebase` (Optional : Only needed to work with Google Authentication )
+```.js
+NEXT_PUBLIC_FIREBASE_API_KEY = "..."
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN = "..."
+NEXT_PUBLIC_FIREBASE_PROJECT_ID = "..."
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET = "..."
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID = "..."
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID = "..."
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = "..."
 ```
 
 Install the packages
