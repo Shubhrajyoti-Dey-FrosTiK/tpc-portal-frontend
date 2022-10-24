@@ -15,6 +15,9 @@ const nextConfig = withPWA({
   // next config
   reactStrictMode: true,
   swcMinify: true,
+  // compiler: {
+  //   removeConsole: true,
+  // },
   experimental: {
     runtime: "experimental-edge",
   },
