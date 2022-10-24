@@ -20,7 +20,7 @@ function App() {
   return (
     <div>
       {/* <Nav sideNavOptions={NAV}> */}
-      <Typography variant="h1">Dashboard</Typography>
+      <Typography variant="h1">Dashboard !</Typography>
       <Typography className="text-slate-400">
         What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing
         and typesetting industry. Lorem Ipsum has been the industry's standard

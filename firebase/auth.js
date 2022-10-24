@@ -1,13 +1,26 @@
 // Firebase
 import firebase from "firebase/compat/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 // Constants
-import { ERROR } from "../constants/codes.js";
+import {
+  ERROR,
+  FIREBASE_AUTH_ERRORS,
+  FIREBASE_AUTH_SUCCESS,
+} from "../constants/codes.js";
 
 // Redux
 import { store } from "../store/store.js";
 import { setUserToken } from "../store/states/userSlice.js";
+
+import * as jose from "jose";
 
 const provider = new GoogleAuthProvider();
 
@@ -21,30 +34,52 @@ const FirebaseCredentials = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
+const auth = getAuth(firebase.initializeApp(FirebaseCredentials));
+
+auth.onAuthStateChanged(async function (user) {
+  if (user) {
+    const userIdToken = await user.getIdToken(true);
+    store.dispatch(setUserToken(userIdToken));
+  } else {
+    store.dispatch(setUserToken(""));
+  }
+});
+
 export const handleLoginWithGoogle = async () => {
   try {
-    const auth = getAuth(firebase.initializeApp(FirebaseCredentials));
-    try {
-      auth.onAuthStateChanged(async function (user) {
-        if (user) {
-          // User is already logged in
-          console.log(await user.getIdToken());
-          const userIdToken = await user.getIdToken();
-          store.dispatch(setUserToken(userIdToken));
-        } else {
-          // Log in the user using the Popup
-          await signInWithPopup(auth, provider);
-        }
-      });
-    } catch (error) {
-      console.log("hello");
-      return { error: error.message };
-    }
+    await signInWithPopup(auth, provider);
+    return { status: FIREBASE_AUTH_SUCCESS };
   } catch (error) {
     // Problem with API key
-    return process.env.NODE_ENV.toUpperCase !== "PRODUCTION"
+    return process.env.NODE_ENV.toUpperCase() !== "PRODUCTION"
       ? defaultResponse
       : { error: ERROR.API_KEY };
+  }
+};
+
+export const handleSignUpWithEmailPassword = async (email, password) => {
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    return { status: FIREBASE_AUTH_SUCCESS };
+  } catch (error) {
+    return FIREBASE_AUTH_ERRORS[error.message];
+  }
+};
+
+export const handleLoginWithEmailPassword = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    return { status: FIREBASE_AUTH_SUCCESS };
+  } catch (error) {
+    return FIREBASE_AUTH_ERRORS[error.message];
+  }
+};
+
+export const signOutAccount = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    return error.message;
   }
 };
 

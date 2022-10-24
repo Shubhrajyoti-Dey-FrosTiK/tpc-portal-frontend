@@ -1,17 +1,21 @@
+// Constants
+import { NextRequest } from "next/server";
 import { STATUS } from "../../../constants/codes";
 
-// Types
-import type { NextRequest } from "next/server";
-
 // Server Side Services
-import JSONResponse from "../../../utils/JSON.service";
+import JSONResponse from "../../../lib/JSON.service";
+import { JWT } from "../../../lib/JWT.service";
 
 export const config = {
   runtime: "experimental-edge",
 };
 
 const Response = new JSONResponse();
+const JwtService = new JWT();
 
 export default async function handler(req: NextRequest) {
-  return Response.process({ name: "Hellp" }, STATUS.SUCCESS);
+  return Response.process(
+    { verified: await JwtService.verify(req.headers.get("token")) },
+    STATUS.SUCCESS
+  );
 }
