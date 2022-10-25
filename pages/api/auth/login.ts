@@ -15,7 +15,7 @@ const JwtService = new JWT();
 
 export default async function handler(req: NextRequest) {
   return Response.process(
-    { verified: await JwtService.verify(req.headers.get("token")) },
+    await JwtService.verify(req.headers.get("token")),
     STATUS.SUCCESS
   );
 }
