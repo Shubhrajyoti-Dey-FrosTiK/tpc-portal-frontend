@@ -8,13 +8,14 @@ export class AuthService {
   router = useRouter();
 
   async checkLoggedIn(token: string) {
+    console.log(`${process.env.NEXT_PUBLIC_URL}/api/auth/login`);
     return (
       await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/auth/login`, {
         headers: {
           token,
         },
       })
-    ).data;
+    ).data.verified;
   }
 
   manageRoute(loggedIn: boolean) {

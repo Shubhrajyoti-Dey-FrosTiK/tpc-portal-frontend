@@ -1,7 +1,8 @@
-import { JWTVerifyResult } from "jose";
+export interface JWTResponse {
+  verified: boolean;
+  uid?: string;
+}
 
 export interface AuthResponse {
-  data: {
-    verified: boolean | JWTVerifyResult;
-  };
+  data: JWTResponse;
 }

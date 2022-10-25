@@ -20,7 +20,7 @@ import {
 import { store } from "../store/store.js";
 import { setUserToken } from "../store/states/userSlice.js";
 
-import * as jose from "jose";
+import axios from "axios";
 
 const provider = new GoogleAuthProvider();
 
@@ -38,8 +38,18 @@ const auth = getAuth(firebase.initializeApp(FirebaseCredentials));
 
 auth.onAuthStateChanged(async function (user) {
   if (user) {
-    const userIdToken = await user.getIdToken(true);
-    store.dispatch(setUserToken(userIdToken));
+    const authValid = await axios.get(
+      `${process.env.NEXT_PUBLIC_URL}/api/auth/login`,
+      {
+        headers: {
+          token: store.getState("user").user.idToken,
+        },
+      }
+    );
+    if (!authValid.data.verified) {
+      const userIdToken = await user.getIdToken(true);
+      store.dispatch(setUserToken(userIdToken));
+    }
   } else {
     store.dispatch(setUserToken(""));
   }

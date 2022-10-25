@@ -29,34 +29,18 @@ const RouteWrapper = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const userIdToken = useSelector(selectUserIdToken);
-  const [currentIdToken, setCurrentIdToken] = useState(
-    store.getState("user").user.idToken
-  );
 
   const checkLoggedIn = async (token) => {
-    const verified = await Auth.checkLoggedIn(token);
-    setLoggedIn(verified ? true : false);
-    Auth.manageRoute(verified ? true : false);
+    const verified = token ? await Auth.checkLoggedIn(token) : false;
+    setLoggedIn(verified);
+    Auth.manageRoute(verified);
     setLoading(false);
   };
 
   useEffect(() => {
     import("preline");
-    const idToken = store.getState("user").user.idToken;
-    console.log({ idToken, currentIdToken });
-    if (idToken !== currentIdToken || !idToken) {
-      setLoading(true);
-      if (idToken) {
-        checkLoggedIn(idToken);
-      } else {
-        Auth.manageRoute(false);
-        setLoggedIn(false);
-        setLoading(false);
-      }
-    } else {
-      setLoading(true);
-    }
-    setCurrentIdToken(idToken);
+    setLoading(true);
+    checkLoggedIn(userIdToken);
   }, [userIdToken]);
 
   return (
