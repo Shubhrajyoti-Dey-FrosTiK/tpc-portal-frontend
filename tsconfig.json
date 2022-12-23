@@ -20,6 +20,15 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/page.tsx",
+    "components/input/TextInput.jsx",
+    "store/states/userSlice.js",
+    "store/states/routeSlice.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,18 +1,28 @@
-import './globals.css'
+import React from "react";
+import RootStyleRegistry from "./emotion";
+
+// Redux
+import ReduxProvider from "./redux";
+
+import "./globals.css";
+
+export const config = {
+  runtime: "experimental-edge",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+    <html lang="en-US">
       <head />
-      <body>{children}</body>
+      <body>
+        <ReduxProvider>
+          <RootStyleRegistry>{children}</RootStyleRegistry>
+        </ReduxProvider>
+      </body>
     </html>
-  )
+  );
 }
