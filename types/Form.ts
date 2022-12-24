@@ -1,5 +1,4 @@
-import { KeyStore } from "../services/form.service";
-import { FormInputType, FormType, InputType } from "./FormType";
+import { FormElement, FormInputType, FormType, InputType } from "./FormType";
 import { Validation as ValidationType } from "./Validation";
 
 // --------------- Form Builder -----------
@@ -23,20 +22,6 @@ export interface Visible {
   validator(arg0: Array<String>): Boolean;
 }
 
-export type FormElement = {
-  label: String;
-  key: String;
-  type: FormInputType;
-  required?: Boolean;
-  validation?: Validation;
-  visible?: Visible;
-  placeHolder?: String;
-  id?: String;
-  description?: String;
-  inputType?: InputType;
-  initialValue?: String | Number | Array<String> | Array<Number>;
-};
-
 export type Section = {
   formElements: Array<FormElement | Section>;
   key: String;
@@ -55,6 +40,14 @@ export interface FormBuilder {
 
 // ----------------- Form State -----------------
 
+export interface KeyStore {
+  [key: string]: string | number | Array<string> | Array<number>;
+}
+
+export interface ValidationStore {
+  [key: string]: boolean;
+}
+
 export interface FormElementState {
   [value: string]:
     | FormElementState
@@ -67,5 +60,6 @@ export interface FormElementState {
 
 export interface FormState {
   keyStore: KeyStore;
+  validationStore: ValidationStore;
   data?: FormElementState;
 }

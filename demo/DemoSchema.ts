@@ -63,7 +63,7 @@ const DemoSchema: FormBuilder = {
     {
       label: "Age",
       key: "age",
-      initialValue: 80,
+      initialValue: "8",
       type: FormInputType.SHORT_TEXT,
       required: true,
       description: "Enter your age",

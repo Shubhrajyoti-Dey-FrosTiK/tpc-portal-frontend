@@ -3,20 +3,20 @@
 import React, { ReactElement } from "react";
 
 // Components
-import { TextInput, Input } from "../../components";
+import { Textarea, Input } from "../../components";
 
 // Hooks
 import useForm from "../../../hooks/useForm";
 
 // Types
-import { ShortText } from "../../../types/FormType";
+import { LongText } from "../../../types/FormType";
 
-function ShortText({
+function LongText({
   formElement,
   basePath,
   formKey,
 }: {
-  formElement: ShortText;
+  formElement: LongText;
   basePath: string;
   formKey: string;
 }): ReactElement {
@@ -43,7 +43,7 @@ function ShortText({
           >
             {formElement.label}
           </Input.Label>
-          <TextInput
+          <Textarea
             placeholder={
               (formElement.placeHolder as string) ||
               (formElement.label as string)
@@ -65,4 +65,4 @@ function ShortText({
   );
 }
 
-export default ShortText;
+export default LongText;

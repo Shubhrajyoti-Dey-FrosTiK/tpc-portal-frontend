@@ -13,7 +13,13 @@ interface FormState {
 export interface UpdateReduxFormState {
   formKey: string;
   stateKey: string;
-  value?: string;
+  value?: string | Array<string> | number | Array<number>;
+}
+
+export interface UpdateReduxFormValidation {
+  formKey: string;
+  stateKey: string;
+  value?: boolean;
 }
 
 export interface InitializeReduxFormState {
@@ -36,19 +42,37 @@ export const formSlice = createSlice({
       if (!state[action.payload.formKey])
         state[action.payload.formKey] = {
           keyStore: {},
+          validationStore: {},
         };
     },
 
-    updateFormContext: (state, action: PayloadAction<UpdateReduxFormState>) => {
+    updateFormStateContext: (
+      state,
+      action: PayloadAction<UpdateReduxFormState>
+    ) => {
       if (!state[action.payload.formKey])
-        state[action.payload.formKey] = { keyStore: {} };
+        state[action.payload.formKey] = { keyStore: {}, validationStore: {} };
       state[action.payload.formKey].keyStore[action.payload.stateKey] =
         action.payload.value || "";
+    },
+
+    updateFormValidationContext: (
+      state,
+      action: PayloadAction<UpdateReduxFormValidation>
+    ) => {
+      if (!state[action.payload.formKey])
+        state[action.payload.formKey] = { keyStore: {}, validationStore: {} };
+      state[action.payload.formKey].validationStore[action.payload.stateKey] =
+        action.payload.value || false;
     },
   },
 });
 
-export const { initializeFormState, updateFormContext } = formSlice.actions;
+export const {
+  initializeFormState,
+  updateFormStateContext,
+  updateFormValidationContext,
+} = formSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectForm = (state: RootState) => state.form;

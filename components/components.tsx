@@ -1,9 +1,15 @@
 "use client";
 
 // Converting Mantine to Client Components
-import { TextInput, Title as Typography, Input } from "@mantine/core";
+import {
+  TextInput,
+  Title as Typography,
+  Input,
+  Textarea,
+  NumberInput,
+} from "@mantine/core";
 
 // Switching to Material Tailwind if Mantine is not good
 import { Button } from "@material-tailwind/react";
 
-export { TextInput, Typography, Button, Input };
+export { TextInput, Typography, Button, Input, Textarea, NumberInput };

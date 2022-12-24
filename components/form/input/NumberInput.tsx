@@ -3,26 +3,26 @@
 import React, { ReactElement } from "react";
 
 // Components
-import { TextInput, Input } from "../../components";
+import { NumberInput as NumInput, Input } from "../../components";
 
 // Hooks
 import useForm from "../../../hooks/useForm";
 
 // Types
-import { ShortText } from "../../../types/FormType";
+import { NumberInput } from "../../../types/FormType";
 
-function ShortText({
+function NumberInput({
   formElement,
   basePath,
   formKey,
 }: {
-  formElement: ShortText;
+  formElement: NumberInput;
   basePath: string;
   formKey: string;
 }): ReactElement {
   const {
     inputState,
-    captureTextInputChange,
+    captureNumberInputChange,
     error,
     visible,
     setBlur,
@@ -43,13 +43,13 @@ function ShortText({
           >
             {formElement.label}
           </Input.Label>
-          <TextInput
+          <NumInput
             placeholder={
               (formElement.placeHolder as string) ||
               (formElement.label as string)
             }
             value={inputState || ""}
-            onChange={captureTextInputChange}
+            onChange={captureNumberInputChange}
             error={error}
             description={formElement.description || ""}
             onKeyDown={() => {
@@ -65,4 +65,4 @@ function ShortText({
   );
 }
 
-export default ShortText;
+export default NumberInput;

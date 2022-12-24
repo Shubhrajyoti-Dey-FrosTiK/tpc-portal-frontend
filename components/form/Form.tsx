@@ -2,9 +2,6 @@
 
 import React from "react";
 
-// Services
-import { FormService } from "../../services/form.service";
-
 // Types
 import { FormBuilder } from "../../types/Form";
 
@@ -17,7 +14,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { initializeFormState, selectForm } from "../../store/states/formSlice";
 
 function Form({ schema }: { schema: FormBuilder }) {
-  const FS = new FormService();
   const formState = useSelector(selectForm);
   console.log(formState);
   const dispatch = useDispatch();
