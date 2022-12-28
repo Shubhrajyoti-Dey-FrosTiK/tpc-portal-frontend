@@ -37,6 +37,8 @@ function ShortText({
     formBuilderSchema,
   });
 
+  console.log(basePath, inputState);
+
   return (
     <React.Fragment>
       {visible && (

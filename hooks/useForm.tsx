@@ -41,6 +41,7 @@ function useForm({
 
   // Initialize Key Value and Validation
   useEffect(() => {
+    // if (!ReduxFormContext[formKey].keyStore[basePath])
     dispatch(
       updateFormStateContext({
         formKey,
@@ -66,7 +67,9 @@ function useForm({
   const populate = (propsList: Array<string>) => {
     let populateValues: Array<String> = [];
     propsList.forEach((prop) => {
-      populateValues.push(ReduxFormContext[formKey]?.keyStore[prop]);
+      if (prop === "SELF")
+        populateValues.push(ReduxFormContext[formKey]?.keyStore[basePath]);
+      else populateValues.push(ReduxFormContext[formKey]?.keyStore[prop]);
     });
     return populateValues;
   };

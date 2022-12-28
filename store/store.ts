@@ -42,7 +42,10 @@ export const store: EnhancedStore = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        ignoredActionPaths: ["payload.formBuilderSchema"],
+        ignoredActionPaths: [
+          "payload.formBuilderSchema",
+          "payload.initialSchema",
+        ],
         ignoredPaths: ["form"],
       },
     }),

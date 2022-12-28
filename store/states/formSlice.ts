@@ -42,6 +42,13 @@ export interface UpdateRepeatingSection {
   initialSchema: FormBuilder;
 }
 
+export interface RemoveRepeatingSection extends UpdateRepeatingSection {
+  basePath: string;
+  formKey: string;
+  indexToRemove: number;
+  repeatingSectionLen: number;
+}
+
 // Define the initial state using that type
 const initialState: FormState = {};
 
@@ -104,6 +111,23 @@ export const formSlice = createSlice({
         0
       );
     },
+
+    removeRepeatingSection: (
+      state,
+      action: PayloadAction<RemoveRepeatingSection>
+    ) => {
+      FS.removeRepeatingSection(
+        state[action.payload.formKey].keyStore,
+        state[action.payload.formKey].validationStore,
+        action.payload.basePath,
+        action.payload.indexToRemove,
+        action.payload.repeatingSectionLen,
+        state[action.payload.formKey].formBuilderSchema.sections,
+        action.payload.initialSchema.sections,
+        action.payload.keyIndices,
+        0
+      );
+    },
   },
 });
 
@@ -112,6 +136,7 @@ export const {
   updateFormStateContext,
   updateFormValidationContext,
   updateRepeatingSection,
+  removeRepeatingSection,
 } = formSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

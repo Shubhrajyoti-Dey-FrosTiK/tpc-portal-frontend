@@ -63,6 +63,23 @@ const DemoSchema: FormBuilder = {
                   label: "School Name",
                   key: "name",
                   type: FormInputType.SHORT_TEXT,
+                  validation: {
+                    props: ["SELF"],
+                    validator: (
+                      propsList: Array<string>
+                    ): Success | Failure => {
+                      const school = propsList[0];
+                      if (school === "IIT BHU")
+                        return {
+                          validationStatus: Validation.SUCCESS,
+                        };
+                      else
+                        return {
+                          validationStatus: Validation.FAILURE,
+                          errorMessage: "Sad to see you are not in IIT BHU",
+                        };
+                    },
+                  },
                 },
               ],
             ],

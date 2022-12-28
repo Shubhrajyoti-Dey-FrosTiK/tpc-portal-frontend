@@ -52,7 +52,12 @@ function Form({ schema }: { schema: FormBuilder }) {
             );
           }
         )}
-      <Button className="mt-4" aria-hidden={true} variant="filled">
+      <Button
+        className="mt-4"
+        ripple={true}
+        aria-hidden={true}
+        variant="gradient"
+      >
         SUBMIT
       </Button>
     </div>

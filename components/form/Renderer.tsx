@@ -3,7 +3,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { BOX_SHADOW } from "../../constants/boxShadow";
-import { updateRepeatingSection } from "../../store/states/formSlice";
+import {
+  removeRepeatingSection,
+  updateRepeatingSection,
+} from "../../store/states/formSlice";
 
 // Types
 import { FormBuilder, RepeatableSection, Section } from "../../types/Form";
@@ -36,6 +39,22 @@ function Renderer({
     dispatch(
       updateRepeatingSection({
         formKey,
+        keyIndices: keyIndex,
+        initialSchema,
+      })
+    );
+  };
+
+  const deleteRepeatingSection = (
+    indexToRemove: number,
+    repeatingSectionLen: number
+  ) => {
+    dispatch(
+      removeRepeatingSection({
+        formKey,
+        basePath: `${basePath}[${renderElement.key}]-(`,
+        indexToRemove,
+        repeatingSectionLen,
         keyIndices: keyIndex,
         initialSchema,
       })
@@ -76,6 +95,7 @@ function Renderer({
         );
 
       case FormType.REPEATABLE_SECTION:
+        console.log(`${basePath}[${renderElement.key}]-(`, renderElement);
         return (
           <div
             style={{
@@ -91,10 +111,30 @@ function Renderer({
                 repeatingSectionIndex: number
               ): React.ReactElement => {
                 return (
-                  <React.Fragment key={`${basePath}-${repeatingSectionIndex}`}>
-                    <Typography order={3}>
-                      {renderElement.title} {repeatingSectionIndex + 1}
-                    </Typography>
+                  <div
+                    className="mb-5"
+                    key={`${basePath}-${repeatingSectionIndex}`}
+                  >
+                    <div className="flex justify-between align-middle">
+                      <Typography order={3}>
+                        {renderElement.title} {repeatingSectionIndex + 1}
+                      </Typography>
+                      {renderElement.formElements.length > 1 && (
+                        <Typography
+                          className="cursor-pointer"
+                          color={"red"}
+                          order={5}
+                          onClick={() => {
+                            deleteRepeatingSection(
+                              repeatingSectionIndex,
+                              renderElement.formElements.length
+                            );
+                          }}
+                        >
+                          REMOVE
+                        </Typography>
+                      )}
+                    </div>
                     {repeatingSection.map(
                       (
                         section: Section | FormElement | RepeatableSection,
@@ -102,9 +142,7 @@ function Renderer({
                       ) => {
                         const newBasePath = `${basePath}[${renderElement.key}]-(${repeatingSectionIndex})-`;
                         return (
-                          <React.Fragment
-                            key={`${newBasePath}-${sectionIndex}`}
-                          >
+                          <div key={`${newBasePath}-${sectionIndex}`}>
                             <Renderer
                               renderElement={section}
                               basePath={newBasePath}
@@ -117,15 +155,15 @@ function Renderer({
                               ]}
                               initialSchema={initialSchema}
                             />
-                          </React.Fragment>
+                          </div>
                         );
                       }
                     )}
-                  </React.Fragment>
+                  </div>
                 );
               }
             )}
-            <Button variant="outlined" onClick={addRepeatingSection}>
+            <Button variant="outlined" size="sm" onClick={addRepeatingSection}>
               + Add {renderElement.title}
             </Button>
           </div>
