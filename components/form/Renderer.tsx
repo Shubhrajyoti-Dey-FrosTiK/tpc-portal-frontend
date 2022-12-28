@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { BOX_SHADOW } from "../../constants/boxShadow";
@@ -12,11 +13,11 @@ import {
 import { FormBuilder, RepeatableSection, Section } from "../../types/Form";
 import { FormType, FormElement, FormInputType } from "../../types/FormType";
 import { Button, Typography } from "../components";
-import LongText from "./input/LongText";
-import NumberInput from "./input/NumberInput";
 
 // Components
-import ShortText from "./input/ShortText";
+const ShortText = dynamic(import("./input/ShortText"));
+const LongText = dynamic(import("./input/LongText"));
+const NumberInput = dynamic(import("./input/NumberInput"));
 
 function Renderer({
   renderElement,

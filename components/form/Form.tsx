@@ -1,13 +1,15 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 
 // Types
 import { FormBuilder, RepeatableSection, Section } from "../../types/Form";
 
 // Components
 import { Typography, Button } from "../components";
-import Renderer from "./Renderer";
+// import Renderer from "./Renderer";
+const Renderer = dynamic(import("./Renderer"));
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
