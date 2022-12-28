@@ -10,15 +10,18 @@ import useForm from "../../../hooks/useForm";
 
 // Types
 import { LongText } from "../../../types/FormType";
+import { FormBuilder } from "../../../types/Form";
 
 function LongText({
   formElement,
   basePath,
   formKey,
+  formBuilderSchema,
 }: {
   formElement: LongText;
   basePath: string;
   formKey: string;
+  formBuilderSchema: FormBuilder;
 }): ReactElement {
   const {
     inputState,
@@ -31,6 +34,7 @@ function LongText({
     formElement,
     basePath,
     formKey,
+    formBuilderSchema,
   });
 
   return (

@@ -2,6 +2,7 @@ import { Validation, Visible } from "./Form";
 
 export enum FormType {
   SECTION = "SECTION",
+  REPEATABLE_SECTION = "REPEATABLE_SECTION",
 }
 
 export enum FormInputType {

@@ -10,15 +10,18 @@ import useForm from "../../../hooks/useForm";
 
 // Types
 import { NumberInput } from "../../../types/FormType";
+import { FormBuilder } from "../../../types/Form";
 
 function NumberInput({
   formElement,
   basePath,
   formKey,
+  formBuilderSchema,
 }: {
   formElement: NumberInput;
   basePath: string;
   formKey: string;
+  formBuilderSchema: FormBuilder;
 }): ReactElement {
   const {
     inputState,
@@ -31,6 +34,7 @@ function NumberInput({
     formElement,
     basePath,
     formKey,
+    formBuilderSchema,
   });
 
   return (

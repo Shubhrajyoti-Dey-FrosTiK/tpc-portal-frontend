@@ -10,15 +10,18 @@ import useForm from "../../../hooks/useForm";
 
 // Types
 import { ShortText } from "../../../types/FormType";
+import { FormBuilder } from "../../../types/Form";
 
 function ShortText({
   formElement,
   basePath,
   formKey,
+  formBuilderSchema,
 }: {
   formElement: ShortText;
   basePath: string;
   formKey: string;
+  formBuilderSchema: FormBuilder;
 }): ReactElement {
   const {
     inputState,
@@ -31,6 +34,7 @@ function ShortText({
     formElement,
     basePath,
     formKey,
+    formBuilderSchema,
   });
 
   return (

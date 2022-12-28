@@ -25,16 +25,27 @@ export interface Visible {
 export type Section = {
   formElements: Array<FormElement | Section>;
   key: String;
-  type: FormType;
-  Typography?: String;
+  type: FormType.SECTION;
+  title?: String;
   validation?: Validation;
   visible?: Visible;
 };
 
-export interface FormBuilder {
-  Typography: String;
+export interface RepeatableSection {
+  formElements: Array<Array<FormElement | Section | RepeatableSection>>;
   key: String;
-  sections: Array<Section | FormElement>;
+  type: FormType.REPEATABLE_SECTION;
+  title?: String;
+  validation?: Validation;
+  visible?: Visible;
+  addElementText?: String;
+  repeatSectionHeading?: String;
+}
+
+export interface FormBuilder {
+  title: String;
+  key: String;
+  sections: Array<Section | RepeatableSection | FormElement>;
   description?: String;
 }
 
@@ -60,6 +71,7 @@ export interface FormElementState {
 
 export interface FormState {
   keyStore: KeyStore;
+  formBuilderSchema: FormBuilder;
   validationStore: ValidationStore;
   data?: FormElementState;
 }

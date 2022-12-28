@@ -3,7 +3,14 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 
 // Types
-import { FormState as FormStateType } from "../../types/Form";
+import {
+  FormBuilder,
+  FormState as FormStateType,
+  RepeatableSection,
+  Section,
+} from "../../types/Form";
+import { FormElement } from "../../types/FormType";
+import FormService from "../../services/form.service";
 
 // Define a type for the slice state
 interface FormState {
@@ -13,21 +20,32 @@ interface FormState {
 export interface UpdateReduxFormState {
   formKey: string;
   stateKey: string;
+  formBuilderSchema: FormBuilder;
   value?: string | Array<string> | number | Array<number>;
 }
 
 export interface UpdateReduxFormValidation {
   formKey: string;
   stateKey: string;
+  formBuilderSchema: FormBuilder;
   value?: boolean;
 }
 
 export interface InitializeReduxFormState {
   formKey: string;
+  formBuilderSchema: FormBuilder;
+}
+
+export interface UpdateRepeatingSection {
+  formKey: string;
+  keyIndices: Array<number>;
+  initialSchema: FormBuilder;
 }
 
 // Define the initial state using that type
 const initialState: FormState = {};
+
+const FS = new FormService();
 
 export const formSlice = createSlice({
   name: "form",
@@ -43,6 +61,7 @@ export const formSlice = createSlice({
         state[action.payload.formKey] = {
           keyStore: {},
           validationStore: {},
+          formBuilderSchema: action.payload.formBuilderSchema,
         };
     },
 
@@ -51,7 +70,11 @@ export const formSlice = createSlice({
       action: PayloadAction<UpdateReduxFormState>
     ) => {
       if (!state[action.payload.formKey])
-        state[action.payload.formKey] = { keyStore: {}, validationStore: {} };
+        state[action.payload.formKey] = {
+          keyStore: {},
+          validationStore: {},
+          formBuilderSchema: action.payload.formBuilderSchema,
+        };
       state[action.payload.formKey].keyStore[action.payload.stateKey] =
         action.payload.value || "";
     },
@@ -61,9 +84,25 @@ export const formSlice = createSlice({
       action: PayloadAction<UpdateReduxFormValidation>
     ) => {
       if (!state[action.payload.formKey])
-        state[action.payload.formKey] = { keyStore: {}, validationStore: {} };
+        state[action.payload.formKey] = {
+          keyStore: {},
+          validationStore: {},
+          formBuilderSchema: action.payload.formBuilderSchema,
+        };
       state[action.payload.formKey].validationStore[action.payload.stateKey] =
         action.payload.value || false;
+    },
+
+    updateRepeatingSection: (
+      state,
+      action: PayloadAction<UpdateRepeatingSection>
+    ) => {
+      FS.recursiveEditor(
+        state[action.payload.formKey].formBuilderSchema.sections,
+        action.payload.initialSchema.sections,
+        action.payload.keyIndices,
+        0
+      );
     },
   },
 });
@@ -72,6 +111,7 @@ export const {
   initializeFormState,
   updateFormStateContext,
   updateFormValidationContext,
+  updateRepeatingSection,
 } = formSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

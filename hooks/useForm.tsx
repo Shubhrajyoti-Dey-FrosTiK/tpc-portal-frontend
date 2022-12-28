@@ -4,7 +4,7 @@ import React, { ReactElement, Fragment, useState, useEffect } from "react";
 import ValidationService from "../services/validation.service";
 
 // Types
-import { Failure, Success } from "../types/Form";
+import { Failure, FormBuilder, Success } from "../types/Form";
 import { Validation } from "../types/Validation";
 
 // Redux
@@ -20,10 +20,12 @@ function useForm({
   formElement,
   basePath,
   formKey,
+  formBuilderSchema,
 }: {
   formElement: FormElement;
   basePath: string;
   formKey: string;
+  formBuilderSchema: FormBuilder;
 }) {
   const dispatch = useDispatch();
   const ReduxFormContext = useSelector(selectForm);
@@ -44,6 +46,7 @@ function useForm({
         formKey,
         stateKey: basePath,
         value: (formElement.initialValue as string) || ("" as string),
+        formBuilderSchema,
       })
     );
     dispatch(
@@ -55,6 +58,7 @@ function useForm({
           (formElement.required || formElement.validation)
             ? false
             : true,
+        formBuilderSchema,
       })
     );
   }, []);
@@ -105,6 +109,7 @@ function useForm({
         formKey,
         stateKey: basePath,
         value: finalValidatedState,
+        formBuilderSchema,
       })
     );
   }, [keyDown, blur, ReduxFormContext[formKey]]);
@@ -125,6 +130,7 @@ function useForm({
         formKey,
         stateKey: basePath,
         value: target.value,
+        formBuilderSchema,
       })
     );
     return target.value;
@@ -138,6 +144,7 @@ function useForm({
         formKey,
         stateKey: basePath,
         value,
+        formBuilderSchema,
       })
     );
     return value;
