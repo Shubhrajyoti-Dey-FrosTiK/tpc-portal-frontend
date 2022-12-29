@@ -12,80 +12,75 @@ const DemoSchema: FormBuilder = {
     {
       title: "Personal Info",
       key: "personalInfo",
-      type: FormType.REPEATABLE_SECTION,
+      type: FormType.SECTION,
       formElements: [
-        [
-          {
-            label: "First Name",
-            key: "firstName",
-            type: FormInputType.SHORT_TEXT,
-          },
-          {
-            label: "Middle Name",
-            key: "middleName",
-            type: FormInputType.SHORT_TEXT,
-            visible: {
-              props: ["[personalInfo]-(0)-[firstName]"],
-              validator: (propsList: Array<string>) => {
-                console.log(propsList);
-                const firstName = propsList[0];
-                return firstName && firstName.length ? true : false;
-              },
+        {
+          label: "First Name",
+          key: "firstName",
+          type: FormInputType.SHORT_TEXT,
+        },
+        {
+          label: "Middle Name",
+          key: "middleName",
+          type: FormInputType.SHORT_TEXT,
+          visible: {
+            props: ["[personalInfo]-(0)-[firstName]"],
+            validator: (propsList: Array<string>) => {
+              const firstName = propsList[0];
+              return firstName && firstName.length ? true : false;
             },
           },
-          {
-            label: "Last Name",
-            key: "lastName",
-            type: FormInputType.SHORT_TEXT,
-            visible: {
-              props: [
-                "[personalInfo]-(0)-[firstName]",
-                "[personalInfo]-(0)-[middleName]",
-              ],
-              validator: (propsList: Array<string>) => {
-                const firstName = propsList[0];
-                const middleName = propsList[1];
-                return firstName &&
-                  firstName.length &&
-                  middleName &&
-                  middleName.length
-                  ? true
-                  : false;
-              },
+        },
+        {
+          label: "Last Name",
+          key: "lastName",
+          type: FormInputType.SHORT_TEXT,
+          visible: {
+            props: [
+              "[personalInfo]-(0)-[firstName]",
+              "[personalInfo]-(0)-[middleName]",
+            ],
+            validator: (propsList: Array<string>) => {
+              const firstName = propsList[0];
+              const middleName = propsList[1];
+              return firstName &&
+                firstName.length &&
+                middleName &&
+                middleName.length
+                ? true
+                : false;
             },
           },
-          {
-            title: "Schooling",
-            key: "school",
-            formElements: [
-              [
-                {
-                  label: "School Name",
-                  key: "name",
-                  type: FormInputType.SHORT_TEXT,
-                  validation: {
-                    props: ["SELF"],
-                    validator: (
-                      propsList: Array<string>
-                    ): Success | Failure => {
-                      const school = propsList[0];
-                      if (school === "IIT BHU")
-                        return {
-                          validationStatus: Validation.SUCCESS,
-                        };
-                      else
-                        return {
-                          validationStatus: Validation.FAILURE,
-                          errorMessage: "Sad to see you are not in IIT BHU",
-                        };
-                    },
+        },
+        {
+          title: "Schooling",
+          key: "school",
+          formElements: [
+            [
+              {
+                label: "School Name",
+                key: "name",
+                type: FormInputType.SHORT_TEXT,
+                validation: {
+                  props: ["SELF"],
+                  validator: (propsList: Array<string>): Success | Failure => {
+                    const school = propsList[0];
+                    if (school === "IIT BHU")
+                      return {
+                        validationStatus: Validation.SUCCESS,
+                      };
+                    else
+                      return {
+                        validationStatus: Validation.FAILURE,
+                        errorMessage: "Sad to see you are not in IIT BHU",
+                      };
                   },
                 },
-              ],
+              },
             ],
-            type: FormType.REPEATABLE_SECTION,
-          },
-        ],
+          ],
+          type: FormType.REPEATABLE_SECTION,
+        },
       ],
     },
     {

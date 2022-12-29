@@ -6,10 +6,6 @@ const Form = dynamic(() => import("../components/form/Form"), {
   loading: () => <h1>Loading</h1>,
 });
 
-export const config = {
-  runtime: "experimental-edge",
-};
-
 export default function Home() {
   return (
     <main>

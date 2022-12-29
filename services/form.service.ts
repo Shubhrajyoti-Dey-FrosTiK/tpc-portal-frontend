@@ -1,11 +1,15 @@
-import { stat } from "fs";
 import {
+  ExportableFormState,
+  FormBuilder,
   KeyStore,
   RepeatableSection,
   Section,
   ValidationStore,
 } from "../types/Form";
 import { FormElement, FormType } from "../types/FormType";
+
+// Service
+import ValidationService from "./validation.service";
 
 const endingBracketIndex = (s: string, start: number): number => {
   let index: number = -1;
@@ -19,6 +23,8 @@ const endingBracketIndex = (s: string, start: number): number => {
 };
 
 export default class FormService {
+  vs = new ValidationService();
+
   recursiveEditor(
     state:
       | Array<Section | RepeatableSection | FormElement>
@@ -103,9 +109,7 @@ export default class FormService {
       state.type === FormType.REPEATABLE_SECTION &&
       initialSchema.type === FormType.REPEATABLE_SECTION
     ) {
-      console.log("hellooooooooo");
       const newFormElements = [];
-      console.log(removeIndex);
       for (let i = 0; i < state.formElements.length; i++) {
         if (i != removeIndex) newFormElements.push(state.formElements[i]);
       }
@@ -230,5 +234,86 @@ export default class FormService {
       pathIndex,
       indexToRemove
     );
+  }
+
+  recursiveExporter(
+    keyStore: KeyStore,
+    formState:
+      | Array<Section | RepeatableSection | FormElement>
+      | Section
+      | RepeatableSection
+      | FormElement,
+    exportableFormData:
+      | string
+      | number
+      | Array<number>
+      | Array<string>
+      | ExportableFormState
+      | Array<ExportableFormState>,
+    basePath: string,
+    exportableFormData2: any
+  ) {
+    // Checking if is a FormElement  -> If this is true then it is a formElement
+    if (
+      !Array.isArray(formState) &&
+      typeof exportableFormData === "object" &&
+      !Array.isArray(exportableFormData)
+    ) {
+      switch (formState.type) {
+        case FormType.SECTION:
+          exportableFormData[formState.key as string] = {};
+          formState.formElements.forEach(
+            (element: FormElement | Section | RepeatableSection) => {
+              this.recursiveExporter(
+                keyStore,
+                element,
+                exportableFormData[formState.key as string],
+                `${basePath}[${formState.key}]-`,
+                exportableFormData2
+              );
+            }
+          );
+          break;
+
+        case FormType.REPEATABLE_SECTION: {
+          exportableFormData[formState.key as string] = [];
+          formState.formElements.map(
+            (
+              section: Array<FormElement | Section | RepeatableSection>,
+              sectionIndex: number
+            ) => {
+              if (Array.isArray(exportableFormData[formState.key as string])) {
+                // @ts-ignore
+                exportableFormData[formState.key as string].push({});
+                section.forEach(
+                  (element: FormElement | Section | RepeatableSection) => {
+                    if (
+                      Array.isArray(exportableFormData[formState.key as string])
+                    )
+                      this.recursiveExporter(
+                        keyStore,
+                        element,
+                        // @ts-ignore
+                        exportableFormData[formState.key as string][
+                          sectionIndex
+                        ],
+                        `${basePath}[${formState.key}]-(${sectionIndex})-`,
+                        exportableFormData2
+                      );
+                  }
+                );
+              }
+            }
+          );
+          break;
+        }
+
+        default: {
+          const newBasePath = `${basePath}[${formState.key}]`;
+          console.log(formState, newBasePath);
+          exportableFormData[formState.key as string] = keyStore[newBasePath];
+        }
+      }
+    }
   }
 }

@@ -23,7 +23,7 @@ export interface Visible {
 }
 
 export type Section = {
-  formElements: Array<FormElement | Section>;
+  formElements: Array<FormElement | Section | RepeatableSection>;
   key: String;
   type: FormType.SECTION;
   title?: String;
@@ -73,5 +73,14 @@ export interface FormState {
   keyStore: KeyStore;
   formBuilderSchema: FormBuilder;
   validationStore: ValidationStore;
-  data?: FormElementState;
+}
+
+export interface ExportableFormState {
+  [key: string]:
+    | string
+    | number
+    | Array<string>
+    | Array<number>
+    | ExportableFormState
+    | Array<ExportableFormState>;
 }

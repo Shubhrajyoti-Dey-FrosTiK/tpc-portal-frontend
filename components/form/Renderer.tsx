@@ -96,7 +96,6 @@ function Renderer({
         );
 
       case FormType.REPEATABLE_SECTION:
-        console.log(`${basePath}[${renderElement.key}]-(`, renderElement);
         return (
           <div
             style={{

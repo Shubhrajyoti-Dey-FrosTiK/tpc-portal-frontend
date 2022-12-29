@@ -3,13 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 
 // Types
-import {
-  FormBuilder,
-  FormState as FormStateType,
-  RepeatableSection,
-  Section,
-} from "../../types/Form";
-import { FormElement } from "../../types/FormType";
+import { FormBuilder, FormState as FormStateType } from "../../types/Form";
 import FormService from "../../services/form.service";
 
 // Define a type for the slice state

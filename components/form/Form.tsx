@@ -15,10 +15,15 @@ const Renderer = dynamic(import("./Renderer"));
 import { useSelector, useDispatch } from "react-redux";
 import { initializeFormState, selectForm } from "../../store/states/formSlice";
 import { FormElement } from "../../types/FormType";
+import useExportableFormData from "../../hooks/useExportableFormData";
 
 function Form({ schema }: { schema: FormBuilder }) {
   const formState = useSelector(selectForm);
-  console.log(formState[schema.key as string]);
+  const { exportableFormState } = useExportableFormData({
+    formKey: schema.key as string,
+  });
+
+  console.log(exportableFormState);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
