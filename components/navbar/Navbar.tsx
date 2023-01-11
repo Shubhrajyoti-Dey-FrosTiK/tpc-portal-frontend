@@ -68,7 +68,7 @@ export function NavbarNested({children}: {children: React.ReactNode}) {
         />
       </Navbar.Section>
     </Navbar>
-    <div className="flex w-full">
+    <div className="flex w-full h-[100vh] overflow-scroll">
       {children}
     </div>
     </div>

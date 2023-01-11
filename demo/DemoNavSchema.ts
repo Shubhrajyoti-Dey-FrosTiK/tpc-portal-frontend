@@ -14,7 +14,7 @@ const DemoNavSchema = [
   {
     label: "Market news",
     icon: IconNotes,
-    initiallyOpened: true,
+    initiallyOpened: false,
     links: [
       { label: "Overview", link: "/" },
       { label: "Forecasts", link: "/" },
