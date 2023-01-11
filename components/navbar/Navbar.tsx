@@ -48,7 +48,7 @@ export function NavbarNested({children}: {children: React.ReactNode}) {
   const {classes} = useStyles();
   const links = DemoNavSchema.map((item)=><LinksGroup  {...item} key={item.label}/>);
   return (
-    <div className="flex-row">
+    <div className="flex">
     <Navbar className="h-[100vh]" p="xs" width={{ base: 300 }}>
       <Navbar.Section className={classes.header}>{/* Header with logo */}
       <Group position="apart">
@@ -68,7 +68,7 @@ export function NavbarNested({children}: {children: React.ReactNode}) {
         />
       </Navbar.Section>
     </Navbar>
-    <div className="flex">
+    <div className="flex w-full">
       {children}
     </div>
     </div>
