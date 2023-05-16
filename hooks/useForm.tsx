@@ -185,7 +185,6 @@ function useForm({
   // Check visibile async
   const visibility = async () => {
     if (!formElement.visible) return;
-    console.log("gello");
     let populateValues = await populate(
       formElement.visible.props as Array<string>
     );

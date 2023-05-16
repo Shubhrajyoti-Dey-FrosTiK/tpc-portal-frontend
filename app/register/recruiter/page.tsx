@@ -35,7 +35,6 @@ function Page() {
       FormState["recruiterAndCompanyRegistration"] &&
       FormState["recruiterAndCompanyRegistration"].posted
     ) {
-      console.log("Hello from heerreee");
       handleSignIn();
     }
   }, [FormState["recruiterAndCompanyRegistration"]]);

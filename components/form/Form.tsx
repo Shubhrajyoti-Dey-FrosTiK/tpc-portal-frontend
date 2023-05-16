@@ -74,11 +74,6 @@ function Form({
   }, []);
 
   const handleSubmit = async () => {
-    console.log(
-      checkValidated(),
-      formState[schema.key as string].keyStore,
-      formState[schema.key as string].validationStore
-    );
     if (step === 1) {
       dispatch(trySubmit({ formKey: schema.key as string }));
       if (checkValidated()) setStep(step + 1);
@@ -87,18 +82,13 @@ function Form({
     if (step == 2) {
       setLoading(true);
       const { exportData, keyStore } = await fileUploader();
-      console.log(
-        bodyTemplate
-          ? { ...bodyTemplate, ...exportData, keyStore }
-          : { ...exportData, keyStore }
-      );
+
       const postResponse = await axios.post(
         postUrl,
         bodyTemplate
           ? { ...bodyTemplate, ...exportData, keyStore }
           : { ...exportData, keyStore }
       );
-      console.log(postResponse);
       setLoading(false);
       setStep(step + 1);
       if (postFunction && (await postFunction())) {

@@ -338,8 +338,6 @@ export default class FormService {
 
           const newBasePath = `${basePath}[${formState.key}]`;
 
-          console.log(exportable, formState.type === FormInputType.FILE);
-
           if (exportable && formState.type === FormInputType.FILE) {
             const urls = await batchUploadFiles(
               keyStore[newBasePath] as File[],
@@ -417,7 +415,6 @@ export default class FormService {
             )
           )
             return;
-          else console.log("Hgello");
           exportableFormData[formState.key as string] = [];
           formState.formElements.map(
             (

@@ -24,7 +24,7 @@ import { store } from "../store/store";
 import { setCurrentUser } from "../store/states/userSlice";
 import { app } from "./firebase";
 
-const provider = new GoogleAuthProvider();
+export const provider = new GoogleAuthProvider();
 
 export const auth = getAuth(app);
 // connectAuthEmulator(auth, "http://localhost:9099");

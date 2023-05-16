@@ -58,7 +58,6 @@ export default function AuthWrapper({
   const getIDToken = async () => {
     const idToken = await UserState.currentUser.getIdToken(true);
 
-    console.log(idToken);
     let loginState: boolean = false;
 
     const response = await axios.get(
@@ -69,7 +68,6 @@ export default function AuthWrapper({
         },
       }
     );
-    console.log(response.data);
     if (!response.data.error) {
       if (response.data) {
         dispatch(

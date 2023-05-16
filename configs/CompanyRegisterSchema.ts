@@ -200,7 +200,6 @@ const RecruiterAndCompanyRegisterSchema: FormBuilder = {
           storagePath: {
             prop: "[company]-[name]",
             path: (companyName: string) => {
-              console.log(companyName);
               return `companies/${companyName}/logo`;
             },
           },

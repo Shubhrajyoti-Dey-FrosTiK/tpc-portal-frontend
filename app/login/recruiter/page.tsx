@@ -21,18 +21,40 @@ import { IconEyeCheck, IconEyeOff, IconBrandGoogle } from "@tabler/icons";
 import {
   handleLoginWithGoogle,
   handleLoginWithEmailPassword,
+  auth,
+  provider,
 } from "../../../firebase/auth";
 
 // Hooks
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { signInWithPopup } from "firebase/auth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<boolean>(false);
+  const [googleLoginError, setGoogleLoginError] = useState<boolean>(false);
+  const router = useRouter();
 
   const googleLogin = async () => {
-    const response = await handleLoginWithGoogle();
+    signInWithPopup(auth, provider)
+      .then(function (result) {
+        // @ts-ignore
+        var isNewUser = result["_tokenResponse"].isNewUser;
+        if (isNewUser) {
+          //delete the created user
+          result.user.delete();
+          setGoogleLoginError(true);
+        } else {
+          router.push("/");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        // Handle Errors here.
+      });
   };
 
   const handlePasswordLogin = async () => {
@@ -40,6 +62,7 @@ export default function Login() {
     if (response.error) {
       setError(true);
     } else {
+      router.push("/");
     }
   };
 
@@ -83,15 +106,16 @@ export default function Login() {
             </Button>
           </div>
         </Group>
-        <Alert
-          title="Hello"
-          variant="filled"
-          withCloseButton={true}
-          color="red"
-        >
-          Incorrect Credentials
-        </Alert>
-        {/* <div className="flex flex-row justify-center p-4">
+        {error && (
+          <Typography
+            className="m-10 font-light text-center m-auto"
+            order={6}
+            color="red"
+          >
+            Invalid Credentials
+          </Typography>
+        )}
+        <div className="flex flex-row justify-center p-4">
           <Typography order={3}>OR</Typography>
         </div>
         <div className="flex flex-col">
@@ -107,7 +131,16 @@ export default function Login() {
               <Typography order={5}>Login with Google</Typography>
             </Paper>
           </Group>
-        </div> */}
+          {googleLoginError && (
+            <Typography
+              className="m-10 font-light text-center m-auto"
+              order={6}
+              color="red"
+            >
+              No account with this google account exists
+            </Typography>
+          )}
+        </div>
       </form>
     </Box>
   );
