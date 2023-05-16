@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.mantine-Drawer-body {
+  height: 100%;
+}
+.mantine-2p7s78{
+  width:26vw;
+}
+/* #mantine-r8{
+  border-color: red;
+} */
