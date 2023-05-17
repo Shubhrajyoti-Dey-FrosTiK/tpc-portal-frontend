@@ -139,6 +139,9 @@ const IAFSchema: FormBuilder = {
                   key: "cgpa",
                   type: FormInputType.NUMBER,
                   required: true,
+                  description: "CGPA must be a number between 0 - 10",
+                  max: 10,
+                  min: 9,
                 },
                 {
                   label: "Eligible Branches",
@@ -262,6 +265,9 @@ const IAFSchema: FormBuilder = {
                   key: "cgpa",
                   type: FormInputType.NUMBER,
                   required: true,
+                  description: "CGPA must be a number between 0 - 10",
+                  max: 10,
+                  min: 9,
                 },
                 {
                   label: "Eligible Branches",
@@ -405,6 +411,9 @@ const IAFSchema: FormBuilder = {
                   key: "cgpa",
                   type: FormInputType.NUMBER,
                   required: true,
+                  description: "CGPA must be a number between 0 - 10",
+                  max: 10,
+                  min: 9,
                 },
                 {
                   label: "Eligible Branches",
@@ -558,6 +567,9 @@ const IAFSchema: FormBuilder = {
                   key: "cgpa",
                   type: FormInputType.NUMBER,
                   required: true,
+                  description: "CGPA must be a number between 0 - 10",
+                  max: 10,
+                  min: 9,
                 },
                 {
                   label: "Eligible Branches",

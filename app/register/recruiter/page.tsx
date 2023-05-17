@@ -53,7 +53,9 @@ function Page() {
             aria-hidden={true}
             color="purple"
             onClick={() => {
-              router.push("/login/recruiter");
+              router.push("/login/recruiter", {
+                forceOptimisticNavigation: true,
+              });
             }}
             variant="gradient"
           >

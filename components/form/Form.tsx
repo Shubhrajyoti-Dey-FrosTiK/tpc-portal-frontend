@@ -27,6 +27,7 @@ import { StepperComponent } from "./Stepper";
 import Viewer from "./Viewer";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Spinner from "../spinner/Spinner";
 
 export interface GoToPath {
   name: string;
@@ -89,12 +90,7 @@ function Form({
           ? { ...bodyTemplate, ...exportData, keyStore }
           : { ...exportData, keyStore }
       );
-      console.log(
-        postResponse,
-        bodyTemplate
-          ? { ...bodyTemplate, ...exportData, keyStore }
-          : { ...exportData, keyStore }
-      );
+
       setLoading(false);
       setStep(step + 1);
       if (postFunction && (await postFunction())) {
@@ -137,34 +133,44 @@ function Form({
 
       <div>
         {step === 2 && (
-          <div>
-            <Typography order={1}>{schema.title}</Typography>
-            {formState[schema.key as string] &&
-              formState[schema.key as string].formBuilderSchema.sections.map(
-                (
-                  section: FormElement | Section | RepeatableSection,
-                  sectionIndex: number
-                ): React.ReactNode => {
-                  return (
-                    <React.Fragment key={section.key as React.Key}>
-                      <Renderer
-                        renderElement={section}
-                        basePath={"" as string}
-                        formKey={schema.key as string}
-                        formBuilderSchema={formState[schema.key as string]}
-                        keyIndex={[sectionIndex]}
-                        initialSchema={schema}
-                        viewOnly={true}
-                      />
-                    </React.Fragment>
-                  );
-                }
-              )}
-          </div>
+          <>
+            <div style={{ display: `${loading ? "none" : "block"}` }}>
+              <Typography order={1}>{schema.title}</Typography>
+              {formState[schema.key as string] &&
+                formState[schema.key as string].formBuilderSchema.sections.map(
+                  (
+                    section: FormElement | Section | RepeatableSection,
+                    sectionIndex: number
+                  ): React.ReactNode => {
+                    return (
+                      <React.Fragment key={section.key as React.Key}>
+                        <Renderer
+                          renderElement={section}
+                          basePath={"" as string}
+                          formKey={schema.key as string}
+                          formBuilderSchema={formState[schema.key as string]}
+                          keyIndex={[sectionIndex]}
+                          initialSchema={schema}
+                          viewOnly={true}
+                        />
+                      </React.Fragment>
+                    );
+                  }
+                )}
+            </div>
+            <div
+              style={{
+                display: `${loading ? "block" : "none"}`,
+                minHeight: "60vh",
+              }}
+            >
+              <Spinner />
+            </div>
+          </>
         )}
       </div>
 
-      {step < 3 && (
+      {!loading && step < 3 && (
         <div className="flex justify-between">
           <div>
             {step > 1 && (
@@ -194,7 +200,8 @@ function Form({
       )}
 
       <div>
-        {step == 3 &&
+        {!loading &&
+          step == 3 &&
           (children ? (
             <div>{children}</div>
           ) : (
@@ -224,8 +231,13 @@ function Form({
                   color="purple"
                   onClick={() => {
                     if (goToPath) {
-                      router.push(goToPath.path);
-                    } else router.push("/");
+                      router.push(goToPath.path, {
+                        forceOptimisticNavigation: true,
+                      });
+                    } else
+                      router.push("/", {
+                        forceOptimisticNavigation: true,
+                      });
                   }}
                   variant="gradient"
                 >

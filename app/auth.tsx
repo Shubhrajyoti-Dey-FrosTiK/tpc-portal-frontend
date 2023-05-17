@@ -23,6 +23,7 @@ import {
   selectIdStore,
   updateCompanyRecruiterId,
 } from "../store/states/idStore";
+import Spinner from "../components/spinner/Spinner";
 
 export default function AuthWrapper({
   children,
@@ -102,9 +103,13 @@ export default function AuthWrapper({
     if (loginChecked) {
       // Check if the route is public or not
       if (!loggedIn && !(pathName in PUBLIC_ROUTES)) {
-        router.push("/register/recruiter");
+        router.push("/register/recruiter", {
+          forceOptimisticNavigation: true,
+        });
       } else if (loggedIn && pathName in PUBLIC_ROUTES) {
-        router.push("/");
+        router.push("/", {
+          forceOptimisticNavigation: true,
+        });
       } else {
         setLoading(false);
       }
@@ -121,12 +126,11 @@ export default function AuthWrapper({
   return (
     <>
       {loading ? (
-        "Loading ......"
+        <div className="h-[100vh] w-full">
+          <Spinner />
+        </div>
       ) : (
-        <>
-          {/* {loggedIn ? <h1>Logged In</h1> : <h1>Not Logged In</h1>} */}
-          {children}
-        </>
+        <>{children}</>
       )}
     </>
   );

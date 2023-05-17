@@ -54,7 +54,9 @@ export default function Login() {
           setGoogleLoginError(true);
         } else {
           // getIDToken();
-          router.push("/");
+          router.push("/", {
+            forceOptimisticNavigation: true,
+          });
         }
       })
       .catch(function (error) {
@@ -69,7 +71,9 @@ export default function Login() {
       setError(true);
     } else {
       // getIDToken();
-      router.push("/");
+      router.push("/", {
+        forceOptimisticNavigation: true,
+      });
     }
   };
 
@@ -77,7 +81,7 @@ export default function Login() {
     <Box
       sx={{ maxWidth: 300 }}
       mx="auto"
-      className="flex flex-col justify-center"
+      className="flex flex-col justify-center mt-10"
     >
       <Typography order={2}>Recruiter Login</Typography>
       <Typography order={6}>Welcome to Training and Placement Cell</Typography>

@@ -63,6 +63,8 @@ const RecruiterAndCompanyRegisterSchema: FormBuilder = {
         },
         {
           label: "Email Address",
+          description:
+            "This will be used as your username in future login sessions and you can also sign in with Google with this email",
           key: "email",
           type: FormInputType.SHORT_TEXT,
           required: true,
@@ -212,6 +214,20 @@ const RecruiterAndCompanyRegisterSchema: FormBuilder = {
       description:
         "This will be your password for your upcoming login sessions and your email id will be the username",
       type: FormType.SECTION,
+      validation: {
+        props: ["[passwordCreation]-[password]"],
+        validator: (propsList) => {
+          const password = propsList[0];
+          return password.length >= 6
+            ? {
+                validationStatus: Validation.SUCCESS,
+              }
+            : {
+                validationStatus: Validation.FAILURE,
+                errorMessage: "Password must be at least of 6 letters",
+              };
+        },
+      },
       formElements: [
         {
           label: "New Password",

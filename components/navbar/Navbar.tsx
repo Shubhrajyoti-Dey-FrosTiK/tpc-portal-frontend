@@ -72,7 +72,9 @@ export function NavbarNested({
             className="flex gap-4 cursor-pointer"
             style={{ alignItems: "center" }}
             onClick={() => {
-              router.push("/");
+              router.push("/", {
+                forceOptimisticNavigation: true,
+              });
             }}
           >
             <Image src={Logo} alt="IIT-BHU logo" width={40} height={40} />
