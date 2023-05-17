@@ -19,8 +19,6 @@ import { selectUser, setCurrentUser } from "../store/states/userSlice";
 import { selectIdStore } from "../store/states/idStore";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Timeline } from "@mantine/core";
-import { IconActivity, IconCircle} from "@tabler/icons";
 
 const Form = dynamic(() => import("../components/form/Form"), {
   loading: () => <h1>Loading</h1>,
@@ -81,12 +79,6 @@ export default function Home() {
     return Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long', timeZone: tz }).format(new Date(str))
   }
 
-  const getActiveIcon = (is_active: boolean) => {
-    if (is_active)
-      return <IconActivity size={30} color="purple" />
-    else
-      return <IconCircle size={30} stroke={0} />
-  }
 
   const fetchData = async () => {
     try {
@@ -94,7 +86,7 @@ export default function Home() {
         `${process.env.NEXT_PUBLIC_IAF_BACKEND}/iaf/recruiter_id`,
         {
           headers: {
-            id: "64612e13a5609e10bd2079eb",
+            id: IdStore,
             mini: "1",
           },
         }
@@ -222,28 +214,44 @@ export default function Home() {
             </Tabs.Panel>
 
             <Tabs.Panel value="iaf" pt="xs">
-              <Timeline bulletSize={30} lineWidth={2}>
-                {!formsLoading ? (formList ? (
-                  formList.map((form, formIndex) => {
-                    return (
-                      <Timeline.Item title={form.internshipDescription.profile} bullet={getActiveIcon(form.is_active)}>
-                        <Typography order={5} color="#4d4d4d" className="font-normal" size="sm">
-                          {form.internshipDescription.jd}
-                        </Typography>
-                        <Typography order={6} className="font-light">
-                          {convertStringToDate(form.updatedAt)}
-                        </Typography>
-                      </Timeline.Item>
-                    );
-                  })
-                ) : (
-                  <Paper className="m-2 p-5 rounded-md">
-                    <Typography order={5} className="font-light" ta="center">Empty</Typography>
-                  </Paper>
-                )) : (<Paper className="m-2 p-5 rounded-md">
-                  <Typography order={5} className="font-light" ta="center">Loading forms ... </Typography>
-                </Paper>)}
-              </Timeline>
+            <Tabs
+                color="purple"
+                defaultValue="2022-23"
+                orientation="vertical"
+              >
+                <Tabs.List>
+                  <Tabs.Tab value="2022-23">2022-23</Tabs.Tab>
+                </Tabs.List>
+
+                <Tabs.Panel value="2022-23" pl="xs">
+                  <div className="max-h-[70vh] overflow-scroll">
+                    {!formsLoading ? (formList ? (
+                      formList.map((form, formIndex) => {
+                        return (
+                          <Paper
+                            key={`Form_${formIndex}`}
+                            className="m-2 p-5 rounded-md shadow-md"
+                          >
+                            <Typography order={5}>
+                              {form.internshipDescription.profile}
+                            </Typography>
+                            <Typography order={6} className="font-light">
+                              {convertStringToDate(form.updatedAt)}
+                            </Typography>
+                          </Paper>
+                        );
+                      })
+                    ) : (
+                      <Paper className="m-2 p-5 rounded-md">
+                        <Typography order={5} className="font-light" ta="center">Empty</Typography>
+                      </Paper>
+                    )) : (<Paper className="m-2 p-5 rounded-md">
+                      <Typography order={5} className="font-light" ta="center">Loading forms ... </Typography>
+                    </Paper>)}
+
+                  </div>
+                </Tabs.Panel>
+              </Tabs>
             </Tabs.Panel>
 
             <Tabs.Panel value="jaf" pt="xs">
