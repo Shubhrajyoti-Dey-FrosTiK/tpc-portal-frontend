@@ -8,8 +8,8 @@ import { Validation } from "../types/Validation";
 const JAFSchema: FormBuilder = {
   title: "Job Announcement Form",
   description:
-    "Fill this form to show your interest in hiring full time candidates from our Institute",
-  key: "iaf",
+    "Fill this form to show your interest in hiring candidates for full time from our Institute",
+  key: "jaf",
   sections: [
     {
       title: "Alternate HR Contact Information",
@@ -53,7 +53,7 @@ const JAFSchema: FormBuilder = {
         },
         {
           label: "Job Description",
-          key: "jobDescription",
+          key: "jd",
           type: FormInputType.LONG_TEXT,
           required: true,
         },
@@ -71,7 +71,7 @@ const JAFSchema: FormBuilder = {
         },
         {
           label: "JD Attachments (if any)",
-          key: "locations",
+          key: "jdAttachments",
           type: FormInputType.FILE,
           storagePath: {
             prop: "",
@@ -80,20 +80,11 @@ const JAFSchema: FormBuilder = {
             },
           },
         },
-      ],
-    },
-
-    {
-      title: "Eligibility",
-      key: "eligibility",
-      type: FormType.SECTION,
-      description:
-        "CGPA must be a value between 0 - 10, XII % must be a value between 0 - 100, X % must be a value between 0 - 100",
-      formElements: [
         {
           label: "Eligible Courses",
           key: "courses",
           type: FormInputType.CHECKBOX,
+          required: true,
           options: [
             {
               label: "B.Tech",
@@ -118,11 +109,11 @@ const JAFSchema: FormBuilder = {
         },
 
         {
-          title: "B.Tech Eligibility Criteria",
+          title: "B.Tech Courses",
           key: "btech",
           type: FormType.SECTION,
           visible: {
-            props: ["[eligibility]-[courses]"],
+            props: ["[jobDescription]-[courses]"],
             validator: (eligibilityArray: Array<string>) => {
               const eligibility = eligibilityArray[0];
               if (!eligibility) return false;
@@ -131,145 +122,163 @@ const JAFSchema: FormBuilder = {
           },
           formElements: [
             {
-              label: "CGPA",
-              key: "cgpa",
-              type: FormInputType.NUMBER,
-              required: true,
-            },
-            {
-              label: "Eligible Branches",
-              key: "branches",
-              required: true,
-              type: FormInputType.CHECKBOX,
-              options: [
+              title: "B.Tech Eligibility Criteria",
+              key: "eligibility",
+              type: FormType.SECTION,
+              formElements: [
                 {
-                  label: "All",
-                  key: "all",
-                  value: [
-                    "cer",
-                    "che",
-                    "civ",
-                    "cse",
-                    "ece",
-                    "eee",
-                    "mec",
-                    "met",
-                    "min",
-                    "phe",
+                  label: "CGPA",
+                  key: "cgpa",
+                  type: FormInputType.NUMBER,
+                  required: true,
+                },
+                {
+                  label: "Eligible Branches",
+                  key: "branches",
+                  required: true,
+                  type: FormInputType.CHECKBOX,
+                  options: [
+                    {
+                      label: "All",
+                      key: "all",
+                      value: [
+                        "cer",
+                        "che",
+                        "civ",
+                        "cse",
+                        "ece",
+                        "eee",
+                        "mec",
+                        "met",
+                        "min",
+                        "phe",
+                      ],
+                    },
+                    {
+                      label: "Ceramic Engineering",
+                      key: "cer",
+                    },
+                    {
+                      label: "Chemical Engineering",
+                      key: "che",
+                    },
+                    {
+                      label: "Civil Engineering",
+                      key: "civ",
+                    },
+                    {
+                      label: "Computer Science and Engineering",
+                      key: "cse",
+                    },
+                    {
+                      label: "Electronics Engineering",
+                      key: "ece",
+                    },
+                    {
+                      label: "Electrical Engineering",
+                      key: "eee",
+                    },
+                    {
+                      label: "Mechanical Engineering",
+                      key: "mec",
+                    },
+                    {
+                      label: "Metallurgical Engineering",
+                      key: "met",
+                    },
+                    {
+                      label: "Mining Engineering",
+                      key: "min",
+                    },
+                    {
+                      label: "Pharmaceutical Engineering",
+                      key: "phe",
+                    },
                   ],
-                },
-                {
-                  label: "Ceramic Engineering",
-                  key: "cer",
-                },
-                {
-                  label: "Chemical Engineering",
-                  key: "che",
-                },
-                {
-                  label: "Civil Engineering",
-                  key: "civ",
-                },
-                {
-                  label: "Computer Science and Engineering",
-                  key: "cse",
-                },
-                {
-                  label: "Electronics Engineering",
-                  key: "ece",
-                },
-                {
-                  label: "Electrical Engineering",
-                  key: "eee",
-                },
-                {
-                  label: "Mechanical Engineering",
-                  key: "mec",
-                },
-                {
-                  label: "Metallurgical Engineering",
-                  key: "met",
-                },
-                {
-                  label: "Mining Engineering",
-                  key: "min",
-                },
-                {
-                  label: "Pharmaceutical Engineering",
-                  key: "phe",
                 },
               ],
             },
             {
-              title: "B.Tech Components Of CTC",
-              key: "ctc",
+              title: "B.Tech CTC",
+              key: "CTC",
               type: FormType.SECTION,
               formElements: [
                 {
                   label: "Total CTC",
                   key: "totalCTC",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "1st Year CTC",
-                  key: "firstCTC",
-                  type: FormInputType.NUMBER,
+                  key: "firstYearCTC",
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Fixed Salary",
                   key: "fixedSalary",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Provident Fund and Gratuity",
-                  key: "providentFund",
-                  type: FormInputType.NUMBER,
+                  key: "providentFundAndGratuity",
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Joining Bonus",
                   key: "joiningBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Relocation Bonus",
                   key: "relocationBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Patent Bonus",
                   key: "patentBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Education Reimbursement",
                   key: "educationReimbursement",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Bonds(if any)",
                   key: "bonds",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Stocks (with vesting period)",
-                  key: "stocks",
-                  type: FormInputType.NUMBER,
+                  key: "stocksWithVestingPlan",
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Other Benefits",
                   key: "otherBenefits",
                   type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
               ],
             },
           ],
         },
         {
-          title: "IDD(Btech + Mtech) Eligibility Criteria",
+          title: "IDD(B.Tech + M.Tech) Courses",
           key: "idd",
           type: FormType.SECTION,
           visible: {
-            props: ["[eligibility]-[courses]"],
+            props: ["[jobDescription]-[courses]"],
             validator: (eligibilityArray: Array<string>) => {
               const eligibility = eligibilityArray[0];
               if (!eligibility) return false;
@@ -278,165 +287,183 @@ const JAFSchema: FormBuilder = {
           },
           formElements: [
             {
-              label: "CGPA",
-              key: "cgpa",
-              type: FormInputType.NUMBER,
-              required: true,
-            },
-            {
-              label: "Eligible Branches",
-              key: "branches",
-              required: true,
-              type: FormInputType.CHECKBOX,
-              options: [
+              title: "IDD Eligibility Criteria",
+              key: "eligibility",
+              type: FormType.SECTION,
+              formElements: [
                 {
-                  label: "All",
-                  key: "all",
-                  value: [
-                    "bce",
-                    "bme",
-                    "cer",
-                    "civ",
-                    "cse",
-                    "eee",
-                    "phy",
-                    "chy",
-                    "mst",
-                    "mat",
-                    "mec",
-                    "met",
-                    "min",
-                    "phe",
+                  label: "CGPA",
+                  key: "cgpa",
+                  type: FormInputType.NUMBER,
+                  required: true,
+                },
+                {
+                  label: "Eligible Branches",
+                  key: "branches",
+                  required: true,
+                  type: FormInputType.CHECKBOX,
+                  options: [
+                    {
+                      label: "All",
+                      key: "all",
+                      value: [
+                        "bce",
+                        "bme",
+                        "cer",
+                        "civ",
+                        "cse",
+                        "eee",
+                        "phy",
+                        "chy",
+                        "mst",
+                        "mat",
+                        "mec",
+                        "met",
+                        "min",
+                        "phe",
+                      ],
+                    },
+                    {
+                      label: "Biochemical Engineering",
+                      key: "bce",
+                    },
+                    {
+                      label: "Biomedical Engineering",
+                      key: "bme",
+                    },
+                    {
+                      label: "Ceramic Engineering",
+                      key: "cer",
+                    },
+                    {
+                      label: "Civil Engineering",
+                      key: "civ",
+                    },
+                    {
+                      label: "Computer Science and Engineering",
+                      key: "cse",
+                    },
+                    {
+                      label: "Electrical Engineering",
+                      key: "eee",
+                    },
+                    {
+                      label: "Department of Physics",
+                      key: "phy",
+                    },
+                    {
+                      label: "Department of Chemistry",
+                      key: "chy",
+                    },
+                    {
+                      label: "Material Science and Technology",
+                      key: "mst",
+                    },
+                    {
+                      label: "Department of Mathematical Sciences",
+                      key: "mat",
+                    },
+                    {
+                      label: "Mechanical Engineering",
+                      key: "mec",
+                    },
+                    {
+                      label: "Metallurgical Engineering",
+                      key: "met",
+                    },
+                    {
+                      label: "Mining Engineering",
+                      key: "min",
+                    },
+                    {
+                      label: "Pharmaceutical Engineering",
+                      key: "phe",
+                    },
                   ],
-                },
-                {
-                  label: "Biochemical Engineering",
-                  key: "bce",
-                },
-                {
-                  label: "Biomedical Engineering",
-                  key: "bme",
-                },
-                {
-                  label: "Ceramic Engineering",
-                  key: "cer",
-                },
-                {
-                  label: "Civil Engineering",
-                  key: "civ",
-                },
-                {
-                  label: "Computer Science and Engineering",
-                  key: "cse",
-                },
-                {
-                  label: "Electrical Engineering",
-                  key: "eee",
-                },
-                {
-                  label: "Department of Physics",
-                  key: "phy",
-                },
-                {
-                  label: "Department of Chemistry",
-                  key: "chy",
-                },
-                {
-                  label: "Material Science and Technology",
-                  key: "mst",
-                },
-                {
-                  label: "Department of Mathematical Sciences",
-                  key: "mat",
-                },
-                {
-                  label: "Mechanical Engineering",
-                  key: "mec",
-                },
-                {
-                  label: "Metallurgical Engineering",
-                  key: "met",
-                },
-                {
-                  label: "Mining Engineering",
-                  key: "min",
-                },
-                {
-                  label: "Pharmaceutical Engineering",
-                  key: "phe",
                 },
               ],
             },
             {
-              title: "IDD Components Of CTC",
-              key: "ctc",
+              title: "IDD CTC",
+              key: "CTC",
               type: FormType.SECTION,
               formElements: [
                 {
                   label: "Total CTC",
                   key: "totalCTC",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "1st Year CTC",
-                  key: "firstCTC",
-                  type: FormInputType.NUMBER,
+                  key: "firstYearCTC",
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Fixed Salary",
                   key: "fixedSalary",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Provident Fund and Gratuity",
-                  key: "providentFund",
-                  type: FormInputType.NUMBER,
+                  key: "providentFundAndGratuity",
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Joining Bonus",
                   key: "joiningBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Relocation Bonus",
                   key: "relocationBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Patent Bonus",
                   key: "patentBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Education Reimbursement",
                   key: "educationReimbursement",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Bonds(if any)",
                   key: "bonds",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Stocks (with vesting period)",
                   key: "stocks",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Other Benefits",
                   key: "otherBenefits",
                   type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
               ],
             },
           ],
         },
         {
-          title: "MTech/Msc/Mpharm",
+          title: "M.Tech Courses",
           key: "mtech",
           type: FormType.SECTION,
           visible: {
-            props: ["[eligibility]-[courses]"],
+            props: ["[jobDescription]-[courses]"],
             validator: (eligibilityArray: Array<string>) => {
               const eligibility = eligibilityArray[0];
               if (!eligibility) return false;
@@ -445,175 +472,193 @@ const JAFSchema: FormBuilder = {
           },
           formElements: [
             {
-              label: "CGPA",
-              key: "cgpa",
-              type: FormInputType.NUMBER,
-              required: true,
-            },
-            {
-              label: "Eligible Branches",
-              key: "branches",
-              required: true,
-              type: FormInputType.CHECKBOX,
-              options: [
+              title: "M.Tech Eligibility Criteria",
+              key: "eligibility",
+              type: FormType.SECTION,
+              formElements: [
                 {
-                  label: "All",
-                  key: "all",
-                  value: [
-                    "bce",
-                    "bme",
-                    "cer",
-                    "che",
-                    "civ",
-                    "cse",
-                    "ece",
-                    "eee",
-                    "phy",
-                    "chy",
-                    "mst",
-                    "mat",
-                    "mec",
-                    "met",
-                    "min",
-                    "phe",
+                  label: "CGPA",
+                  key: "cgpa",
+                  type: FormInputType.NUMBER,
+                  required: true,
+                },
+                {
+                  label: "Eligible Branches",
+                  key: "branches",
+                  required: true,
+                  type: FormInputType.CHECKBOX,
+                  options: [
+                    {
+                      label: "All",
+                      key: "all",
+                      value: [
+                        "bce",
+                        "bme",
+                        "cer",
+                        "che",
+                        "civ",
+                        "cse",
+                        "ece",
+                        "eee",
+                        "phy",
+                        "chy",
+                        "mst",
+                        "mat",
+                        "mec",
+                        "met",
+                        "min",
+                        "phe",
+                      ],
+                    },
+                    {
+                      label: "Biochemical Engineering",
+                      key: "bce",
+                    },
+                    {
+                      label: "Biomedical Engineering",
+                      key: "bme",
+                    },
+                    {
+                      label: "Ceramic Engineering",
+                      key: "cer",
+                    },
+                    {
+                      label: "Chemical Engineering",
+                      key: "che",
+                    },
+                    {
+                      label: "Civil Engineering",
+                      key: "civ",
+                    },
+                    {
+                      label: "Computer Science and Engineering",
+                      key: "cse",
+                    },
+                    {
+                      label: "Electronics Engineering",
+                      key: "ece",
+                    },
+                    {
+                      label: "Electrical Engineering",
+                      key: "eee",
+                    },
+                    {
+                      label: "Department of Physics",
+                      key: "phy",
+                    },
+                    {
+                      label: "Department of Chemistry",
+                      key: "chy",
+                    },
+                    {
+                      label: "Material Science and Technology",
+                      key: "mst",
+                    },
+                    {
+                      label: "Department of Mathematical Sciences",
+                      key: "mat",
+                    },
+                    {
+                      label: "Mechanical Engineering",
+                      key: "mec",
+                    },
+                    {
+                      label: "Metallurgical Engineering",
+                      key: "met",
+                    },
+                    {
+                      label: "Mining Engineering",
+                      key: "min",
+                    },
+                    {
+                      label: "Pharmaceutical Engineering",
+                      key: "phe",
+                    },
                   ],
-                },
-                {
-                  label: "Biochemical Engineering",
-                  key: "bce",
-                },
-                {
-                  label: "Biomedical Engineering",
-                  key: "bme",
-                },
-                {
-                  label: "Ceramic Engineering",
-                  key: "cer",
-                },
-                {
-                  label: "Chemical Engineering",
-                  key: "che",
-                },
-                {
-                  label: "Civil Engineering",
-                  key: "civ",
-                },
-                {
-                  label: "Computer Science and Engineering",
-                  key: "cse",
-                },
-                {
-                  label: "Electronics Engineering",
-                  key: "ece",
-                },
-                {
-                  label: "Electrical Engineering",
-                  key: "eee",
-                },
-                {
-                  label: "Department of Physics",
-                  key: "phy",
-                },
-                {
-                  label: "Department of Chemistry",
-                  key: "chy",
-                },
-                {
-                  label: "Material Science and Technology",
-                  key: "mst",
-                },
-                {
-                  label: "Department of Mathematical Sciences",
-                  key: "mat",
-                },
-                {
-                  label: "Mechanical Engineering",
-                  key: "mec",
-                },
-                {
-                  label: "Metallurgical Engineering",
-                  key: "met",
-                },
-                {
-                  label: "Mining Engineering",
-                  key: "min",
-                },
-                {
-                  label: "Pharmaceutical Engineering",
-                  key: "phe",
                 },
               ],
             },
             {
-              title: "M.Tech Components Of CTC",
-              key: "ctc",
+              title: "M.Tech CTC",
+              key: "CTC",
               type: FormType.SECTION,
               formElements: [
                 {
                   label: "Total CTC",
                   key: "totalCTC",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "1st Year CTC",
-                  key: "firstCTC",
-                  type: FormInputType.NUMBER,
+                  key: "firstYearCTC",
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Fixed Salary",
                   key: "fixedSalary",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Provident Fund and Gratuity",
-                  key: "providentFund",
-                  type: FormInputType.NUMBER,
+                  key: "providentFundAndGratuity",
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Joining Bonus",
                   key: "joiningBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Relocation Bonus",
                   key: "relocationBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Patent Bonus",
                   key: "patentBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Education Reimbursement",
                   key: "educationReimbursement",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Bonds(if any)",
                   key: "bonds",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Stocks (with vesting period)",
                   key: "stocks",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Other Benefits",
                   key: "otherBenefits",
                   type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
               ],
             },
           ],
         },
         {
-          title: "Phd Eligibility Criteria",
+          title: "PhD Courses",
           key: "phd",
           type: FormType.SECTION,
           visible: {
-            props: ["[eligibility]-[courses]"],
+            props: ["[jobDescription]-[courses]"],
             validator: (eligibilityArray: Array<string>) => {
               const eligibility = eligibilityArray[0];
               if (!eligibility) return false;
@@ -622,164 +667,182 @@ const JAFSchema: FormBuilder = {
           },
           formElements: [
             {
-              label: "CGPA",
-              key: "cgpa",
-              type: FormInputType.NUMBER,
-              required: true,
-            },
-            {
-              label: "Eligible Branches",
-              key: "branches",
-              required: true,
-              type: FormInputType.CHECKBOX,
-              options: [
+              title: "PhD Eligibility Criteria",
+              key: "eligibility",
+              type: FormType.SECTION,
+              formElements: [
                 {
-                  label: "All",
-                  key: "all",
-                  value: [
-                    "bce",
-                    "bme",
-                    "cer",
-                    "che",
-                    "civ",
-                    "cse",
-                    "ece",
-                    "eee",
-                    "phy",
-                    "chy",
-                    "mst",
-                    "mat",
-                    "mec",
-                    "met",
-                    "min",
-                    "phe",
+                  label: "CGPA",
+                  key: "cgpa",
+                  type: FormInputType.NUMBER,
+                  required: true,
+                },
+                {
+                  label: "Eligible Branches",
+                  key: "branches",
+                  required: true,
+                  type: FormInputType.CHECKBOX,
+                  options: [
+                    {
+                      label: "All",
+                      key: "all",
+                      value: [
+                        "bce",
+                        "bme",
+                        "cer",
+                        "che",
+                        "civ",
+                        "cse",
+                        "ece",
+                        "eee",
+                        "phy",
+                        "chy",
+                        "mst",
+                        "mat",
+                        "mec",
+                        "met",
+                        "min",
+                        "phe",
+                      ],
+                    },
+                    {
+                      label: "Biochemical Engineering",
+                      key: "bce",
+                    },
+                    {
+                      label: "Biomedical Engineering",
+                      key: "bme",
+                    },
+                    {
+                      label: "Ceramic Engineering",
+                      key: "cer",
+                    },
+                    {
+                      label: "Chemical Engineering",
+                      key: "che",
+                    },
+                    {
+                      label: "Civil Engineering",
+                      key: "civ",
+                    },
+                    {
+                      label: "Computer Science and Engineering",
+                      key: "cse",
+                    },
+                    {
+                      label: "Electronics Engineering",
+                      key: "ece",
+                    },
+                    {
+                      label: "Electrical Engineering",
+                      key: "eee",
+                    },
+                    {
+                      label: "Department of Physics",
+                      key: "phy",
+                    },
+                    {
+                      label: "Department of Chemistry",
+                      key: "chy",
+                    },
+                    {
+                      label: "Material Science and Technology",
+                      key: "mst",
+                    },
+                    {
+                      label: "Department of Mathematical Sciences",
+                      key: "mat",
+                    },
+                    {
+                      label: "Mechanical Engineering",
+                      key: "mec",
+                    },
+                    {
+                      label: "Metallurgical Engineering",
+                      key: "met",
+                    },
+                    {
+                      label: "Mining Engineering",
+                      key: "min",
+                    },
+                    {
+                      label: "Pharmaceutical Engineering",
+                      key: "phe",
+                    },
                   ],
-                },
-                {
-                  label: "Biochemical Engineering",
-                  key: "bce",
-                },
-                {
-                  label: "Biomedical Engineering",
-                  key: "bme",
-                },
-                {
-                  label: "Ceramic Engineering",
-                  key: "cer",
-                },
-                {
-                  label: "Chemical Engineering",
-                  key: "che",
-                },
-                {
-                  label: "Civil Engineering",
-                  key: "civ",
-                },
-                {
-                  label: "Computer Science and Engineering",
-                  key: "cse",
-                },
-                {
-                  label: "Electronics Engineering",
-                  key: "ece",
-                },
-                {
-                  label: "Electrical Engineering",
-                  key: "eee",
-                },
-                {
-                  label: "Department of Physics",
-                  key: "phy",
-                },
-                {
-                  label: "Department of Chemistry",
-                  key: "chy",
-                },
-                {
-                  label: "Material Science and Technology",
-                  key: "mst",
-                },
-                {
-                  label: "Department of Mathematical Sciences",
-                  key: "mat",
-                },
-                {
-                  label: "Mechanical Engineering",
-                  key: "mec",
-                },
-                {
-                  label: "Metallurgical Engineering",
-                  key: "met",
-                },
-                {
-                  label: "Mining Engineering",
-                  key: "min",
-                },
-                {
-                  label: "Pharmaceutical Engineering",
-                  key: "phe",
                 },
               ],
             },
             {
-              title: "PhD Components Of CTC",
-              key: "ctc",
+              title: "PhD CTC",
+              key: "CTC",
               type: FormType.SECTION,
               formElements: [
                 {
                   label: "Total CTC",
                   key: "totalCTC",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "1st Year CTC",
-                  key: "firstCTC",
-                  type: FormInputType.NUMBER,
+                  key: "firstYearCTC",
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Fixed Salary",
                   key: "fixedSalary",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Provident Fund and Gratuity",
-                  key: "providentFund",
-                  type: FormInputType.NUMBER,
+                  key: "providentFundAndGratuity",
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Joining Bonus",
                   key: "joiningBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Relocation Bonus",
                   key: "relocationBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.CURRENCY,
+                  required: true
                 },
                 {
                   label: "Patent Bonus",
                   key: "patentBonus",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Education Reimbursement",
                   key: "educationReimbursement",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Bonds(if any)",
                   key: "bonds",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Stocks (with vesting period)",
                   key: "stocks",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
                 {
                   label: "Other Benefits",
                   key: "otherBenefits",
                   type: FormInputType.SHORT_TEXT,
+                  required: true
                 },
               ],
             },
@@ -794,37 +857,32 @@ const JAFSchema: FormBuilder = {
       formElements: [
         {
           label: "Color Blindness",
-          key: "jobDescription",
+          key: "colorBlindness",
           type: FormInputType.SHORT_TEXT,
         },
         {
           label: "Visibility",
-          key: "hires",
-          type: FormInputType.NUMBER,
+          key: "visibility",
+          type: FormInputType.SHORT_TEXT,
         },
         {
           label: "Height",
-          key: "location",
+          key: "height",
           type: FormInputType.SHORT_TEXT,
         },
         {
           label: "Weight",
-          key: "joiningDate",
-          type: FormInputType.SHORT_TEXT,
-        },
-        {
-          label: "BP",
-          key: "joiningDate",
+          key: "weight",
           type: FormInputType.SHORT_TEXT,
         },
         {
           label: "BMI",
-          key: "joiningDate",
+          key: "bmi",
           type: FormInputType.SHORT_TEXT,
         },
         {
           label: "Others",
-          key: "joiningDate",
+          key: "others",
           type: FormInputType.SHORT_TEXT,
         },
       ],
@@ -833,6 +891,7 @@ const JAFSchema: FormBuilder = {
     {
       label: "Selection Process",
       key: "selectionProcess",
+      required: true,
       type: FormInputType.CHECKBOX,
       options: [
         {
@@ -854,6 +913,34 @@ const JAFSchema: FormBuilder = {
         {
           label: "Personal Interview",
           key: "personalInterview",
+        },
+      ],
+    },
+    {
+      label: "Campus process mode",
+      required: true,
+      key: "processMode",
+      type: FormInputType.CHECKBOX,
+      options: [
+        {
+          label: "Virtual",
+          description: "All Processes are conducted online",
+          key: "virtual",
+        },
+        {
+          label: "Offline",
+          description: "All processes are conducted in campus",
+          key: "offline",
+        },
+        {
+          label: "Hybrid",
+          description:
+            "Some processes is conducted in online mode and some in campus",
+          key: "hybrid",
+        },
+        {
+          label: "Undecided",
+          key: "undecided",
         },
       ],
     },

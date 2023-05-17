@@ -29,17 +29,25 @@ export interface FormInterface {
   description?: string;
 }
 
-export interface Form {
-  _id: string;
+export interface iafForm {
+  _id: string
   internshipDescription: {
-    profile: string;
-    jd: string;
-  };
-  updatedAt: string;
-  is_active: boolean;
+    profile: string
+  }
+  updatedAt: string
 }
 
-export interface Forms extends Array<Form> {}
+export interface jafForm {
+  _id: string
+  jobDescription: {
+    profile: string;
+  }
+  updatedAt: string
+}
+
+export interface iafForms extends Array<iafForm> {}
+export interface jafForms extends Array<jafForm> {}
+
 
 export const config = {
   runtime: "experimental-edge",
@@ -61,7 +69,8 @@ const formTypes: Array<FormInterface> = [
 ];
 
 export default function Home() {
-  const [formList, setFormList] = useState<Forms | null>(null);
+  const [iafFormList, setIafFormList] = useState<iafForms | null>(null);
+  const [jafFormList, setJafFormList] = useState<jafForms | null>(null);
   const [formsLoading, setFormsLoading] = useState<boolean>(true);
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -88,8 +97,17 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_IAF_BACKEND}/iaf/recruiter_id`,
+      const iafResponse = await axios.get(
+        `${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/iaf/recruiter_id`,
+        {
+          headers: {
+            id: IdStore.recruiterId,
+            mini: "1",
+          },
+        }
+      );
+      const jafResponse = await axios.get(
+        `${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/jaf/recruiter_id`,
         {
           headers: {
             id: IdStore.recruiterId,
@@ -98,7 +116,8 @@ export default function Home() {
         }
       );
       setFormsLoading(false);
-      setFormList(response.data.data);
+      setIafFormList(iafResponse.data.data);
+      setJafFormList(jafResponse.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -147,9 +166,9 @@ export default function Home() {
 
           <div className="flex justify-between mt-10 items-center">
             {!formsLoading ? (
-              formList ? (
+              iafFormList ? (
                 <Typography order={4} className="font-light">
-                  Total {formList.length} form(s) filled
+                  Total {iafFormList.length} form(s) filled
                 </Typography>
               ) : (
                 <Typography order={4} className="font-light">
@@ -190,8 +209,8 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                      formList ? (
-                        formList.map((form, formIndex) => {
+                      iafFormList ? (
+                        iafFormList.map((form, formIndex) => {
                           return (
                             <Paper
                               key={`Form_${formIndex}`}
@@ -249,8 +268,8 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                      formList ? (
-                        formList.map((form, formIndex) => {
+                      iafFormList ? (
+                        iafFormList.map((form, formIndex) => {
                           return (
                             <Paper
                               key={`Form_${formIndex}`}
@@ -293,7 +312,59 @@ export default function Home() {
             </Tabs.Panel>
 
             <Tabs.Panel value="jaf" pt="xs">
-              Settings tab content
+            <Tabs
+                color="purple"
+                defaultValue="2022-23"
+                orientation="vertical"
+              >
+                <Tabs.List>
+                  <Tabs.Tab value="2022-23">2022-23</Tabs.Tab>
+                </Tabs.List>
+
+                <Tabs.Panel value="2022-23" pl="xs">
+                  <div className="max-h-[70vh] overflow-scroll">
+                    {!formsLoading ? (
+                      jafFormList ? (
+                        jafFormList.map((form, formIndex) => {
+                          return (
+                            <Paper
+                              key={`Form_${formIndex}`}
+                              className="m-2 p-5 rounded-md shadow-md"
+                            >
+                              <Typography order={5}>
+                                {form.jobDescription.profile}
+                              </Typography>
+                              <Typography order={6} className="font-light">
+                                {convertStringToDate(form.updatedAt)}
+                              </Typography>
+                            </Paper>
+                          );
+                        })
+                      ) : (
+                        <Paper className="m-2 p-5 rounded-md">
+                          <Typography
+                            order={5}
+                            className="font-light"
+                            ta="center"
+                          >
+                            Empty
+                          </Typography>
+                        </Paper>
+                      )
+                    ) : (
+                      <Paper className="m-2 p-5 rounded-md">
+                        <Typography
+                          order={5}
+                          className="font-light"
+                          ta="center"
+                        >
+                          Loading forms ...{" "}
+                        </Typography>
+                      </Paper>
+                    )}
+                  </div>
+                </Tabs.Panel>
+              </Tabs>
             </Tabs.Panel>
           </Tabs>
         </div>
