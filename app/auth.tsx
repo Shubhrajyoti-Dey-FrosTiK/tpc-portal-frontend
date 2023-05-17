@@ -46,13 +46,16 @@ export default function AuthWrapper({
 
     // If user is not logged in
     if (!currentUser) {
-      setLoginChecked(true);
       setLoggedIn(false);
+      setLoginChecked(true);
     }
   };
 
   auth.onAuthStateChanged(async function (user) {
-    if (!(pathName in PUBLIC_ROUTES)) checkAuthState();
+    if (!(pathName in PUBLIC_ROUTES)) {
+      // if (!user)  setLoginChecked(false);
+      checkAuthState();
+    }
   });
 
   const getIDToken = async () => {
@@ -68,12 +71,13 @@ export default function AuthWrapper({
         },
       }
     );
+
     if (!response.data.error) {
       if (response.data) {
         dispatch(
           updateCompanyRecruiterId({
-            companyId: response.data["company"],
-            recruiterId: response.data["_id"],
+            companyId: response.data.data["company"],
+            recruiterId: response.data.data["_id"],
           })
         );
       }

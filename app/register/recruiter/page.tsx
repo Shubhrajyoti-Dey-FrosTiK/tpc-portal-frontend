@@ -1,8 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Typography } from "../../../components/components";
+import { Button, Typography } from "../../../components/components";
 import Form from "../../../components/form/Form";
 import RecruiterAndCompanyRegisterSchema from "../../../configs/CompanyRegisterSchema";
 import { handleSignUpWithEmailPassword } from "../../../firebase/auth";
@@ -13,6 +14,8 @@ function Page() {
   const {} = useExportableFormData({
     formKey: "recruiterAndCompanyRegistration",
   });
+
+  const router = useRouter();
 
   const FormState = useSelector(selectForm);
 
@@ -43,6 +46,20 @@ function Page() {
   return (
     <div>
       <div className="max-w-[800px] m-auto">
+        <div className="border-1 border-purple-500 flex justify-between m-5 items-center">
+          <Typography order={5}>Already registered ?</Typography>
+          <Button
+            ripple={true}
+            aria-hidden={true}
+            color="purple"
+            onClick={() => {
+              router.push("/login/recruiter");
+            }}
+            variant="gradient"
+          >
+            Login
+          </Button>
+        </div>
         <Form
           schema={RecruiterAndCompanyRegisterSchema}
           postFunction={handleSignIn}

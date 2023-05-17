@@ -89,6 +89,12 @@ function Form({
           ? { ...bodyTemplate, ...exportData, keyStore }
           : { ...exportData, keyStore }
       );
+      console.log(
+        postResponse,
+        bodyTemplate
+          ? { ...bodyTemplate, ...exportData, keyStore }
+          : { ...exportData, keyStore }
+      );
       setLoading(false);
       setStep(step + 1);
       if (postFunction && (await postFunction())) {

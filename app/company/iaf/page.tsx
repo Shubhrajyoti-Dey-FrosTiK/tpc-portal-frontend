@@ -17,7 +17,7 @@ function IAF() {
           recruiter: IdStore.recruiterId,
           company: IdStore.companyId,
         }}
-        postUrl={process.env.NEXT_PUBLIC_IAF_BACKEND || ""}
+        postUrl={`${process.env.NEXT_PUBLIC_IAF_BACKEND}/iaf` || ""}
       />
     </div>
   );

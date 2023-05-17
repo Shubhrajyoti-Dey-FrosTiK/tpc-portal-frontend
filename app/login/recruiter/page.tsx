@@ -28,6 +28,10 @@ import {
 // Hooks
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+
+import { updateCompanyRecruiterId } from "../../../store/states/idStore";
+import axios from "axios";
 
 import { signInWithPopup } from "firebase/auth";
 
@@ -37,6 +41,7 @@ export default function Login() {
   const [error, setError] = useState<boolean>(false);
   const [googleLoginError, setGoogleLoginError] = useState<boolean>(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const googleLogin = async () => {
     signInWithPopup(auth, provider)
@@ -48,6 +53,7 @@ export default function Login() {
           result.user.delete();
           setGoogleLoginError(true);
         } else {
+          // getIDToken();
           router.push("/");
         }
       })
@@ -62,6 +68,7 @@ export default function Login() {
     if (response.error) {
       setError(true);
     } else {
+      // getIDToken();
       router.push("/");
     }
   };

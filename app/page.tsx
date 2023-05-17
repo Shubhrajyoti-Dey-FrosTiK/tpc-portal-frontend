@@ -14,16 +14,31 @@ import {
   Group,
 } from "../components/components";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { selectUser, setCurrentUser } from "../store/states/userSlice";
+import { selectIdStore } from "../store/states/idStore";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Form = dynamic(() => import("../components/form/Form"), {
   loading: () => <h1>Loading</h1>,
 });
-
 export interface FormInterface {
   title: string;
   goTo: string;
   description?: string;
 }
+
+export interface Form {
+  _id: string;
+  internshipDescription: {
+    profile: string;
+    jd: string;
+  };
+  updatedAt?: string;
+}
+
+export interface Forms extends Array<Form> {}
 
 export const config = {
   runtime: "experimental-edge",
@@ -45,16 +60,38 @@ const formTypes: Array<FormInterface> = [
 ];
 
 export default function Home() {
-  const [opened, { open, close }] = useDisclosure(false);
-  const router = useRouter();
+  const [formList, setFormList] = useState<Forms | null>(null);
 
-  const formList = [
-    {
-      title: "Software Engineer",
-      purpose: "Internship",
-      dateFiled: "29th May, 2023",
-    },
-  ];
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const router = useRouter();
+  const User = useSelector(selectUser);
+  const IdStore = useSelector(selectIdStore);
+
+  useEffect(() => {
+    if (!User.currentUser) router.push("/register/recruiter");
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_IAF_BACKEND}/iaf/recruiter_id`,
+        {
+          headers: {
+            id: IdStore.recruiterId,
+            mini: "1",
+          },
+        }
+      );
+      setFormList(response.data.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <main>
@@ -94,9 +131,14 @@ export default function Home() {
           </Modal>
 
           <div className="flex justify-between mt-10 items-center">
-            <Typography order={4}>
-              Total {formList.length} form(s) filled
-            </Typography>
+            {formList ? (
+              <Typography order={4}>
+                Total {formList.length} form(s) filled
+              </Typography>
+            ) : (
+              <Typography order={4}>...</Typography>
+            )}
+
             <Button
               color="purple"
               ripple={true}
@@ -126,22 +168,30 @@ export default function Home() {
 
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
-                    {formList.map((form, formIndex) => {
-                      return (
-                        <Paper
-                          key={`Form_${formIndex}`}
-                          className="m-2 p-5 rounded-md shadow-md"
-                        >
-                          <Typography order={5}>{form.title}</Typography>
-                          <Typography order={6} className="font-normal">
-                            {form.purpose}
-                          </Typography>
-                          <Typography order={6} className="font-light">
-                            Form filled: {form.dateFiled}
-                          </Typography>
-                        </Paper>
-                      );
-                    })}
+                    {formList ? (
+                      formList.map((form, formIndex) => {
+                        return (
+                          <Paper
+                            key={`Form_${formIndex}`}
+                            className="m-2 p-5 rounded-md shadow-md"
+                          >
+                            <Typography order={5}>
+                              {form.internshipDescription.profile}
+                            </Typography>
+                            <Typography order={6} className="font-normal">
+                              {form.internshipDescription.jd}
+                            </Typography>
+                            <Typography order={6} className="font-light">
+                              Form filled: {form.updatedAt}
+                            </Typography>
+                          </Paper>
+                        );
+                      })
+                    ) : (
+                      <Paper className="m-2 p-5 rounded-md shadow-md">
+                        <Typography order={5}>Loading Forms</Typography>
+                      </Paper>
+                    )}
                   </div>
                 </Tabs.Panel>
               </Tabs>
