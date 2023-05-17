@@ -19,6 +19,8 @@ import { selectUser, setCurrentUser } from "../store/states/userSlice";
 import { selectIdStore } from "../store/states/idStore";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Timeline } from "@mantine/core";
+import { IconActivity, IconCircle} from "@tabler/icons";
 
 const Form = dynamic(() => import("../components/form/Form"), {
   loading: () => <h1>Loading</h1>,
@@ -36,6 +38,7 @@ export interface Form {
     jd: string;
   };
   updatedAt: string;
+  is_active: boolean;
 }
 
 export interface Forms extends Array<Form> { }
@@ -74,7 +77,15 @@ export default function Home() {
   }, []);
 
   const convertStringToDate = (str: string) => {
-    return Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long', timeZone: 'Asia/Kolkata' }).format(new Date(str))
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long', timeZone: tz }).format(new Date(str))
+  }
+
+  const getActiveIcon = (is_active: boolean) => {
+    if (is_active)
+      return <IconActivity size={30} color="purple" />
+    else
+      return <IconCircle size={30} stroke={0} />
   }
 
   const fetchData = async () => {
@@ -83,7 +94,7 @@ export default function Home() {
         `${process.env.NEXT_PUBLIC_IAF_BACKEND}/iaf/recruiter_id`,
         {
           headers: {
-            id: IdStore.recruiterId,
+            id: "64612e13a5609e10bd2079eb",
             mini: "1",
           },
         }
@@ -192,7 +203,7 @@ export default function Home() {
                               Internship
                             </Typography>
                             <Typography order={6} className="font-light">
-                            {convertStringToDate(form.updatedAt)}
+                              {convertStringToDate(form.updatedAt)}
                             </Typography>
                           </Paper>
                         );
@@ -201,9 +212,9 @@ export default function Home() {
                       <Paper className="m-2 p-5 rounded-md">
                         <Typography order={5} className="font-light" ta="center">Empty</Typography>
                       </Paper>
-                    )):(<Paper className="m-2 p-5 rounded-md">
-                    <Typography order={5} className="font-light" ta="center">Loading forms ... </Typography>
-                  </Paper>)}
+                    )) : (<Paper className="m-2 p-5 rounded-md">
+                      <Typography order={5} className="font-light" ta="center">Loading forms ... </Typography>
+                    </Paper>)}
 
                   </div>
                 </Tabs.Panel>
@@ -211,7 +222,28 @@ export default function Home() {
             </Tabs.Panel>
 
             <Tabs.Panel value="iaf" pt="xs">
-              Messages tab content
+              <Timeline bulletSize={30} lineWidth={2}>
+                {!formsLoading ? (formList ? (
+                  formList.map((form, formIndex) => {
+                    return (
+                      <Timeline.Item title={form.internshipDescription.profile} bullet={getActiveIcon(form.is_active)}>
+                        <Typography order={5} color="#4d4d4d" className="font-normal" size="sm">
+                          {form.internshipDescription.jd}
+                        </Typography>
+                        <Typography order={6} className="font-light">
+                          {convertStringToDate(form.updatedAt)}
+                        </Typography>
+                      </Timeline.Item>
+                    );
+                  })
+                ) : (
+                  <Paper className="m-2 p-5 rounded-md">
+                    <Typography order={5} className="font-light" ta="center">Empty</Typography>
+                  </Paper>
+                )) : (<Paper className="m-2 p-5 rounded-md">
+                  <Typography order={5} className="font-light" ta="center">Loading forms ... </Typography>
+                </Paper>)}
+              </Timeline>
             </Tabs.Panel>
 
             <Tabs.Panel value="jaf" pt="xs">
