@@ -35,10 +35,11 @@ export interface Form {
     profile: string;
     jd: string;
   };
-  updatedAt?: string;
+  updatedAt: string;
+  is_active: boolean;
 }
 
-export interface Forms extends Array<Form> {}
+export interface Forms extends Array<Form> { }
 
 export const config = {
   runtime: "experimental-edge",
@@ -61,6 +62,7 @@ const formTypes: Array<FormInterface> = [
 
 export default function Home() {
   const [formList, setFormList] = useState<Forms | null>(null);
+  const [formsLoading, setFormsLoading] = useState<boolean>(true)
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -71,6 +73,12 @@ export default function Home() {
   useEffect(() => {
     if (!User.currentUser) router.push("/register/recruiter");
   }, []);
+
+  const convertStringToDate = (str: string) => {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long', timeZone: tz }).format(new Date(str))
+  }
+
 
   const fetchData = async () => {
     try {
@@ -83,6 +91,7 @@ export default function Home() {
           },
         }
       );
+      setFormsLoading(false)
       setFormList(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -131,10 +140,14 @@ export default function Home() {
           </Modal>
 
           <div className="flex justify-between mt-10 items-center">
-            {formList ? (
-              <Typography order={4}>
-                Total {formList.length} form(s) filled
-              </Typography>
+            {!formsLoading ? (
+              formList ? (
+                <Typography order={4} className="font-light" >
+                  Total {formList.length} form(s) filled
+                </Typography>
+              ) : (<Typography order={4} className="font-light">
+                You have not filled any forms. Fill a new one.
+              </Typography>)
             ) : (
               <Typography order={4}>...</Typography>
             )}
@@ -168,7 +181,7 @@ export default function Home() {
 
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
-                    {formList ? (
+                    {!formsLoading ? (formList ? (
                       formList.map((form, formIndex) => {
                         return (
                           <Paper
@@ -179,26 +192,66 @@ export default function Home() {
                               {form.internshipDescription.profile}
                             </Typography>
                             <Typography order={6} className="font-normal">
-                              {form.internshipDescription.jd}
+                              Internship
                             </Typography>
                             <Typography order={6} className="font-light">
-                              Form filled: {form.updatedAt}
+                              {convertStringToDate(form.updatedAt)}
                             </Typography>
                           </Paper>
                         );
                       })
                     ) : (
-                      <Paper className="m-2 p-5 rounded-md shadow-md">
-                        <Typography order={5}>Loading Forms</Typography>
+                      <Paper className="m-2 p-5 rounded-md">
+                        <Typography order={5} className="font-light" ta="center">Empty</Typography>
                       </Paper>
-                    )}
+                    )) : (<Paper className="m-2 p-5 rounded-md">
+                      <Typography order={5} className="font-light" ta="center">Loading forms ... </Typography>
+                    </Paper>)}
+
                   </div>
                 </Tabs.Panel>
               </Tabs>
             </Tabs.Panel>
 
             <Tabs.Panel value="iaf" pt="xs">
-              Messages tab content
+            <Tabs
+                color="purple"
+                defaultValue="2022-23"
+                orientation="vertical"
+              >
+                <Tabs.List>
+                  <Tabs.Tab value="2022-23">2022-23</Tabs.Tab>
+                </Tabs.List>
+
+                <Tabs.Panel value="2022-23" pl="xs">
+                  <div className="max-h-[70vh] overflow-scroll">
+                    {!formsLoading ? (formList ? (
+                      formList.map((form, formIndex) => {
+                        return (
+                          <Paper
+                            key={`Form_${formIndex}`}
+                            className="m-2 p-5 rounded-md shadow-md"
+                          >
+                            <Typography order={5}>
+                              {form.internshipDescription.profile}
+                            </Typography>
+                            <Typography order={6} className="font-light">
+                              {convertStringToDate(form.updatedAt)}
+                            </Typography>
+                          </Paper>
+                        );
+                      })
+                    ) : (
+                      <Paper className="m-2 p-5 rounded-md">
+                        <Typography order={5} className="font-light" ta="center">Empty</Typography>
+                      </Paper>
+                    )) : (<Paper className="m-2 p-5 rounded-md">
+                      <Typography order={5} className="font-light" ta="center">Loading forms ... </Typography>
+                    </Paper>)}
+
+                  </div>
+                </Tabs.Panel>
+              </Tabs>
             </Tabs.Panel>
 
             <Tabs.Panel value="jaf" pt="xs">
