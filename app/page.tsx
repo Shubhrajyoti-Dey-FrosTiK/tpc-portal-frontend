@@ -86,7 +86,7 @@ export default function Home() {
         `${process.env.NEXT_PUBLIC_IAF_BACKEND}/iaf/recruiter_id`,
         {
           headers: {
-            id: IdStore,
+            id: IdStore.recruiterId,
             mini: "1",
           },
         }
