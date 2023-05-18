@@ -456,7 +456,7 @@ const JAFSchema: FormBuilder = {
                 },
                 {
                   label: "Stocks (with vesting period)",
-                  key: "stocks",
+                  key: "stocksWithVestingPlan",
                   type: FormInputType.SHORT_TEXT,
                   required: true
                 },
@@ -657,7 +657,7 @@ const JAFSchema: FormBuilder = {
                 },
                 {
                   label: "Stocks (with vesting period)",
-                  key: "stocks",
+                  key: "stocksWithVestingPlan",
                   type: FormInputType.SHORT_TEXT,
                   required: true
                 },
@@ -858,7 +858,7 @@ const JAFSchema: FormBuilder = {
                 },
                 {
                   label: "Stocks (with vesting period)",
-                  key: "stocks",
+                  key: "stocksWithVestingPlan",
                   type: FormInputType.SHORT_TEXT,
                   required: true
                 },
