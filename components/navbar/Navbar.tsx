@@ -18,7 +18,7 @@ import Image from "next/image";
 import { Typography } from "../components";
 
 // Logo
-import Logo from "../../assets/logo/Logo.png";
+import { ASSETS } from "../../constants/assets";
 import { useRouter } from "next/navigation";
 
 export interface mockdata {
@@ -77,7 +77,7 @@ export function NavbarNested({
               });
             }}
           >
-            <Image src={Logo} alt="IIT-BHU logo" width={40} height={40} />
+            <Image src={ASSETS.iitbhu_logo} alt="IIT-BHU logo" width={40} height={40} />
             <Typography order={3}>
               Training and Placement Cell IIT BHU
             </Typography>
