@@ -23,7 +23,7 @@ import { Sidebar } from "../../types/Sidebar.types";
 import { SearchBarMobile } from "./SearchBar";
 import Image from "next/image";
 
-import Logo from "../../assets/logo/Logo.png";
+import { ASSETS } from "../../constants/assets";
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -99,7 +99,7 @@ export function MobileDrawer({
         className="flex justify-between flex-row flex-nowrap p-5"
       >
         <div className="flex gap-4" style={{ alignItems: "center" }}>
-          <Image src={Logo} alt="IIT-BHU logo" width={40} height={40} />
+          <Image src={ASSETS.iitbhu_logo} alt="IIT-BHU logo" width={40} height={40} />
           <Typography order={3}>TPC IIT BHU</Typography>
         </div>
         {/* <Burger

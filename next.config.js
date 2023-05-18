@@ -9,6 +9,7 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [],
+    domains: ['www.iitbhu.ac.in'],
   },
 };
 
