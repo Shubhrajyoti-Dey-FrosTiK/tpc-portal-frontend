@@ -23,8 +23,8 @@ const JAFSchema: FormBuilder = {
             type: FormInputType.SHORT_TEXT,
           },
           {
-            label: "Mobile",
-            key: "mobile",
+            label: "Contact",
+            key: "contact",
             type: FormInputType.SHORT_TEXT,
           },
           {
@@ -33,8 +33,8 @@ const JAFSchema: FormBuilder = {
             type: FormInputType.SHORT_TEXT,
           },
           {
-            label: "Phone",
-            key: "phone",
+            label: "Alternative Contact",
+            key: "alternativeContact",
             type: FormInputType.SHORT_TEXT,
           },
         ],
@@ -196,11 +196,17 @@ const JAFSchema: FormBuilder = {
                     },
                   ],
                 },
+                {
+                  label: "Age Limit",
+                  key: "ageLimit",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                },
               ],
             },
             {
               title: "B.Tech CTC",
-              key: "CTC",
+              key: "ctcDetails",
               type: FormType.SECTION,
               formElements: [
                 {
@@ -381,11 +387,17 @@ const JAFSchema: FormBuilder = {
                     },
                   ],
                 },
+                {
+                  label: "Age Limit",
+                  key: "ageLimit",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                },
               ],
             },
             {
               title: "IDD CTC",
-              key: "CTC",
+              key: "ctcDetails",
               type: FormType.SECTION,
               formElements: [
                 {
@@ -576,11 +588,17 @@ const JAFSchema: FormBuilder = {
                     },
                   ],
                 },
+                {
+                  label: "Age Limit",
+                  key: "ageLimit",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                },
               ],
             },
             {
               title: "M.Tech CTC",
-              key: "CTC",
+              key: "ctcDetails",
               type: FormType.SECTION,
               formElements: [
                 {
@@ -771,11 +789,17 @@ const JAFSchema: FormBuilder = {
                     },
                   ],
                 },
+                {
+                  label: "Age Limit",
+                  key: "ageLimit",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                },
               ],
             },
             {
               title: "PhD CTC",
-              key: "CTC",
+              key: "ctcDetails",
               type: FormType.SECTION,
               formElements: [
                 {

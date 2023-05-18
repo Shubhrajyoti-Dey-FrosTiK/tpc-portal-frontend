@@ -23,8 +23,8 @@ const IAFSchema: FormBuilder = {
             type: FormInputType.SHORT_TEXT,
           },
           {
-            label: "Mobile",
-            key: "mobile",
+            label: "Contact",
+            key: "contact",
             type: FormInputType.SHORT_TEXT,
           },
           {
@@ -33,8 +33,8 @@ const IAFSchema: FormBuilder = {
             type: FormInputType.SHORT_TEXT,
           },
           {
-            label: "Phone",
-            key: "phone",
+            label: "Alternative Contact",
+            key: "alternativeContact",
             type: FormInputType.SHORT_TEXT,
           },
         ],
@@ -207,6 +207,12 @@ const IAFSchema: FormBuilder = {
                     },
                   ],
                 },
+                {
+                  label: "Age Limit",
+                  key: "ageLimit",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                },
               ],
             },
             {
@@ -352,6 +358,12 @@ const IAFSchema: FormBuilder = {
                       key: "phe",
                     },
                   ],
+                },
+                {
+                  label: "Age Limit",
+                  key: "ageLimit",
+                  type: FormInputType.NUMBER,
+                  required: false,
                 },
               ],
             },
@@ -509,6 +521,12 @@ const IAFSchema: FormBuilder = {
                     },
                   ],
                 },
+                {
+                  label: "Age Limit",
+                  key: "ageLimit",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                },
               ],
             },
             {
@@ -664,6 +682,12 @@ const IAFSchema: FormBuilder = {
                       key: "phe",
                     },
                   ],
+                },
+                {
+                  label: "Age Limit",
+                  key: "ageLimit",
+                  type: FormInputType.NUMBER,
+                  required: false,
                 },
               ],
             },

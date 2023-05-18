@@ -58,7 +58,7 @@ const RecruiterAndCompanyRegisterSchema: FormBuilder = {
         },
         {
           label: "Alternative Mobile Number",
-          key: "alternateContact",
+          key: "alternativeContact",
           type: FormInputType.SHORT_TEXT,
         },
         {
@@ -209,7 +209,7 @@ const RecruiterAndCompanyRegisterSchema: FormBuilder = {
       ],
     },
     {
-      title: "Password Createion",
+      title: "Set your Password",
       key: "passwordCreation",
       description:
         "This will be your password for your upcoming login sessions and your email id will be the username",
