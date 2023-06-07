@@ -199,7 +199,7 @@ const JAFSchema: FormBuilder = {
                 {
                   label: "Age Limit",
                   key: "ageLimit",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
               ],
@@ -944,7 +944,7 @@ const JAFSchema: FormBuilder = {
       label: "Campus process mode",
       required: true,
       key: "processMode",
-      type: FormInputType.CHECKBOX,
+      type: FormInputType.RADIO,
       options: [
         {
           label: "Virtual",
