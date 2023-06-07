@@ -210,7 +210,7 @@ const IAFSchema: FormBuilder = {
                 {
                   label: "Age Limit",
                   key: "ageLimit",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
               ],
@@ -230,7 +230,7 @@ const IAFSchema: FormBuilder = {
                   label: "Accommodation",
                   key: "accommodation",
                   type: FormInputType.SHORT_TEXT,
-                  required: true,
+                  required: false,
                 },
                 {
                   label: "Relocation Bonus",
@@ -362,7 +362,7 @@ const IAFSchema: FormBuilder = {
                 {
                   label: "Age Limit",
                   key: "ageLimit",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
               ],
@@ -382,7 +382,7 @@ const IAFSchema: FormBuilder = {
                   label: "Accommodation",
                   key: "accommodation",
                   type: FormInputType.SHORT_TEXT,
-                  required: true,
+                  required: false,
                 },
                 {
                   label: "Relocation Bonus",
@@ -528,7 +528,7 @@ const IAFSchema: FormBuilder = {
                 {
                   label: "Age Limit",
                   key: "ageLimit",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
               ],
@@ -548,7 +548,7 @@ const IAFSchema: FormBuilder = {
                   label: "Accommodation",
                   key: "accommodation",
                   type: FormInputType.SHORT_TEXT,
-                  required: true,
+                  required: false,
                 },
                 {
                   label: "Relocation Bonus",
@@ -690,7 +690,7 @@ const IAFSchema: FormBuilder = {
                 {
                   label: "Age Limit",
                   key: "ageLimit",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
               ],
@@ -710,7 +710,7 @@ const IAFSchema: FormBuilder = {
                   label: "Accommodation",
                   key: "accommodation",
                   type: FormInputType.SHORT_TEXT,
-                  required: true,
+                  required: false,
                 },
                 {
                   label: "Relocation Bonus",
@@ -801,7 +801,7 @@ const IAFSchema: FormBuilder = {
       label: "Campus process mode",
       required: true,
       key: "processMode",
-      type: FormInputType.CHECKBOX,
+      type: FormInputType.RADIO,
       options: [
         {
           label: "Virtual",
