@@ -1,14 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import MarkdownEditor from "@uiw/react-markdown-editor";
+// import MarkdownEditor from "@uiw/react-markdown-editor";
 import { useSelector } from "react-redux";
 import { ProfileLink, selectResume } from "../../../store/states/resumeSlice";
 import { Avatar, Paper, Typography } from "../../../components/components";
 
+export const config = {
+  runtime: "nodejs"
+}
+
 function Page() {
   const [markdown, setMarkdown] = useState("");
   const { resumeFields } = useSelector(selectResume);
-
 
   return (
     <div>
@@ -43,7 +46,7 @@ function Page() {
         )}
       </div>
 
-      <MarkdownEditor
+      {/* <MarkdownEditor
         toolbars={["undo", "redo", "bold", "italic", "underline", "link"]}
         value={markdown}
         visible={true}
@@ -51,7 +54,7 @@ function Page() {
           minHeight: "100px",
         }}
         enableScroll={true}
-      />
+      /> */}
     </div>
   );
 }
