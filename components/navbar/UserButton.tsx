@@ -7,6 +7,7 @@ import {
   createStyles,
 } from '../components';
 import { IconChevronRight } from '@tabler/icons';
+import { ASSETS } from '../../constants/assets';
 
 const useStyles = createStyles((theme) => ({
   user: {
@@ -34,7 +35,7 @@ export function UserButton({ image, name, email, icon, ...others }: UserButtonPr
   return (
     <UnstyledButton className={classes.user} {...others}>
       <Group>
-        <Avatar src={image} radius="xl" />
+        <Avatar src={ASSETS.iitbhu_logo} radius="xl" />
 
         <div style={{ flex: 1 }}>
           <Text size="sm" weight={500}>

@@ -519,6 +519,10 @@ const IAFSchema: FormBuilder = {
                       label: "Pharmaceutical Engineering",
                       key: "phe",
                     },
+                    {
+                      label: "Decision Science Engineering",
+                      key: "dse",
+                    },
                   ],
                 },
                 {

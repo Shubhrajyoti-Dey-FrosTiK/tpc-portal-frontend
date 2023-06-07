@@ -29,7 +29,7 @@ export interface FormInterface {
   description?: string;
 }
 
-export interface iafForm {
+export interface IafForm {
   _id: string
   internshipDescription: {
     profile: string
@@ -37,7 +37,7 @@ export interface iafForm {
   updatedAt: string
 }
 
-export interface jafForm {
+export interface JafForm {
   _id: string
   jobDescription: {
     profile: string;
@@ -45,8 +45,8 @@ export interface jafForm {
   updatedAt: string
 }
 
-export interface iafForms extends Array<iafForm> {}
-export interface jafForms extends Array<jafForm> {}
+export interface IafForms extends Array<IafForm> {}
+export interface JafForms extends Array<JafForm> {}
 
 
 export const config = {
@@ -69,8 +69,8 @@ const formTypes: Array<FormInterface> = [
 ];
 
 export default function Home() {
-  const [iafFormList, setIafFormList] = useState<iafForms | null>(null);
-  const [jafFormList, setJafFormList] = useState<jafForms | null>(null);
+  const [iafFormList, setIafFormList] = useState<IafForms | null>(null);
+  const [jafFormList, setJafFormList] = useState<JafForms | null>(null);
   const [formsLoading, setFormsLoading] = useState<boolean>(true);
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -116,8 +116,8 @@ export default function Home() {
         }
       );
       setFormsLoading(false);
-      setIafFormList(iafResponse.data.data);
-      setJafFormList(jafResponse.data.data);
+      setIafFormList({...iafResponse.data.data,type: iafResponse.data.type});
+      setIafFormList({...jafResponse.data.data,type: jafResponse.data.type});
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -196,6 +196,7 @@ export default function Home() {
               <Tabs.Tab value="jaf">JAF</Tabs.Tab>
             </Tabs.List>
 
+            {/* ALL  */}
             <Tabs.Panel value="all" pt="xs">
               <Tabs
                 color="purple"
@@ -214,7 +215,8 @@ export default function Home() {
                           return (
                             <Paper
                               key={`Form_${formIndex}`}
-                              className="m-2 p-5 rounded-md shadow-md"
+                              className="m-2 p-5 rounded-md shadow-md cursor-pointer"
+                              // onClick={() => {router.push(`/iaf/${form["_id"]}`)}}
                             >
                               <Typography order={5}>
                                 {form.internshipDescription.profile}
@@ -235,7 +237,7 @@ export default function Home() {
                             className="font-light"
                             ta="center"
                           >
-                            Empty
+                            No forms filled yet.
                           </Typography>
                         </Paper>
                       )
@@ -255,6 +257,7 @@ export default function Home() {
               </Tabs>
             </Tabs.Panel>
 
+            {/* IAF */}
             <Tabs.Panel value="iaf" pt="xs">
               <Tabs
                 color="purple"
@@ -291,7 +294,7 @@ export default function Home() {
                             className="font-light"
                             ta="center"
                           >
-                            Empty
+                            No forms filled yet.
                           </Typography>
                         </Paper>
                       )
@@ -311,6 +314,8 @@ export default function Home() {
               </Tabs>
             </Tabs.Panel>
 
+
+            {/* JAF  */}
             <Tabs.Panel value="jaf" pt="xs">
             <Tabs
                 color="purple"
@@ -347,7 +352,7 @@ export default function Home() {
                             className="font-light"
                             ta="center"
                           >
-                            Empty
+                            No forms filled yet.
                           </Typography>
                         </Paper>
                       )

@@ -29,8 +29,8 @@
     "components/input/TextInput.jsx",
     "store/states/userSlice.js",
     "store/states/routeSlice.js",
-    "constants/currency.js"
+    "constants/currency.js",
+    "app/resume/fields/page.tsx"
   ],
-  "exclude": ["node_modules"],
-  
+  "exclude": ["node_modules"]
 }

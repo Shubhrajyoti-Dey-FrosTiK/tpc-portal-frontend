@@ -23,6 +23,7 @@ import userSlice from "./states/userSlice";
 import formSlice from "./states/formSlice";
 import themeSlice from "./states/themeSlice";
 import idStoreSlice from "./states/idStore";
+import resumeSlice from "./states/resumeSlice";
 
 const persistConfig = {
   key: "root",
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   form: formSlice.reducer,
   theme: themeSlice.reducer,
   idStore: idStoreSlice.reducer,
+  resume: resumeSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
