@@ -45,8 +45,8 @@ export interface JafForm {
   updatedAt: string
 }
 
-export interface IafForms extends Array<IafForm> {}
-export interface JafForms extends Array<JafForm> {}
+export interface IafForms {data: Array<IafForm>, type: string}
+export interface JafForms {data: Array<JafForm>, type: string}
 
 
 export const config = {
@@ -116,8 +116,8 @@ export default function Home() {
         }
       );
       setFormsLoading(false);
-      setIafFormList({...iafResponse.data.data,type: iafResponse.data.type});
-      setIafFormList({...jafResponse.data.data,type: jafResponse.data.type});
+      setIafFormList({data: iafResponse.data.data, type: iafResponse.data.type});
+      setIafFormList({data :jafResponse.data.data, type: jafResponse.data.type});
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -166,9 +166,9 @@ export default function Home() {
 
           <div className="flex justify-between mt-10 items-center">
             {!formsLoading ? (
-              iafFormList ? (
+              iafFormList && iafFormList ? (
                 <Typography order={4} className="font-light">
-                  Total {iafFormList.length} form(s) filled
+                  Total {iafFormList && iafFormList.data ? iafFormList.data.length : 0} form(s) filled
                 </Typography>
               ) : (
                 <Typography order={4} className="font-light">
@@ -210,8 +210,8 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                      iafFormList ? (
-                        iafFormList.map((form, formIndex) => {
+                      iafFormList && iafFormList.data ? (
+                        iafFormList.data.map((form, formIndex) => {
                           return (
                             <Paper
                               key={`Form_${formIndex}`}
@@ -271,8 +271,8 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                      iafFormList ? (
-                        iafFormList.map((form, formIndex) => {
+                      iafFormList && iafFormList.data ? (
+                        iafFormList.data.map((form, formIndex) => {
                           return (
                             <Paper
                               key={`Form_${formIndex}`}
@@ -329,8 +329,8 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                      jafFormList ? (
-                        jafFormList.map((form, formIndex) => {
+                     jafFormList && jafFormList.data ? (
+                        jafFormList.data.map((form, formIndex) => {
                           return (
                             <Paper
                               key={`Form_${formIndex}`}

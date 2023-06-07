@@ -85,6 +85,8 @@ export default function FileInput({
           MIME_TYPES.pdf,
           MIME_TYPES.ppt,
           MIME_TYPES.pptx,
+          MIME_TYPES.png,
+          MIME_TYPES.jpeg,
         ]}
       >
         <Group
