@@ -390,7 +390,7 @@ const JAFSchema: FormBuilder = {
                 {
                   label: "Age Limit",
                   key: "ageLimit",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
               ],
@@ -591,7 +591,7 @@ const JAFSchema: FormBuilder = {
                 {
                   label: "Age Limit",
                   key: "ageLimit",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
               ],
@@ -792,7 +792,7 @@ const JAFSchema: FormBuilder = {
                 {
                   label: "Age Limit",
                   key: "ageLimit",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
               ],
