@@ -29,12 +29,18 @@ export interface FormInterface {
   description?: string;
 }
 
+enum FormType {
+  "IAF" = "IAF",
+  "JAF" = "JAF",
+}
+
 export interface IafForm {
   _id: string
   internshipDescription: {
     profile: string
   }
   updatedAt: string
+  type: FormType.IAF
 }
 
 export interface JafForm {
@@ -43,6 +49,8 @@ export interface JafForm {
     profile: string;
   }
   updatedAt: string
+  type: FormType.JAF
+
 }
 
 export interface IafForms { data: Array<IafForm>, type: string }
@@ -69,8 +77,8 @@ const formTypes: Array<FormInterface> = [
 ];
 
 export default function Home() {
-  const [iafFormList, setIafFormList] = useState<IafForms | null>(null);
-  const [jafFormList, setJafFormList] = useState<JafForms | null>(null);
+  const [iafFormList, setIafFormList] = useState<Array<IafForm>>([]);
+  const [jafFormList, setJafFormList] = useState<Array<JafForm>>([]);
   const [formsLoading, setFormsLoading] = useState<boolean>(true);
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -116,8 +124,24 @@ export default function Home() {
         }
       );
       setFormsLoading(false);
-      setIafFormList({ data: iafResponse.data.data, type: iafResponse.data.type });
-      setJafFormList({ data: jafResponse.data.data, type: jafResponse.data.type });
+
+      const jafList: Array<JafForm> = []
+      const iafList: Array<IafForm> = []
+
+      if(jafResponse.data && jafResponse.data.data && Array.isArray(jafResponse.data.data)) {
+        jafResponse.data.data.forEach((data : any) => {
+          jafList.push({...data, type: FormType.JAF})
+        })
+      }
+
+      if(iafResponse.data && iafResponse.data.data && Array.isArray(iafResponse.data.data)) {
+        iafResponse.data.data.forEach((data : any) => {
+          iafList.push({...data, type: FormType.IAF})
+        })
+      }
+
+      setIafFormList(iafList);
+      setJafFormList(jafList);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -168,7 +192,7 @@ export default function Home() {
             {!formsLoading ? (
               iafFormList && iafFormList ? (
                 <Typography order={4} className="font-light">
-                  Total {iafFormList && iafFormList.data ? iafFormList.data.length : 0} form(s) filled
+                  Total {iafFormList.length + jafFormList.length} form(s) filled
                 </Typography>
               ) : (
                 <Typography order={4} className="font-light">
@@ -210,8 +234,10 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                      iafFormList && iafFormList.data ? (
-                        iafFormList.data.map((form, formIndex) => {
+                        [...iafFormList, ...jafFormList].length ? ([...iafFormList, ...jafFormList].sort(function(a, b) {
+                          var x = a.updatedAt; var y = b.updatedAt;
+                          return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+                      }).map((form, formIndex) => {
                           return (
                             <Paper
                               key={`Form_${formIndex}`}
@@ -219,10 +245,10 @@ export default function Home() {
                             // onClick={() => {router.push(`/iaf/${form["_id"]}`)}}
                             >
                               <Typography order={5}>
-                                {form.internshipDescription.profile}
+                                {form.type === FormType.IAF ? form.internshipDescription.profile : form.jobDescription.profile}
                               </Typography>
                               <Typography order={6} className="font-normal">
-                                Internship
+                                {form.type == FormType.IAF ? "Internship" : "Full Time"}
                               </Typography>
                               <Typography order={6} className="font-light">
                                 {convertStringToDate(form.updatedAt)}
@@ -271,8 +297,11 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                      iafFormList && iafFormList.data ? (
-                        iafFormList.data.map((form, formIndex) => {
+                      iafFormList && iafFormList.length ? (
+                        iafFormList.sort(function(a, b) {
+                          var x = a.updatedAt; var y = b.updatedAt;
+                          return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+                      }).map((form, formIndex) => {
                           return (
                             <Paper
                               key={`Form_${formIndex}`}
@@ -329,8 +358,11 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                      jafFormList && jafFormList.data ? (
-                        jafFormList.data.map((form, formIndex) => {
+                      jafFormList && jafFormList.length ? (
+                        jafFormList.sort(function(a, b) {
+                          var x = a.updatedAt; var y = b.updatedAt;
+                          return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+                      }).map((form, formIndex) => {
                           return (
                             <Paper
                               key={`Form_${formIndex}`}
