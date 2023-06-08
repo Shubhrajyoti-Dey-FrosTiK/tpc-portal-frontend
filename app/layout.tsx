@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import RootStyleRegistry from "./emotion";
 import { NavbarNested } from "../components/navbar/Navbar";
 import { MobileDrawer } from "../components/navbar/Drawer";
+import { Analytics } from '@vercel/analytics/react';
+
 // Redux
 import ReduxProvider from "./redux";
 
@@ -26,6 +28,7 @@ export default function RootLayout({
     <html lang="en-US">
       <head />
       <body>
+      <Analytics />
         <ReduxProvider>
           <RootStyleRegistry>
             <AuthWrapper>
