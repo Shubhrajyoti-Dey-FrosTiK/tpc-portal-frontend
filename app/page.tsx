@@ -45,8 +45,8 @@ export interface JafForm {
   updatedAt: string
 }
 
-export interface IafForms {data: Array<IafForm>, type: string}
-export interface JafForms {data: Array<JafForm>, type: string}
+export interface IafForms { data: Array<IafForm>, type: string }
+export interface JafForms { data: Array<JafForm>, type: string }
 
 
 export const config = {
@@ -116,8 +116,8 @@ export default function Home() {
         }
       );
       setFormsLoading(false);
-      setIafFormList({data: iafResponse.data.data, type: iafResponse.data.type});
-      setIafFormList({data :jafResponse.data.data, type: jafResponse.data.type});
+      setIafFormList({ data: iafResponse.data.data, type: iafResponse.data.type });
+      setJafFormList({ data: jafResponse.data.data, type: jafResponse.data.type });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -216,7 +216,7 @@ export default function Home() {
                             <Paper
                               key={`Form_${formIndex}`}
                               className="m-2 p-5 rounded-md shadow-md cursor-pointer"
-                              // onClick={() => {router.push(`/iaf/${form["_id"]}`)}}
+                            // onClick={() => {router.push(`/iaf/${form["_id"]}`)}}
                             >
                               <Typography order={5}>
                                 {form.internshipDescription.profile}
@@ -317,7 +317,7 @@ export default function Home() {
 
             {/* JAF  */}
             <Tabs.Panel value="jaf" pt="xs">
-            <Tabs
+              <Tabs
                 color="purple"
                 defaultValue="2022-23"
                 orientation="vertical"
@@ -329,7 +329,7 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                     jafFormList && jafFormList.data ? (
+                      jafFormList && jafFormList.data ? (
                         jafFormList.data.map((form, formIndex) => {
                           return (
                             <Paper
