@@ -93,35 +93,45 @@ function Renderer({
     const newBasePath = `${basePath}[${renderElement.key}]`;
 
     switch (renderElement.type) {
-      case FormInputType.FILE:
-        return (
-          <div>
-            {ReduxFormContext[formKey].keyStore[newBasePath] ? (
-              <div>
-                {ReduxFormContext[formKey].keyStore[newBasePath].map(
-                  (file: File, fileIndex: number) => {
-                    return (
-                      <Paper
-                        key={`${renderElement.label}_${fileIndex}`}
-                        shadow="sm"
-                        p="sm"
-                        className="flex justify-between mt-3"
-                        withBorder
-                      >
-                        <div className="flex gap-2 items-center">
-                          <IconFileX size={30} />
-                          <Text>{file.name}</Text>
-                        </div>
-                      </Paper>
-                    );
-                  }
-                )}
-              </div>
-            ) : (
-              "-"
-            )}
-          </div>
-        );
+      case FormInputType.FILE: {
+        // To tackle URL of files (VIEWER)
+        if (typeof ReduxFormContext[formKey].keyStore[newBasePath] === "string")
+          return (
+            <Typography order={5} className="font-light">
+              ReduxFormContext[formKey].keyStore[newBasePath]
+            </Typography>
+          );
+        // To show the box for file
+        else
+          return (
+            <div>
+              {ReduxFormContext[formKey].keyStore[newBasePath] ? (
+                <div>
+                  {ReduxFormContext[formKey].keyStore[newBasePath].map(
+                    (file: File, fileIndex: number) => {
+                      return (
+                        <Paper
+                          key={`${renderElement.label}_${fileIndex}`}
+                          shadow="sm"
+                          p="sm"
+                          className="flex justify-between mt-3"
+                          withBorder
+                        >
+                          <div className="flex gap-2 items-center">
+                            <IconFileX size={30} />
+                            <Text>{file.name}</Text>
+                          </div>
+                        </Paper>
+                      );
+                    }
+                  )}
+                </div>
+              ) : (
+                "-"
+              )}
+            </div>
+          );
+      }
 
       case FormInputType.CHECKBOX: {
         const optionKeysSelected =

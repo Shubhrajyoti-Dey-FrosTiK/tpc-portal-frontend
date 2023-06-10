@@ -3,7 +3,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 
 // Types
-import { FormBuilder, FormState as FormStateType } from "../../types/Form";
+import {
+  FormBuilder,
+  FormState as FormStateType,
+  KeyStore,
+} from "../../types/Form";
 import FormService from "../../services/form.service";
 
 // Define a type for the slice state
@@ -28,6 +32,7 @@ export interface UpdateReduxFormValidation {
 export interface InitializeReduxFormState {
   formKey: string;
   formBuilderSchema: FormBuilder;
+  keyStore?: KeyStore;
 }
 
 export interface UpdateRepeatingSection {
@@ -62,7 +67,7 @@ export const formSlice = createSlice({
     ) => {
       if (!state[action.payload.formKey])
         state[action.payload.formKey] = {
-          keyStore: {},
+          keyStore: action.payload.keyStore ? action.payload.keyStore : {},
           validationStore: {},
           repeatStore: {},
           formBuilderSchema: action.payload.formBuilderSchema,

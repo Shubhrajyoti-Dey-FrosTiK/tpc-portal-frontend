@@ -136,7 +136,7 @@ function Form({
           <>
             <div style={{ display: `${loading ? "none" : "block"}` }}>
               <Typography order={1}>{schema.title}</Typography>
-              {formState[schema.key as string] &&
+              {/* {formState[schema.key as string] &&
                 formState[schema.key as string].formBuilderSchema.sections.map(
                   (
                     section: FormElement | Section | RepeatableSection,
@@ -156,7 +156,8 @@ function Form({
                       </React.Fragment>
                     );
                   }
-                )}
+                )} */}
+              <Viewer schema={schema} />
             </div>
             <div
               style={{
