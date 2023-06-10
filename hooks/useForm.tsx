@@ -89,6 +89,16 @@ function useForm({
           })
         );
 
+        case FormInputType.NUMBER:
+          dispatch(
+            updateFormStateContext({
+              formKey,
+              stateKey: basePath,
+              value:  (formElement.initialValue as number) || 0,
+              formBuilderSchema,
+            })
+          );
+
       default:
         dispatch(
           updateFormStateContext({
@@ -267,7 +277,7 @@ function useForm({
       updateFormStateContext({
         formKey,
         stateKey: basePath,
-        value: input,
+        value: input ? input : 0,
         formBuilderSchema,
       })
     );

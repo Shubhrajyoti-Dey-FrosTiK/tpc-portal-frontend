@@ -89,74 +89,29 @@ function NumberInput({
   });
   const { classes } = useStyles();
 
+  console.log(formElement);
+
   return (
     <React.Fragment>
       {visible && (
         <div className="mt-3 mb-3">
-          <Input.Label
-            className="font-bold"
-            required={(formElement.required as boolean) || false}
-          >
-            {formElement.label}
-          </Input.Label>
-          <Input.Description className="mb-1">
-            {formElement.description}
-          </Input.Description>
-          <div className={classes.wrapper}>
-            <ActionIcon<"button">
-              size={28}
-              variant="transparent"
-              onClick={() => {
-                captureNumberInputChange(inputState - 1);
-                setKeyDown(true);
-              }}
-              disabled={
-                formElement.min && inputState <= formElement.min ? true : false
-              }
-              className={classes.control}
-              onMouseDown={(event) => event.preventDefault()}
-            >
-              <IconMinus size={16} stroke={1.5} />
-            </ActionIcon>
-
-            <NumberInputElement
-              variant="unstyled"
-              defaultValue={undefined}
-              min={formElement.min || Number.MIN_VALUE}
-              max={formElement.max || Number.MAX_VALUE}
-              value={inputState}
-              precision={1}
-              // onChange={(value: number) => {
-              //   captureNumberInputChange(value);
-              // }}
-              classNames={{ input: classes.input }}
-              onKeyDown={() => {
-                setKeyDown(true);
-              }}
-              onBlur={(e: React.FormEvent<HTMLInputElement>) => {
-                setBlur(true);
-                captureNumberInputChange(
-                  Number((e.target as HTMLInputElement).value)
-                );
-              }}
-            />
-
-            <ActionIcon<"button">
-              size={28}
-              variant="transparent"
-              onClick={() => {
-                captureNumberInputChange(inputState + 1);
-                setKeyDown(true);
-              }}
-              disabled={
-                formElement.max && inputState >= formElement.max ? true : false
-              }
-              className={classes.control}
-              onMouseDown={(event) => event.preventDefault()}
-            >
-              <IconPlus size={16} stroke={1.5} />
-            </ActionIcon>
-          </div>
+          <NumberInputElement
+            label={formElement.label}
+            description={formElement.description}
+            placeholder={formElement.placeHolder as string | undefined}
+            precision={1}
+            min={formElement.min || Number.MIN_VALUE}
+            max={formElement.max || Number.MAX_VALUE}
+            onKeyDown={() => {
+              setKeyDown(true);
+            }}
+            onBlur={(e: React.FormEvent<HTMLInputElement>) => {
+              setBlur(true);
+              captureNumberInputChange(
+                Number((e.target as HTMLInputElement).value)
+              );
+            }}
+          />
           <Input.Error className="mt-1">{error}</Input.Error>
         </div>
       )}

@@ -13,7 +13,12 @@ import {
 
 // Types
 import { FormBuilder, RepeatableSection, Section } from "../../types/Form";
-import { FormType, FormElement, FormInputType } from "../../types/FormType";
+import {
+  FormType,
+  FormElement,
+  FormInputType,
+  Option,
+} from "../../types/FormType";
 import { Button, Input, Text, Typography, Paper } from "../components";
 
 // Components
@@ -117,6 +122,51 @@ function Renderer({
             )}
           </div>
         );
+
+      case FormInputType.CHECKBOX: {
+        const optionKeysSelected =
+          ReduxFormContext[formKey].keyStore[newBasePath];
+        const allOptions = renderElement.options;
+        const labels: Array<String> = [];
+        optionKeysSelected.forEach((option: string) => {
+          for (
+            let optionIndex = 0;
+            optionIndex < allOptions.length;
+            optionIndex++
+          ) {
+            if (allOptions[optionIndex].key == option) {
+              labels.push(allOptions[optionIndex].label);
+            }
+          }
+        });
+        return (
+          <Typography order={5} className="font-light">
+            {labels.toString()}
+          </Typography>
+        );
+      }
+
+      case FormInputType.RADIO: {
+        const optionKeysSelected =
+          ReduxFormContext[formKey].keyStore[newBasePath];
+        const allOptions = renderElement.options;
+        let label: String = "";
+        for (
+          let optionIndex = 0;
+          optionIndex < allOptions.length;
+          optionIndex++
+        ) {
+          if (allOptions[optionIndex].key == optionKeysSelected) {
+            label = allOptions[optionIndex].label;
+          }
+        }
+        return (
+          <Typography order={5} className="font-light">
+            {label}
+          </Typography>
+        );
+      }
+
       default:
         return (
           <Typography order={5} className="font-light">

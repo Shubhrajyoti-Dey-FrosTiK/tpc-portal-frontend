@@ -141,7 +141,7 @@ const IAFSchema: FormBuilder = {
                   required: true,
                   description: "CGPA must be a number between 0 - 10",
                   max: 10,
-                  min: 9,
+                  min: 0,
                 },
                 {
                   label: "Eligible Branches",
@@ -217,7 +217,7 @@ const IAFSchema: FormBuilder = {
             },
             {
               title: "B.Tech Stipend Details",
-              key: "stipend",
+              key: "compensationDetails",
               type: FormType.SECTION,
               formElements: [
                 {
@@ -273,7 +273,7 @@ const IAFSchema: FormBuilder = {
                   required: true,
                   description: "CGPA must be a number between 0 - 10",
                   max: 10,
-                  min: 9,
+                  min: 0,
                 },
                 {
                   label: "Eligible Branches",
@@ -369,7 +369,7 @@ const IAFSchema: FormBuilder = {
             },
             {
               title: "IDD Stipend Details",
-              key: "stipend",
+              key: "compensationDetails",
               type: FormType.SECTION,
               formElements: [
                 {
@@ -425,7 +425,7 @@ const IAFSchema: FormBuilder = {
                   required: true,
                   description: "CGPA must be a number between 0 - 10",
                   max: 10,
-                  min: 9,
+                  min: 0,
                 },
                 {
                   label: "Eligible Branches",
@@ -535,7 +535,7 @@ const IAFSchema: FormBuilder = {
             },
             {
               title: "M.Tech Stipend Details",
-              key: "stipend",
+              key: "compensationDetails",
               type: FormType.SECTION,
               formElements: [
                 {
@@ -591,7 +591,7 @@ const IAFSchema: FormBuilder = {
                   required: true,
                   description: "CGPA must be a number between 0 - 10",
                   max: 10,
-                  min: 9,
+                  min: 0,
                 },
                 {
                   label: "Eligible Branches",
@@ -697,7 +697,7 @@ const IAFSchema: FormBuilder = {
             },
             {
               title: "PhD Stipend details",
-              key: "stipend",
+              key: "compensationDetails",
               type: FormType.SECTION,
               formElements: [
                 {

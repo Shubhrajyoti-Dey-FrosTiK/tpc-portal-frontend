@@ -206,74 +206,74 @@ const JAFSchema: FormBuilder = {
             },
             {
               title: "B.Tech CTC",
-              key: "ctcDetails",
+              key: "compensationDetails",
               type: FormType.SECTION,
               formElements: [
                 {
                   label: "Total CTC",
                   key: "totalCTC",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "1st Year CTC",
                   key: "firstYearCTC",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Fixed Salary",
                   key: "fixedSalary",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Provident Fund and Gratuity",
                   key: "providentFundAndGratuity",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Joining Bonus",
                   key: "joiningBonus",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Relocation Bonus",
                   key: "relocationBonus",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Patent Bonus",
                   key: "patentBonus",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Education Reimbursement",
                   key: "educationReimbursement",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Bonds(if any)",
                   key: "bonds",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Stocks (with vesting period)",
                   key: "stocksWithVestingPlan",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Other Benefits",
                   key: "otherBenefits",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
               ],
             },
@@ -397,74 +397,74 @@ const JAFSchema: FormBuilder = {
             },
             {
               title: "IDD CTC",
-              key: "ctcDetails",
+              key: "compensationDetails",
               type: FormType.SECTION,
               formElements: [
                 {
                   label: "Total CTC",
                   key: "totalCTC",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "1st Year CTC",
                   key: "firstYearCTC",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Fixed Salary",
                   key: "fixedSalary",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Provident Fund and Gratuity",
                   key: "providentFundAndGratuity",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Joining Bonus",
                   key: "joiningBonus",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Relocation Bonus",
                   key: "relocationBonus",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Patent Bonus",
                   key: "patentBonus",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Education Reimbursement",
                   key: "educationReimbursement",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Bonds(if any)",
                   key: "bonds",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Stocks (with vesting period)",
                   key: "stocksWithVestingPlan",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Other Benefits",
                   key: "otherBenefits",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
               ],
             },
@@ -598,74 +598,74 @@ const JAFSchema: FormBuilder = {
             },
             {
               title: "M.Tech CTC",
-              key: "ctcDetails",
+              key: "compensationDetails",
               type: FormType.SECTION,
               formElements: [
                 {
                   label: "Total CTC",
                   key: "totalCTC",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "1st Year CTC",
                   key: "firstYearCTC",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Fixed Salary",
                   key: "fixedSalary",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Provident Fund and Gratuity",
                   key: "providentFundAndGratuity",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Joining Bonus",
                   key: "joiningBonus",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Relocation Bonus",
                   key: "relocationBonus",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Patent Bonus",
                   key: "patentBonus",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Education Reimbursement",
                   key: "educationReimbursement",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Bonds(if any)",
                   key: "bonds",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Stocks (with vesting period)",
                   key: "stocksWithVestingPlan",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Other Benefits",
                   key: "otherBenefits",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
               ],
             },
@@ -799,74 +799,74 @@ const JAFSchema: FormBuilder = {
             },
             {
               title: "PhD CTC",
-              key: "ctcDetails",
+              key: "compensationDetails",
               type: FormType.SECTION,
               formElements: [
                 {
                   label: "Total CTC",
                   key: "totalCTC",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "1st Year CTC",
                   key: "firstYearCTC",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Fixed Salary",
                   key: "fixedSalary",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Provident Fund and Gratuity",
                   key: "providentFundAndGratuity",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Joining Bonus",
                   key: "joiningBonus",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Relocation Bonus",
                   key: "relocationBonus",
                   type: FormInputType.CURRENCY,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Patent Bonus",
                   key: "patentBonus",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Education Reimbursement",
                   key: "educationReimbursement",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Bonds(if any)",
                   key: "bonds",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Stocks (with vesting period)",
                   key: "stocksWithVestingPlan",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
                 {
                   label: "Other Benefits",
                   key: "otherBenefits",
                   type: FormInputType.SHORT_TEXT,
-                  required: true
+                  required: true,
                 },
               ],
             },
