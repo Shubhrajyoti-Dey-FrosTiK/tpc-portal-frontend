@@ -214,24 +214,25 @@ const RecruiterAndCompanyRegisterSchema: FormBuilder = {
       description:
         "This will be your password for your upcoming login sessions and your email id will be the username",
       type: FormType.SECTION,
-      validation: {
-        props: ["[passwordCreation]-[password]"],
-        validator: (propsList) => {
-          const password = propsList[0];
-          return password.length >= 6
-            ? {
-                validationStatus: Validation.SUCCESS,
-              }
-            : {
-                validationStatus: Validation.FAILURE,
-                errorMessage: "Password must be at least of 6 letters",
-              };
-        },
-      },
       formElements: [
         {
           label: "New Password",
           key: "password",
+          description: "Your password should be at least 6 letters long",
+          validation: {
+            props: ["[passwordCreation]-[password]"],
+            validator: (propsList) => {
+              const password = propsList[0];
+              return password.length >= 6
+                ? {
+                    validationStatus: Validation.SUCCESS,
+                  }
+                : {
+                    validationStatus: Validation.FAILURE,
+                    errorMessage: "Password must be at least of 6 letters",
+                  };
+            },
+          },
           required: true,
           type: FormInputType.PASSWORD_CREATION,
         },
