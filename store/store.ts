@@ -5,7 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 
 // Persist
-import storage from "redux-persist/lib/storage";
+import AsyncStorage from "redux-persist/lib/storage";
+
 import {
   persistStore,
   persistReducer,
@@ -27,7 +28,7 @@ import resumeSlice from "./states/resumeSlice";
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage: AsyncStorage,
   whitelist: ["theme"],
 };
 

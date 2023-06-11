@@ -52,8 +52,8 @@ function PasswordCreation({
               (formElement.placeHolder as string) ||
               (formElement.label as string)
             }
-            // value={inputState || ""}
-            // onChange={captureTextInputChange}
+            value={inputState || ""}
+            onChange={captureTextInputChange}
             error={error}
             description={formElement.description || ""}
             onKeyDown={() => {
@@ -61,7 +61,7 @@ function PasswordCreation({
             }}
             onBlur={(e) => {
               setBlur(true);
-              captureTextInputChange(e);
+              // captureTextInputChange(e);
             }}
           />
         </div>

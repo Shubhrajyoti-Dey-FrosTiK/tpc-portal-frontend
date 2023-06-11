@@ -22,14 +22,23 @@ import {
 import { Button, Input, Text, Typography, Paper } from "../components";
 
 // Components
-const ShortText = dynamic(import("./input/ShortText"));
-const LongText = dynamic(import("./input/LongText"));
-const NumberInput = dynamic(import("./input/NumberInput"));
-const RadioInput = dynamic(import("./input/RadioInput"));
-const CurrencyInput = dynamic(import("./input/CurrencyInput"));
-const CheckboxInput = dynamic(import("./input/Checkbox"));
-const FileInput = dynamic(import("./input/FileInput"));
-const PasswordCreation = dynamic(import("./input/PasswordCreation"));
+// const ShortText = dynamic(import("./input/ShortText"));
+// const LongText = dynamic(import("./input/LongText"));
+// const NumberInput = dynamic(import("./input/NumberInput"));
+// const RadioInput = dynamic(import("./input/RadioInput"));
+// const CurrencyInput = dynamic(import("./input/CurrencyInput"));
+// const CheckboxInput = dynamic(import("./input/Checkbox"));
+// const FileInput = dynamic(import("./input/FileInput"));
+// const PasswordCreation = dynamic(import("./input/PasswordCreation"));
+
+import ShortText from "./input/ShortText";
+import LongText from "./input/LongText";
+import NumberInput from "./input/NumberInput";
+import RadioInput from "./input/RadioInput";
+import CurrencyInput from "./input/CurrencyInput";
+import CheckboxInput from "./input/Checkbox";
+import FileInput from "./input/FileInput";
+import PasswordCreation from "./input/PasswordCreation";
 
 function Renderer({
   renderElement,

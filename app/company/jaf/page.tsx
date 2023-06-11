@@ -6,6 +6,8 @@ import Form from "../../../components/form/Form";
 import JAFSchema from "../../../configs/JAFSchema";
 import { selectIdStore } from "../../../store/states/idStore";
 
+// export const runtime = "edge";
+
 function JAF() {
   const IdStore = useSelector(selectIdStore);
 

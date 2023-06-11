@@ -8,7 +8,8 @@ import { FormBuilder, RepeatableSection, Section } from "../../types/Form";
 
 // Components
 import { Typography, Button, useMantineTheme } from "../components";
-const Renderer = dynamic(import("./Renderer"));
+// const Renderer = dynamic(import("./Renderer"));
+import Renderer from "./Renderer";
 
 // Icons
 import { IconCheck } from "@tabler/icons";
@@ -104,6 +105,8 @@ function Form({
       <div className="mb-5">
         <StepperComponent step={step} />
       </div>
+
+      {/* Step 1  */}
       <div style={{ display: `${step == 1 ? "block" : "none"}` }}>
         <Typography order={1}>{schema.title}</Typography>
         <Typography order={4} className="font-light mb-5">

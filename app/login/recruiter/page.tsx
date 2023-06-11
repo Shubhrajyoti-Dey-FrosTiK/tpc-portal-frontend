@@ -35,6 +35,8 @@ import axios from "axios";
 
 import { signInWithPopup } from "firebase/auth";
 
+export const runtime = "edge";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

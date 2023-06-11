@@ -52,7 +52,8 @@ function LongText({
               (formElement.placeHolder as string) ||
               (formElement.label as string)
             }
-            // onChange={captureTextInputChange}
+            value={inputState || ""}
+            onChange={captureTextInputChange}
             error={error}
             description={formElement.description || ""}
             onKeyDown={() => {
@@ -60,7 +61,7 @@ function LongText({
             }}
             onBlur={(e) => {
               setBlur(true);
-              captureTextInputChange(e);
+              // captureTextInputChange(e);
             }}
           />
         </div>

@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import React, { useState } from "react";
 
 // Components
@@ -17,9 +17,10 @@ import { CurrencyInput } from "../../../types/FormType";
 import { CurrencyCodes } from "../../../constants/currency";
 import useForm from "../../../hooks/useForm";
 
-const CurrencyFlag = dynamic(() => import("./currency/Currency"), {
-  loading: () => <h1>Loading</h1>,
-});
+// const CurrencyFlag = dynamic(() => import("./currency/Currency"), {
+//   loading: () => <h1>Loading</h1>,
+// });
+import CurrencyFlagLogo from "./currency/Currency";
 
 interface ItemProps extends React.ComponentPropsWithoutRef<"div"> {
   image: string;
@@ -71,7 +72,7 @@ function CurrencyInput({
     return (
       <div className="cursor-pointer">
         <Group noWrap className="mt-1 mb-1">
-          <CurrencyFlag currency={curr} />
+          <CurrencyFlagLogo currency={curr} />
           <Text size="sm">{curr}</Text>
         </Group>
       </div>

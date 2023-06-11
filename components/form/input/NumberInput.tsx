@@ -17,10 +17,6 @@ import useForm from "../../../hooks/useForm";
 import { NumberInput as NumberInputType } from "../../../types/FormType";
 import { FormBuilder } from "../../../types/Form";
 
-// Icons
-import { IconPlus, IconMinus } from "@tabler/icons";
-import { useRef } from "react";
-
 const useStyles = createStyles((theme) => ({
   wrapper: {
     display: "flex",
@@ -89,14 +85,17 @@ function NumberInput({
   });
   const { classes } = useStyles();
 
-  console.log(formElement);
-
   return (
     <React.Fragment>
       {visible && (
         <div className="mt-3 mb-3">
+          <Input.Label
+            className="font-bold"
+            required={(formElement.required as boolean) || false}
+          >
+            {formElement.label}
+          </Input.Label>
           <NumberInputElement
-            label={formElement.label}
             description={formElement.description}
             placeholder={formElement.placeHolder as string | undefined}
             precision={1}
@@ -105,11 +104,18 @@ function NumberInput({
             onKeyDown={() => {
               setKeyDown(true);
             }}
-            onBlur={(e: React.FormEvent<HTMLInputElement>) => {
+            value={
+              inputState
+                ? inputState
+                : formElement.initialValue
+                ? formElement.initialValue
+                : 0
+            }
+            onChange={(input: number) => {
+              captureNumberInputChange(Number(input));
+            }}
+            onBlur={() => {
               setBlur(true);
-              captureNumberInputChange(
-                Number((e.target as HTMLInputElement).value)
-              );
             }}
           />
           <Input.Error className="mt-1">{error}</Input.Error>

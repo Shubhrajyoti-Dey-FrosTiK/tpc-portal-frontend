@@ -1,7 +1,5 @@
 "use client";
-import dynamic from "next/dynamic";
 
-import DemoSchema from "../demo/DemoSchema";
 import { useDisclosure } from "@mantine/hooks";
 import {
   Typography,
@@ -20,9 +18,6 @@ import { selectIdStore } from "../store/states/idStore";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Form = dynamic(() => import("../components/form/Form"), {
-  loading: () => <h1>Loading</h1>,
-});
 export interface FormInterface {
   title: string;
   goTo: string;

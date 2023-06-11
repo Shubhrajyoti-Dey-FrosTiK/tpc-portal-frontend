@@ -2,14 +2,10 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    runtime: 'edge',
-  },
-  env: {
-    hello: "world",
   },
   images: {
     remotePatterns: [],
-    domains: ['www.iitbhu.ac.in'],
+    domains: ["www.iitbhu.ac.in"],
   },
 };
 
