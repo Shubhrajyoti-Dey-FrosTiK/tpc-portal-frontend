@@ -15,8 +15,6 @@ import DemoNavSchema from "../demo/DemoNavSchema";
 
 import AuthWrapper from "./auth";
 
-export const runtime = "edge";
-
 export default function RootLayout({
   children,
 }: {

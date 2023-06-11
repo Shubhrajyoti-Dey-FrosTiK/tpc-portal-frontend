@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm i -g next && npm i && npm run build
+      - run: curl -fsSL https://get.pnpm.io/install.sh | sh - && npm i -g next && pnpm i && pnpm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
