@@ -35,31 +35,33 @@ enum FormType {
 }
 
 export interface IafForm {
-  _id: string
+  _id: string;
   internshipDescription: {
-    profile: string
-  }
-  updatedAt: string
-  type: FormType.IAF
+    profile: string;
+  };
+  updatedAt: string;
+  type: FormType.IAF;
 }
 
 export interface JafForm {
-  _id: string
+  _id: string;
   jobDescription: {
     profile: string;
-  }
-  updatedAt: string
-  type: FormType.JAF
-
+  };
+  updatedAt: string;
+  type: FormType.JAF;
 }
 
-export interface IafForms { data: Array<IafForm>, type: string }
-export interface JafForms { data: Array<JafForm>, type: string }
+export interface IafForms {
+  data: Array<IafForm>;
+  type: string;
+}
+export interface JafForms {
+  data: Array<JafForm>;
+  type: string;
+}
 
-
-export const config = {
-  runtime: "experimental-edge",
-};
+export const runtime = "edge";
 
 const formTypes: Array<FormInterface> = [
   {
@@ -125,19 +127,27 @@ export default function Home() {
       );
       setFormsLoading(false);
 
-      const jafList: Array<JafForm> = []
-      const iafList: Array<IafForm> = []
+      const jafList: Array<JafForm> = [];
+      const iafList: Array<IafForm> = [];
 
-      if(jafResponse.data && jafResponse.data.data && Array.isArray(jafResponse.data.data)) {
-        jafResponse.data.data.forEach((data : any) => {
-          jafList.push({...data, type: FormType.JAF})
-        })
+      if (
+        jafResponse.data &&
+        jafResponse.data.data &&
+        Array.isArray(jafResponse.data.data)
+      ) {
+        jafResponse.data.data.forEach((data: any) => {
+          jafList.push({ ...data, type: FormType.JAF });
+        });
       }
 
-      if(iafResponse.data && iafResponse.data.data && Array.isArray(iafResponse.data.data)) {
-        iafResponse.data.data.forEach((data : any) => {
-          iafList.push({...data, type: FormType.IAF})
-        })
+      if (
+        iafResponse.data &&
+        iafResponse.data.data &&
+        Array.isArray(iafResponse.data.data)
+      ) {
+        iafResponse.data.data.forEach((data: any) => {
+          iafList.push({ ...data, type: FormType.IAF });
+        });
       }
 
       setIafFormList(iafList);
@@ -234,28 +244,36 @@ export default function Home() {
                 <Tabs.Panel value="2022-23" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
-                        [...iafFormList, ...jafFormList].length ? ([...iafFormList, ...jafFormList].sort(function(a, b) {
-                          var x = a.updatedAt; var y = b.updatedAt;
-                          return ((x < y) ? 1 : ((x > y) ? -1 : 0));
-                      }).map((form, formIndex) => {
-                          return (
-                            <Paper
-                              key={`Form_${formIndex}`}
-                              className="m-2 p-5 rounded-md shadow-md cursor-pointer"
-                            // onClick={() => {router.push(`/iaf/${form["_id"]}`)}}
-                            >
-                              <Typography order={5}>
-                                {form.type === FormType.IAF ? form.internshipDescription.profile : form.jobDescription.profile}
-                              </Typography>
-                              <Typography order={6} className="font-normal">
-                                {form.type == FormType.IAF ? "Internship" : "Full Time"}
-                              </Typography>
-                              <Typography order={6} className="font-light">
-                                {convertStringToDate(form.updatedAt)}
-                              </Typography>
-                            </Paper>
-                          );
-                        })
+                      [...iafFormList, ...jafFormList].length ? (
+                        [...iafFormList, ...jafFormList]
+                          .sort(function (a, b) {
+                            var x = a.updatedAt;
+                            var y = b.updatedAt;
+                            return x < y ? 1 : x > y ? -1 : 0;
+                          })
+                          .map((form, formIndex) => {
+                            return (
+                              <Paper
+                                key={`Form_${formIndex}`}
+                                className="m-2 p-5 rounded-md shadow-md cursor-pointer"
+                                // onClick={() => {router.push(`/iaf/${form["_id"]}`)}}
+                              >
+                                <Typography order={5}>
+                                  {form.type === FormType.IAF
+                                    ? form.internshipDescription.profile
+                                    : form.jobDescription.profile}
+                                </Typography>
+                                <Typography order={6} className="font-normal">
+                                  {form.type == FormType.IAF
+                                    ? "Internship"
+                                    : "Full Time"}
+                                </Typography>
+                                <Typography order={6} className="font-light">
+                                  {convertStringToDate(form.updatedAt)}
+                                </Typography>
+                              </Paper>
+                            );
+                          })
                       ) : (
                         <Paper className="m-2 p-5 rounded-md">
                           <Typography
@@ -298,24 +316,27 @@ export default function Home() {
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
                       iafFormList && iafFormList.length ? (
-                        iafFormList.sort(function(a, b) {
-                          var x = a.updatedAt; var y = b.updatedAt;
-                          return ((x < y) ? 1 : ((x > y) ? -1 : 0));
-                      }).map((form, formIndex) => {
-                          return (
-                            <Paper
-                              key={`Form_${formIndex}`}
-                              className="m-2 p-5 rounded-md shadow-md"
-                            >
-                              <Typography order={5}>
-                                {form.internshipDescription.profile}
-                              </Typography>
-                              <Typography order={6} className="font-light">
-                                {convertStringToDate(form.updatedAt)}
-                              </Typography>
-                            </Paper>
-                          );
-                        })
+                        iafFormList
+                          .sort(function (a, b) {
+                            var x = a.updatedAt;
+                            var y = b.updatedAt;
+                            return x < y ? 1 : x > y ? -1 : 0;
+                          })
+                          .map((form, formIndex) => {
+                            return (
+                              <Paper
+                                key={`Form_${formIndex}`}
+                                className="m-2 p-5 rounded-md shadow-md"
+                              >
+                                <Typography order={5}>
+                                  {form.internshipDescription.profile}
+                                </Typography>
+                                <Typography order={6} className="font-light">
+                                  {convertStringToDate(form.updatedAt)}
+                                </Typography>
+                              </Paper>
+                            );
+                          })
                       ) : (
                         <Paper className="m-2 p-5 rounded-md">
                           <Typography
@@ -343,7 +364,6 @@ export default function Home() {
               </Tabs>
             </Tabs.Panel>
 
-
             {/* JAF  */}
             <Tabs.Panel value="jaf" pt="xs">
               <Tabs
@@ -359,24 +379,27 @@ export default function Home() {
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
                       jafFormList && jafFormList.length ? (
-                        jafFormList.sort(function(a, b) {
-                          var x = a.updatedAt; var y = b.updatedAt;
-                          return ((x < y) ? 1 : ((x > y) ? -1 : 0));
-                      }).map((form, formIndex) => {
-                          return (
-                            <Paper
-                              key={`Form_${formIndex}`}
-                              className="m-2 p-5 rounded-md shadow-md"
-                            >
-                              <Typography order={5}>
-                                {form.jobDescription.profile}
-                              </Typography>
-                              <Typography order={6} className="font-light">
-                                {convertStringToDate(form.updatedAt)}
-                              </Typography>
-                            </Paper>
-                          );
-                        })
+                        jafFormList
+                          .sort(function (a, b) {
+                            var x = a.updatedAt;
+                            var y = b.updatedAt;
+                            return x < y ? 1 : x > y ? -1 : 0;
+                          })
+                          .map((form, formIndex) => {
+                            return (
+                              <Paper
+                                key={`Form_${formIndex}`}
+                                className="m-2 p-5 rounded-md shadow-md"
+                              >
+                                <Typography order={5}>
+                                  {form.jobDescription.profile}
+                                </Typography>
+                                <Typography order={6} className="font-light">
+                                  {convertStringToDate(form.updatedAt)}
+                                </Typography>
+                              </Paper>
+                            );
+                          })
                       ) : (
                         <Paper className="m-2 p-5 rounded-md">
                           <Typography

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import RootStyleRegistry from "./emotion";
 import { NavbarNested } from "../components/navbar/Navbar";
 import { MobileDrawer } from "../components/navbar/Drawer";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 
 // Redux
 import ReduxProvider from "./redux";
@@ -15,9 +15,7 @@ import DemoNavSchema from "../demo/DemoNavSchema";
 
 import AuthWrapper from "./auth";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 export default function RootLayout({
   children,
@@ -28,7 +26,7 @@ export default function RootLayout({
     <html lang="en-US">
       <head />
       <body>
-      <Analytics />
+        <Analytics />
         <ReduxProvider>
           <RootStyleRegistry>
             <AuthWrapper>
