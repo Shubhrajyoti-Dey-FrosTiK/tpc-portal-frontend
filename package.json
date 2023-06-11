@@ -2,7 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "main": "src/firebaseApp.js",
   "scripts": {
     "dev": "next dev",
     "build": "rm -rf dist && next build",
