@@ -26,43 +26,43 @@ import { app } from "./firebase";
 
 export const provider = new GoogleAuthProvider();
 
-export const auth = getAuth(app);
+// export const auth = getAuth(app);
 // connectAuthEmulator(auth, "http://localhost:9099");
 
-export const handleLoginWithGoogle = async () => {
-  try {
-    await signInWithPopup(auth, provider);
-    store.dispatch(setCurrentUser({ user: auth.currentUser }));
-    return { status: FIREBASE_AUTH_SUCCESS };
-  } catch (error) {
-    // Problem with API key
-    return { error: ERROR.API_KEY };
-  }
-};
+// export const handleLoginWithGoogle = async () => {
+//   try {
+//     await signInWithPopup(auth, provider);
+//     store.dispatch(setCurrentUser({ user: auth.currentUser }));
+//     return { status: FIREBASE_AUTH_SUCCESS };
+//   } catch (error) {
+//     // Problem with API key
+//     return { error: ERROR.API_KEY };
+//   }
+// };
 
-export const handleSignUpWithEmailPassword = async (
-  email: string,
-  password: string
-) => {
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    return { status: FIREBASE_AUTH_SUCCESS };
-  } catch (error: any) {
-    return { error: error.message as string };
-  }
-};
+// export const handleSignUpWithEmailPassword = async (
+//   email: string,
+//   password: string
+// ) => {
+//   try {
+//     await createUserWithEmailAndPassword(auth, email, password);
+//     return { status: FIREBASE_AUTH_SUCCESS };
+//   } catch (error: any) {
+//     return { error: error.message as string };
+//   }
+// };
 
-export const handleLoginWithEmailPassword = async (
-  email: string,
-  password: string
-) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    return { status: FIREBASE_AUTH_SUCCESS };
-  } catch (error: any) {
-    return { error: error.message as string };
-  }
-};
+// export const handleLoginWithEmailPassword = async (
+//   email: string,
+//   password: string
+// ) => {
+//   try {
+//     await signInWithEmailAndPassword(auth, email, password);
+//     return { status: FIREBASE_AUTH_SUCCESS };
+//   } catch (error: any) {
+//     return { error: error.message as string };
+//   }
+// };
 
 // export const handleLoginWithEmailPassword = async (email, password) => {
 //   try {

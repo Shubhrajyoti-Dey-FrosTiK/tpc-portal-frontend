@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import RootStyleRegistry from "./emotion";
 import { NavbarNested } from "../components/navbar/Navbar";
 import { MobileDrawer } from "../components/navbar/Drawer";
-import { Analytics } from "@vercel/analytics/react";
+// import { Analytics } from "@vercel/analytics/react";
 
 // Redux
 import ReduxProvider from "./redux";
@@ -13,7 +13,7 @@ import "./globals.css";
 // Demo
 import DemoNavSchema from "../demo/DemoNavSchema";
 
-import AuthWrapper from "./auth";
+// import AuthWrapper from "./auth";
 
 export default function RootLayout({
   children,
@@ -24,10 +24,10 @@ export default function RootLayout({
     <html lang="en-US">
       <head />
       <body>
-        <Analytics />
+        {/* <Analytics /> */}
         <ReduxProvider>
           <RootStyleRegistry>
-            <AuthWrapper>
+            {/* <AuthWrapper> */}
               <div className="sm:hidden">
                 <MobileDrawer schema={DemoNavSchema}>
                   <div>{children}</div>
@@ -36,7 +36,7 @@ export default function RootLayout({
               <div className=" hidden sm:block">
                 <NavbarNested schema={DemoNavSchema}>{children}</NavbarNested>
               </div>
-            </AuthWrapper>
+            {/* </AuthWrapper> */}
           </RootStyleRegistry>
         </ReduxProvider>
       </body>
