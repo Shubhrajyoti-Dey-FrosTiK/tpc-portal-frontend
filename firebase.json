@@ -8,5 +8,20 @@
       "enabled": true,
       "port": 9000
     }
+  },
+  "hosting": {
+    "public": "out",
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "nextApp"
+      }
+    ],
+    "cleanUrls": true
+  },
+  "functions": {
+    "source": ".",
+    "ignore": ["firebase.json", "node_modules", "**/out"],
+    "runtime": "nodejs12"
   }
 }
