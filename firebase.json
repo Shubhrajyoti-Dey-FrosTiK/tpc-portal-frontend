@@ -10,18 +10,20 @@
     }
   },
   "hosting": {
-    "public": "out",
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "nextApp"
-      }
-    ],
-    "cleanUrls": true
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   },
   "functions": {
     "source": ".",
-    "ignore": ["firebase.json", "node_modules", "**/out"],
+    "ignore": [
+      "firebase.json",
+      "node_modules",
+      "**/out"
+    ],
     "runtime": "nodejs12"
   }
 }
