@@ -44,7 +44,7 @@ function JAF() {
   }, []);
 
   return (
-    <div className="max-w-[800px] m-auto p-10">
+    <div className="max-w-[800px] m-auto  pl-5 pr-5">
       {laoding && (
         <div className="h-[60vh]">
           <Spinner />

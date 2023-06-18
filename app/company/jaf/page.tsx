@@ -12,7 +12,7 @@ function JAF() {
   const IdStore = useSelector(selectIdStore);
 
   return (
-    <div className="max-w-[800px] m-auto">
+    <div className="max-w-[800px] m-auto pl-5 pr-5">
       <Form
         schema={JAFSchema}
         bodyTemplate={{
