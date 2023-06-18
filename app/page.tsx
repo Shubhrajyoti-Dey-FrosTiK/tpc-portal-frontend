@@ -248,25 +248,29 @@ export default function Home() {
                           })
                           .map((form, formIndex) => {
                             return (
-                              <Paper
+                              <a
                                 key={`Form_${formIndex}`}
-                                className="m-2 p-5 rounded-md shadow-md cursor-pointer"
-                                // onClick={() => {router.push(`/iaf/${form["_id"]}`)}}
+                                target="_blank"
+                                href={`/company/${
+                                  form.type == FormType.IAF ? "iaf" : "jaf"
+                                }/${form._id}`}
                               >
-                                <Typography order={5}>
-                                  {form.type === FormType.IAF
-                                    ? form.internshipDescription.profile
-                                    : form.jobDescription.profile}
-                                </Typography>
-                                <Typography order={6} className="font-normal">
-                                  {form.type == FormType.IAF
-                                    ? "Internship"
-                                    : "Full Time"}
-                                </Typography>
-                                <Typography order={6} className="font-light">
-                                  {convertStringToDate(form.updatedAt)}
-                                </Typography>
-                              </Paper>
+                                <Paper className="m-2 p-5 rounded-md shadow-md cursor-pointer">
+                                  <Typography order={5}>
+                                    {form.type === FormType.IAF
+                                      ? form.internshipDescription.profile
+                                      : form.jobDescription.profile}
+                                  </Typography>
+                                  <Typography order={6} className="font-normal">
+                                    {form.type == FormType.IAF
+                                      ? "Internship"
+                                      : "Full Time"}
+                                  </Typography>
+                                  <Typography order={6} className="font-light">
+                                    {convertStringToDate(form.updatedAt)}
+                                  </Typography>
+                                </Paper>
+                              </a>
                             );
                           })
                       ) : (
@@ -311,17 +315,19 @@ export default function Home() {
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
                       iafFormList && iafFormList.length ? (
-                        iafFormList
-                          .sort(function (a, b) {
-                            var x = a.updatedAt;
-                            var y = b.updatedAt;
-                            return x < y ? 1 : x > y ? -1 : 0;
-                          })
-                          .map((form, formIndex) => {
-                            return (
+                        iafFormList.map((form, formIndex) => {
+                          return (
+                            <a
+                              key={`Form_${formIndex}`}
+                              target="_blank"
+                              href={`/company/iaf/${form._id}`}
+                            >
                               <Paper
                                 key={`Form_${formIndex}`}
                                 className="m-2 p-5 rounded-md shadow-md"
+                                onClick={() => {
+                                  router.push(`/company/iaf/${form._id}`);
+                                }}
                               >
                                 <Typography order={5}>
                                   {form.internshipDescription.profile}
@@ -330,8 +336,9 @@ export default function Home() {
                                   {convertStringToDate(form.updatedAt)}
                                 </Typography>
                               </Paper>
-                            );
-                          })
+                            </a>
+                          );
+                        })
                       ) : (
                         <Paper className="m-2 p-5 rounded-md">
                           <Typography
@@ -374,18 +381,14 @@ export default function Home() {
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
                       jafFormList && jafFormList.length ? (
-                        jafFormList
-                          .sort(function (a, b) {
-                            var x = a.updatedAt;
-                            var y = b.updatedAt;
-                            return x < y ? 1 : x > y ? -1 : 0;
-                          })
-                          .map((form, formIndex) => {
-                            return (
-                              <Paper
-                                key={`Form_${formIndex}`}
-                                className="m-2 p-5 rounded-md shadow-md"
-                              >
+                        jafFormList.map((form, formIndex) => {
+                          return (
+                            <a
+                              key={`Form_${formIndex}`}
+                              target="_blank"
+                              href={`/company/jaf/${form._id}`}
+                            >
+                              <Paper className="m-2 p-5 rounded-md shadow-md">
                                 <Typography order={5}>
                                   {form.jobDescription.profile}
                                 </Typography>
@@ -393,8 +396,9 @@ export default function Home() {
                                   {convertStringToDate(form.updatedAt)}
                                 </Typography>
                               </Paper>
-                            );
-                          })
+                            </a>
+                          );
+                        })
                       ) : (
                         <Paper className="m-2 p-5 rounded-md">
                           <Typography
