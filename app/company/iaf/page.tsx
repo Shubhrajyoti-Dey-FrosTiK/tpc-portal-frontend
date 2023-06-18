@@ -12,7 +12,7 @@ function IAF() {
   const IdStore = useSelector(selectIdStore);
 
   return (
-    <div className="max-w-[800px] m-auto">
+    <div className="max-w-[800px] m-auto p-10">
       <Form
         schema={IAFSchema}
         bodyTemplate={{
