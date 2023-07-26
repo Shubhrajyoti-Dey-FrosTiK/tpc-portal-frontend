@@ -2,14 +2,13 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Viewer from "../../../../components/form/Viewer";
-import { KeyStore } from "../../../../types/Form";
-import IAFSchema from "../../../../configs/IAFSchema";
-import Spinner from "../../../../components/spinner/Spinner";
+import Viewer from "../../../../../components/form/Viewer";
+import { KeyStore } from "../../../../../types/Form";
+import IAFSchema from "../../../../../configs/IAFSchema";
+import Spinner from "../../../../../components/spinner/Spinner";
 import { useParams, useRouter } from "next/navigation";
-import { Typography } from "../../../../components/components";
-
-// export const runtime = "edge";
+import Form from "../../../../../components/form/Form";
+import { Badge } from "@mantine/core";
 
 function IAF() {
   const [keyStore, setKeyStore] = useState<KeyStore | null>(null);
@@ -54,8 +53,12 @@ function IAF() {
 
       {!laoding && keyStore && (
         <>
-          <Typography order={3}>Hello</Typography>
-          <Viewer schema={IAFSchema} keyStore={keyStore} />
+          <Badge size="xl">EDITTING</Badge>
+          <Form
+            postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/iaf` || ""}
+            schema={IAFSchema}
+            edit={{ keyStore }}
+          />
         </>
       )}
     </div>

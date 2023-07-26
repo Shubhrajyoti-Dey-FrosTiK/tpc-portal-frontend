@@ -4,7 +4,12 @@ import React, { useState } from "react";
 import dynamic from "next/dynamic";
 
 // Types
-import { FormBuilder, RepeatableSection, Section } from "../../types/Form";
+import {
+  FormBuilder,
+  KeyStore,
+  RepeatableSection,
+  Section,
+} from "../../types/Form";
 
 // Components
 import { Typography, Button, useMantineTheme } from "../components";
@@ -44,6 +49,7 @@ function Form({
   postFunction,
   bodyTemplate,
   goToPath,
+  edit,
 }: {
   schema: FormBuilder;
   children?: React.ReactNode;
@@ -54,6 +60,9 @@ function Form({
   postError?: string;
   bodyTemplate?: object;
   goToPath?: GoToPath;
+  edit?: {
+    keyStore: KeyStore;
+  };
 }) {
   const formState = useSelector(selectForm);
   const router = useRouter();
@@ -69,6 +78,7 @@ function Form({
   React.useEffect(() => {
     dispatch(
       initializeFormState({
+        keyStore: edit ? edit.keyStore : {},
         formKey: schema.key as string,
         formBuilderSchema: schema,
       })
@@ -85,12 +95,21 @@ function Form({
       setLoading(true);
       const { exportData, keyStore } = await fileUploader();
 
-      const postResponse = await axios.post(
-        postUrl,
-        bodyTemplate
-          ? { ...bodyTemplate, ...exportData, keyStore }
-          : { ...exportData, keyStore }
-      );
+      if (edit && edit.keyStore) {
+        await axios.put(
+          postUrl,
+          bodyTemplate
+            ? { ...bodyTemplate, ...exportData, keyStore }
+            : { ...exportData, keyStore }
+        );
+      } else {
+        await axios.post(
+          postUrl,
+          bodyTemplate
+            ? { ...bodyTemplate, ...exportData, keyStore }
+            : { ...exportData, keyStore }
+        );
+      }
 
       setLoading(false);
       setStep(step + 1);

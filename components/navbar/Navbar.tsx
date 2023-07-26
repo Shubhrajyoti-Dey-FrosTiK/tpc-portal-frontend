@@ -57,9 +57,11 @@ const useStyles = createStyles((theme) => ({
 export function NavbarNested({
   schema,
   children,
+  ref,
 }: {
   schema: Sidebar;
   children: React.ReactNode;
+  ref: React.MutableRefObject<HTMLDivElement>;
 }) {
   const { classes } = useStyles();
   const router = useRouter();
@@ -77,7 +79,12 @@ export function NavbarNested({
               });
             }}
           >
-            <Image src={ASSETS.iitbhu_logo} alt="IIT-BHU logo" width={40} height={40} />
+            <Image
+              src={ASSETS.iitbhu_logo}
+              alt="IIT-BHU logo"
+              width={40}
+              height={40}
+            />
             <Typography order={3}>
               Training and Placement Cell IIT BHU
             </Typography>
@@ -115,6 +122,7 @@ export function NavbarNested({
           </Navbar.Section>
         </Navbar> */}
         <div className="flex-col w-full h-[calc(100vh-70px)] overflow-scroll overflow-x-hidden p-5 m-5">
+          <div id="top" ref={ref}></div>
           {children}
         </div>
       </div>

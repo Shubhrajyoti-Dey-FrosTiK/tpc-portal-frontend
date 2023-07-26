@@ -28,7 +28,8 @@ export async function batchUploadFiles(
   const fileRes = [];
 
   for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
-    fileRes.push(await uploadFile(files[fileIndex], storagePath));
+    if (files[fileIndex] instanceof File)
+      fileRes.push(await uploadFile(files[fileIndex], storagePath));
   }
 
   // const fileRes = await Promise.all(filePromises);

@@ -22,7 +22,7 @@ import { handleLoginWithGoogle } from "../../firebase/auth";
 // Hooks
 import { useState } from "react";
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 export default function Login() {
   const [Text, setText] = useState("");

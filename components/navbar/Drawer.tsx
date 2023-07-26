@@ -78,9 +78,11 @@ function MobileNavbarNested({ schema }: { schema: Sidebar }) {
 export function MobileDrawer({
   schema,
   children,
+  ref,
 }: {
   schema: Sidebar;
   children: React.ReactNode;
+  ref: React.MutableRefObject<HTMLDivElement>;
 }) {
   const [opened, setOpened] = useState(false);
   const title = opened ? "close navigation" : "open navigation";
@@ -99,7 +101,12 @@ export function MobileDrawer({
         className="flex justify-between flex-row flex-nowrap p-5"
       >
         <div className="flex gap-4" style={{ alignItems: "center" }}>
-          <Image src={ASSETS.iitbhu_logo} alt="IIT-BHU logo" width={40} height={40} />
+          <Image
+            src={ASSETS.iitbhu_logo}
+            alt="IIT-BHU logo"
+            width={40}
+            height={40}
+          />
           <Typography order={3}>TPC IIT BHU</Typography>
         </div>
         {/* <Burger
@@ -110,6 +117,7 @@ export function MobileDrawer({
         {/* <SearchBarMobile /> */}
         <ThemeToggle />
       </Paper>
+      <div id="top" ref={ref}></div>
       {children}
     </div>
   );

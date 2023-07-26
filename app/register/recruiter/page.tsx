@@ -10,7 +10,7 @@ import { handleSignUpWithEmailPassword } from "../../../firebase/auth";
 import useExportableFormData from "../../../hooks/useExportableFormData";
 import { selectForm } from "../../../store/states/formSlice";
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 function Page() {
   const {} = useExportableFormData({

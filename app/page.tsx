@@ -56,8 +56,6 @@ export interface JafForms {
   type: string;
 }
 
-export const runtime = "edge";
-
 const formTypes: Array<FormInterface> = [
   {
     title: "Internship Announcement Form (IAF)",

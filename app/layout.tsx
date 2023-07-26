@@ -5,6 +5,10 @@ import { NavbarNested } from "../components/navbar/Navbar";
 import { MobileDrawer } from "../components/navbar/Drawer";
 import { Analytics } from "@vercel/analytics/react";
 
+import { Affix, Transition, Button } from "@mantine/core";
+import { IconArrowUp } from "@tabler/icons";
+import { useScrollIntoView, useWindowScroll } from "@mantine/hooks";
+
 // Redux
 import ReduxProvider from "./redux";
 
@@ -20,6 +24,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [scroll, scrollTo] = useWindowScroll();
+  const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({
+    offset: 60,
+  });
+
   return (
     <html lang="en-US">
       <head />
@@ -29,12 +38,14 @@ export default function RootLayout({
           <RootStyleRegistry>
             <AuthWrapper>
               <div className="sm:hidden">
-                <MobileDrawer schema={DemoNavSchema}>
+                <MobileDrawer ref={targetRef} schema={DemoNavSchema}>
                   <div>{children}</div>
                 </MobileDrawer>
               </div>
               <div className=" hidden sm:block">
-                <NavbarNested schema={DemoNavSchema}>{children}</NavbarNested>
+                <NavbarNested ref={targetRef} schema={DemoNavSchema}>
+                  {children}
+                </NavbarNested>
               </div>
             </AuthWrapper>
           </RootStyleRegistry>
