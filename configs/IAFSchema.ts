@@ -1,6 +1,6 @@
 "use client";
 
-import { title } from "process";
+// import { title } from "process";
 import { Failure, FormBuilder, Success } from "../types/Form";
 import { FormInputType, FormType } from "../types/FormType";
 import { Validation } from "../types/Validation";
@@ -113,6 +113,11 @@ const IAFSchema: FormBuilder = {
               label: "PhD",
               key: "phd",
             },
+            {
+              label: "B.Arch",
+              description: "Bachelors in Architecture",
+              key: "barch",
+            }
           ],
         },
 
@@ -697,6 +702,74 @@ const IAFSchema: FormBuilder = {
             },
             {
               title: "PhD Stipend details",
+              key: "compensationDetails",
+              type: FormType.SECTION,
+              formElements: [
+                {
+                  label: "Stipend Per Month",
+                  key: "stipendPerMonth",
+                  type: FormInputType.CURRENCY,
+                  required: true,
+                },
+                {
+                  label: "Accommodation",
+                  key: "accommodation",
+                  type: FormInputType.SHORT_TEXT,
+                  required: false,
+                },
+                {
+                  label: "Relocation Bonus",
+                  key: "relocationBonus",
+                  type: FormInputType.SHORT_TEXT,
+                  required: false,
+                },
+                {
+                  label: "Incentives/Perks/Bonus",
+                  key: "incentives",
+                  type: FormInputType.SHORT_TEXT,
+                  required: false,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          title: "",
+          key: "barch",
+          type: FormType.SECTION,
+          visible: {
+            props: ["[internshipDescription]-[courses]"],
+            validator: (eligibilityArray: Array<string>) => {
+              const eligibility = eligibilityArray[0];
+              if (!eligibility) return false;
+              return eligibility.includes("barch") ? true : false;
+            },
+          },
+          formElements: [
+            {
+              title: "B.Arch Eligibility Criteria",
+              key: "eligibility",
+              type: FormType.SECTION,
+              formElements: [
+                {
+                  label: "CGPA",
+                  key: "cgpa",
+                  type: FormInputType.NUMBER,
+                  required: true,
+                  description: "CGPA must be a number between 0 - 10",
+                  max: 10,
+                  min: 0,
+                },
+                {
+                  label: "Age Limit",
+                  key: "ageLimit",
+                  type: FormInputType.SHORT_TEXT,
+                  required: false,
+                },
+              ],
+            },
+            {
+              title: "B.Arch Stipend Details",
               key: "compensationDetails",
               type: FormType.SECTION,
               formElements: [
