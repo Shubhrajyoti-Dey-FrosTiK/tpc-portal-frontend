@@ -28,12 +28,14 @@ export async function batchUploadFiles(
   const fileRes = [];
 
   for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
-    if (files[fileIndex] instanceof File)
-      fileRes.push(await uploadFile(files[fileIndex], storagePath));
+    if (files[fileIndex] instanceof File) {
+      const link = await uploadFile(files[fileIndex], storagePath);
+      fileRes.push(link);
+    }
   }
 
   // const fileRes = await Promise.all(filePromises);
 
   // fileRes;
-  return Promise.all(fileRes); // list of url like ["https://..", ...]
+  return await Promise.all(fileRes); // list of url like ["https://..", ...]
 }
