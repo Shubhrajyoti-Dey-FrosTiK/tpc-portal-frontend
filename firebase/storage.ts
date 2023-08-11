@@ -35,5 +35,5 @@ export async function batchUploadFiles(
   // const fileRes = await Promise.all(filePromises);
 
   // fileRes;
-  return fileRes; // list of url like ["https://..", ...]
+  return Promise.all(fileRes); // list of url like ["https://..", ...]
 }

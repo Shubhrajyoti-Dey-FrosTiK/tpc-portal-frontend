@@ -50,6 +50,7 @@ function Form({
   bodyTemplate,
   goToPath,
   edit,
+  variables,
 }: {
   schema: FormBuilder;
   children?: React.ReactNode;
@@ -63,6 +64,7 @@ function Form({
   edit?: {
     keyStore: KeyStore;
   };
+  variables?: object;
 }) {
   const formState = useSelector(selectForm);
   const router = useRouter();
@@ -76,9 +78,12 @@ function Form({
   const [loading, setLoading] = useState(false);
 
   React.useEffect(() => {
+    let keyStore: KeyStore = edit ? edit.keyStore : {};
+    if (variables) keyStore = { ...keyStore, ...variables };
+
     dispatch(
       initializeFormState({
-        keyStore: edit ? edit.keyStore : {},
+        keyStore,
         formKey: schema.key as string,
         formBuilderSchema: schema,
       })

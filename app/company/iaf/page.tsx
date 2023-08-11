@@ -36,6 +36,7 @@ function IAF() {
           company: IdStore.companyId,
           domain: { domain },
         }}
+        variables={{ companyId: IdStore.companyId }}
         postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/iaf` || ""}
       />
     </div>

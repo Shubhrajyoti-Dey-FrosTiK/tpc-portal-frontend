@@ -90,7 +90,7 @@ export default function AuthWrapper({
 
   // Trigger whenever there is a change in the UserState.currentUser
   useEffect(() => {
-    if (UserState.currentUser) {
+    if (UserState.currentUser && !(pathName in PUBLIC_ROUTES)) {
       getIDToken();
     }
   }, [UserState.currentUser]);

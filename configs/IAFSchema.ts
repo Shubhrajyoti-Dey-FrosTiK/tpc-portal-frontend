@@ -82,9 +82,9 @@ const IAFSchema: FormBuilder = {
           key: "jdAttachments",
           type: FormInputType.FILE,
           storagePath: {
-            prop: "",
-            path: () => {
-              return "jd";
+            prop: "companyId",
+            path: (companyId: string) => {
+              return `jd/${companyId}`;
             },
           },
         },
