@@ -17,7 +17,7 @@ function IAF() {
   const fetchEmail = async () => {
     const email = User.currentUser.email;
     if (email && email.split("@").length > 1) {
-      setDomain(`@${email.split("@")[1]}`);
+      setDomain(`${email.split("@")[1]}`);
     }
   };
 
