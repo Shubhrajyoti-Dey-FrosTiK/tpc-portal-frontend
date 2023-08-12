@@ -34,7 +34,7 @@ function IAF() {
         bodyTemplate={{
           recruiter: IdStore.recruiterId,
           company: IdStore.companyId,
-          domain: { domain },
+          domain,
         }}
         variables={{ companyId: IdStore.companyId }}
         postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/iaf` || ""}
