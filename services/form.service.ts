@@ -1,4 +1,4 @@
-import { batchUploadFiles } from "../firebase/storage";
+import { batchUploadFiles, getLink } from "../firebase/storage";
 import {
   ExportableFormState,
   FormBuilder,
@@ -339,14 +339,21 @@ export default class FormService {
           const newBasePath = `${basePath}[${formState.key}]`;
 
           if (exportable && formState.type === FormInputType.FILE) {
-            const urls = await batchUploadFiles(
-              keyStore[newBasePath] as File[],
-              formState.storagePath.path(
-                keyStore[formState.storagePath.prop as string]
-                  ? keyStore[formState.storagePath.prop as string].toString()
-                  : ""
-              )
+            const files: File[] = keyStore[newBasePath] as File[];
+            const storagePath: string = formState.storagePath.path(
+              keyStore[formState.storagePath.prop as string]
+                ? keyStore[formState.storagePath.prop as string].toString()
+                : ""
             );
+            await batchUploadFiles(files, storagePath);
+            const urls: string[] = [];
+            files.forEach((file: File) => {
+              urls.push(
+                `https://firebasestorage.googleapis.com/v0/b/${
+                  process.env.NEXT_PUBLIC_FIREBASE_CLIENT_PROJECT_ID
+                }.appspot.com/o/${getLink(file, storagePath)}`
+              );
+            });
 
             exportableFormData[formState.key as string] = urls;
             keyStore[newBasePath] = urls;

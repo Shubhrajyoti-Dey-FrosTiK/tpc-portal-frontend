@@ -16,7 +16,7 @@ export const uploadFile = async (file: File | null, storagePath?: string) => {
   return url;
 };
 
-const getLink = (file: File | null, storagePath: string) => {
+export const getLink = (file: File | null, storagePath: string) => {
   if (!file) return "";
 
   const path = encodeURIComponent(
@@ -35,23 +35,9 @@ export async function batchUploadFiles(
   //   async (file) => await uploadFile(file, storagePath)
   // );
 
-  const fileRes = [];
-  const path = storagePath ? storagePath : "";
-
   for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
     if (files[fileIndex] instanceof File) {
       await uploadFile(files[fileIndex], storagePath);
-      fileRes.push(
-        `https://firebasestorage.googleapis.com/v0/b/${
-          process.env.NEXT_PUBLIC_FIREBASE_CLIENT_PROJECT_ID
-        }.appspot.com/o/${getLink(files[fileIndex], path)}`
-      );
     }
   }
-
-  // const fileRes = await Promise.all(filePromises);
-
-  // fileRes;
-  await new Promise((r) => setTimeout(r, 2000));
-  return fileRes; // list of url like ["https://..", ...]
 }
