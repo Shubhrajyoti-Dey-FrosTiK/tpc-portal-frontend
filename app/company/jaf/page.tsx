@@ -17,7 +17,7 @@ function JAF() {
   const fetchEmail = async () => {
     const email = User.currentUser.email;
     if (email && email.split("@").length > 1) {
-      setDomain(`@${email.split("@")[1]}`);
+      setDomain(`${email.split("@")[1]}`);
     }
   };
 
@@ -34,7 +34,7 @@ function JAF() {
         bodyTemplate={{
           recruiter: IdStore.recruiterId,
           company: IdStore.companyId,
-          domain: { domain },
+          domain,
         }}
         variables={{ companyId: IdStore.companyId }}
         postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/jaf` || ""}
