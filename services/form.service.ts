@@ -345,7 +345,7 @@ export default class FormService {
                 ? keyStore[formState.storagePath.prop as string].toString()
                 : ""
             );
-            await batchUploadFiles(files, storagePath);
+            batchUploadFiles(files, storagePath);
             const urls: string[] = [];
             files.forEach((file: File) => {
               urls.push(
@@ -354,7 +354,6 @@ export default class FormService {
                 }.appspot.com/o/${getLink(file, storagePath)}`
               );
             });
-
             exportableFormData[formState.key as string] = urls;
             keyStore[newBasePath] = urls;
           } else {
