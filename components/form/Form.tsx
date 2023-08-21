@@ -99,7 +99,7 @@ function Form({
     if (step == 2) {
       setLoading(true);
       const { exportData, keyStore } = await fileUploader();
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 5000));
       if (edit && edit.keyStore) {
         await axios.put(
           postUrl,
