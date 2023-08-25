@@ -87,8 +87,9 @@ const JAFSchema: FormBuilder = {
           required: true,
           options: [
             {
-              label: "B.Tech",
-              description: "4 Year Bachelors in Technology",
+              label: "B.Tech / B.Arch",
+              description:
+                "4 Yr Bachelors in Technology/ 5 Yr Bachelors in Architecture",
               key: "btech",
             },
             {
@@ -152,6 +153,7 @@ const JAFSchema: FormBuilder = {
                         "met",
                         "min",
                         "phe",
+                        "arch",
                       ],
                     },
                     {
@@ -193,6 +195,10 @@ const JAFSchema: FormBuilder = {
                     {
                       label: "Pharmaceutical Engineering",
                       key: "phe",
+                    },
+                    {
+                      label: "Architecture Planning and Design",
+                      key: "arch",
                     },
                   ],
                 },

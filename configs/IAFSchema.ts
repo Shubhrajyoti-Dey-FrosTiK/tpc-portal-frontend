@@ -95,8 +95,9 @@ const IAFSchema: FormBuilder = {
           required: true,
           options: [
             {
-              label: "B.Tech",
-              description: "4 Year Bachelors in Technology",
+              label: "B.Tech / B.Arch",
+              description:
+                "4 Yr Bachelors in Technology/ 5 Yr Bachelors in Architecture",
               key: "btech",
             },
             {
@@ -113,11 +114,6 @@ const IAFSchema: FormBuilder = {
               label: "PhD",
               key: "phd",
             },
-            {
-              label: "B.Arch",
-              description: "Bachelors in Architecture",
-              key: "barch",
-            }
           ],
         },
 
@@ -168,6 +164,7 @@ const IAFSchema: FormBuilder = {
                         "met",
                         "min",
                         "phe",
+                        "arch",
                       ],
                     },
                     {
@@ -209,6 +206,10 @@ const IAFSchema: FormBuilder = {
                     {
                       label: "Pharmaceutical Engineering",
                       key: "phe",
+                    },
+                    {
+                      label: "Architecture Planning and Design",
+                      key: "arch",
                     },
                   ],
                 },
