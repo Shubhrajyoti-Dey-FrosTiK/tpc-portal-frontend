@@ -1,6 +1,5 @@
 "use client";
 
-import { title } from "process";
 import { Failure, FormBuilder, Success } from "../types/Form";
 import { FormInputType, FormType } from "../types/FormType";
 import { Validation } from "../types/Validation";
@@ -513,6 +512,7 @@ const JAFSchema: FormBuilder = {
                         "bce",
                         "bme",
                         "cer",
+                        "dse",
                         "che",
                         "civ",
                         "cse",
@@ -579,6 +579,10 @@ const JAFSchema: FormBuilder = {
                     {
                       label: "Mechanical Engineering",
                       key: "mec",
+                    },
+                    {
+                      label: "Decision Sciences & Engineering",
+                      key: "dse",
                     },
                     {
                       label: "Metallurgical Engineering",
