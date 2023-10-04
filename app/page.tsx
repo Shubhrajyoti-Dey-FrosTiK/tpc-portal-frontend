@@ -17,6 +17,7 @@ import { selectUser, setCurrentUser } from "../store/states/userSlice";
 import { selectIdStore } from "../store/states/idStore";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { IconEdit } from "@tabler/icons";
 
 export interface FormInterface {
   title: string;
@@ -34,6 +35,7 @@ export interface IafForm {
   internshipDescription: {
     profile: string;
   };
+  iaf_id: string;
   updatedAt: string;
   type: FormType.IAF;
 }
@@ -43,6 +45,7 @@ export interface JafForm {
   jobDescription: {
     profile: string;
   };
+  jaf_id: string;
   updatedAt: string;
   type: FormType.JAF;
 }
@@ -251,22 +254,52 @@ export default function Home() {
                                 target="_blank"
                                 href={`/company/${
                                   form.type == FormType.IAF ? "iaf" : "jaf"
-                                }/${form._id}`}
+                                  // @ts-ignore
+                                }/${
+                                  form.type == FormType.IAF
+                                    ? form.iaf_id
+                                    : form.jaf_id
+                                }`}
                               >
-                                <Paper className="m-2 p-5 rounded-md shadow-md cursor-pointer">
-                                  <Typography order={5}>
-                                    {form.type === FormType.IAF
-                                      ? form.internshipDescription.profile
-                                      : form.jobDescription.profile}
-                                  </Typography>
-                                  <Typography order={6} className="font-normal">
-                                    {form.type == FormType.IAF
-                                      ? "Internship"
-                                      : "Full Time"}
-                                  </Typography>
-                                  <Typography order={6} className="font-light">
-                                    {convertStringToDate(form.updatedAt)}
-                                  </Typography>
+                                <Paper className="m-2 p-5 rounded-md shadow-md cursor-pointer flex justify-between">
+                                  <div>
+                                    <Typography order={5}>
+                                      {form.type === FormType.IAF
+                                        ? form.internshipDescription.profile
+                                        : form.jobDescription.profile}
+                                    </Typography>
+                                    <Typography
+                                      order={6}
+                                      className="font-normal"
+                                    >
+                                      {form.type == FormType.IAF
+                                        ? "Internship"
+                                        : "Full Time"}
+                                    </Typography>
+                                    <Typography
+                                      order={6}
+                                      className="font-light"
+                                    >
+                                      {convertStringToDate(form.updatedAt)}
+                                    </Typography>
+                                  </div>
+                                  <div>
+                                    <a
+                                      target="_blank"
+                                      href={`/company/${
+                                        form.type == FormType.IAF
+                                          ? "iaf"
+                                          : "jaf"
+                                        // @ts-ignore
+                                      }/edit/${
+                                        form.type == FormType.IAF
+                                          ? form.iaf_id
+                                          : form.jaf_id
+                                      }`}
+                                    >
+                                      <IconEdit />
+                                    </a>
+                                  </div>
                                 </Paper>
                               </a>
                             );
@@ -318,21 +351,31 @@ export default function Home() {
                             <a
                               key={`Form_${formIndex}`}
                               target="_blank"
-                              href={`/company/iaf/${form._id}`}
+                              href={`/company/iaf/${form.iaf_id}`}
                             >
                               <Paper
                                 key={`Form_${formIndex}`}
-                                className="m-2 p-5 rounded-md shadow-md"
+                                className="m-2 p-5 rounded-md shadow-md flex justify-between"
                                 onClick={() => {
                                   router.push(`/company/iaf/${form._id}`);
                                 }}
                               >
-                                <Typography order={5}>
-                                  {form.internshipDescription.profile}
-                                </Typography>
-                                <Typography order={6} className="font-light">
-                                  {convertStringToDate(form.updatedAt)}
-                                </Typography>
+                                <div>
+                                  <Typography order={5}>
+                                    {form.internshipDescription.profile}
+                                  </Typography>
+                                  <Typography order={6} className="font-light">
+                                    {convertStringToDate(form.updatedAt)}
+                                  </Typography>
+                                </div>
+                                <div>
+                                  <a
+                                    target="_blank"
+                                    href={`/company/iaf/edit/${form.iaf_id}`}
+                                  >
+                                    <IconEdit />
+                                  </a>
+                                </div>
                               </Paper>
                             </a>
                           );
@@ -384,15 +427,25 @@ export default function Home() {
                             <a
                               key={`Form_${formIndex}`}
                               target="_blank"
-                              href={`/company/jaf/${form._id}`}
+                              href={`/company/jaf/${form.jaf_id}`}
                             >
-                              <Paper className="m-2 p-5 rounded-md shadow-md">
-                                <Typography order={5}>
-                                  {form.jobDescription.profile}
-                                </Typography>
-                                <Typography order={6} className="font-light">
-                                  {convertStringToDate(form.updatedAt)}
-                                </Typography>
+                              <Paper className="m-2 p-5 rounded-md shadow-md flex justify-between">
+                                <div>
+                                  <Typography order={5}>
+                                    {form.jobDescription.profile}
+                                  </Typography>
+                                  <Typography order={6} className="font-light">
+                                    {convertStringToDate(form.updatedAt)}
+                                  </Typography>
+                                </div>
+                                <div>
+                                  <a
+                                    target="_blank"
+                                    href={`/company/jaf/edit/${form.jaf_id}`}
+                                  >
+                                    <IconEdit />
+                                  </a>
+                                </div>
                               </Paper>
                             </a>
                           );

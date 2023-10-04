@@ -339,23 +339,30 @@ export default class FormService {
           const newBasePath = `${basePath}[${formState.key}]`;
 
           if (exportable && formState.type === FormInputType.FILE) {
-            const files: File[] = keyStore[newBasePath] as File[];
-            const storagePath: string = formState.storagePath.path(
-              keyStore[formState.storagePath.prop as string]
-                ? keyStore[formState.storagePath.prop as string].toString()
-                : ""
-            );
-            batchUploadFiles(files, storagePath);
-            const urls: string[] = [];
-            files.forEach((file: File) => {
-              urls.push(
-                `https://firebasestorage.googleapis.com/v0/b/${
-                  process.env.NEXT_PUBLIC_FIREBASE_CLIENT_PROJECT_ID
-                }.appspot.com/o/${getLink(file, storagePath)}`
+            const files: File[] = keyStore[newBasePath]
+              ? (keyStore[newBasePath] as File[])
+              : [];
+
+            if (files.length && files[0] instanceof File) {
+              const storagePath: string = formState.storagePath.path(
+                keyStore[formState.storagePath.prop as string]
+                  ? keyStore[formState.storagePath.prop as string].toString()
+                  : ""
               );
-            });
-            exportableFormData[formState.key as string] = urls;
-            keyStore[newBasePath] = urls;
+              batchUploadFiles(files, storagePath);
+              const urls: string[] = [];
+              files.forEach((file: File) => {
+                urls.push(
+                  `https://firebasestorage.googleapis.com/v0/b/${
+                    process.env.NEXT_PUBLIC_FIREBASE_CLIENT_PROJECT_ID
+                  }.appspot.com/o/${getLink(file, storagePath)}`
+                );
+              });
+              exportableFormData[formState.key as string] = urls;
+              keyStore[newBasePath] = urls;
+            } else {
+              exportableFormData[formState.key as string] = files;
+            }
           } else {
             exportableFormData[formState.key as string] = keyStore[newBasePath];
           }

@@ -26,18 +26,14 @@ function IAF() {
 
     const response = await axios.get(url, {
       headers: {
-        obj_id: params ? params.id : "",
+        iaf_id: params ? params.id : "",
         token,
+        latest: 1,
       },
     });
 
-    if (
-      response.data &&
-      response.data.data &&
-      response.data.data["raw_key_store"] &&
-      response.data.data["raw_key_store"].keyStore
-    ) {
-      setKeyStore(response.data.data["raw_key_store"].keyStore);
+    if (response.data && response.data.data && response.data.data.length) {
+      setKeyStore(response.data.data[0]["raw_key_store"].keyStore);
     }
     setLoading(false);
   };

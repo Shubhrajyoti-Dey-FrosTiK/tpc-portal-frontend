@@ -51,6 +51,7 @@ function Form({
   goToPath,
   edit,
   variables,
+  headers,
 }: {
   schema: FormBuilder;
   children?: React.ReactNode;
@@ -65,6 +66,7 @@ function Form({
     keyStore: KeyStore;
   };
   variables?: object;
+  headers?: { [key: string]: string };
 }) {
   const formState = useSelector(selectForm);
   const router = useRouter();
@@ -105,14 +107,16 @@ function Form({
           postUrl,
           bodyTemplate
             ? { ...bodyTemplate, ...exportData, keyStore }
-            : { ...exportData, keyStore }
+            : { ...exportData, keyStore },
+          { headers: headers }
         );
       } else {
         await axios.post(
           postUrl,
           bodyTemplate
             ? { ...bodyTemplate, ...exportData, keyStore }
-            : { ...exportData, keyStore }
+            : { ...exportData, keyStore },
+          { headers: headers }
         );
       }
 

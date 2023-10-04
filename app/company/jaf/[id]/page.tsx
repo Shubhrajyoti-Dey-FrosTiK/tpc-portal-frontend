@@ -28,20 +28,18 @@ function JAF() {
     console.log(url);
     const response = await axios.get(url, {
       headers: {
-        obj_id: params ? params.id : "",
+        jaf_id: params ? params.id : "",
         token: token,
       },
     });
 
-    console.log(response.data);
-
     if (
       response.data &&
       response.data.data &&
-      response.data.data["raw_key_store"] &&
-      response.data.data["raw_key_store"].keyStore
+      response.data.data.length &&
+      response.data.data[0]["raw_key_store"].keyStore
     ) {
-      setKeyStore(response.data.data["raw_key_store"].keyStore);
+      setKeyStore(response.data.data[0]["raw_key_store"].keyStore);
     }
     setLoading(false);
   };

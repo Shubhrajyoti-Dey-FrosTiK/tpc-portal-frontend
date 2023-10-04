@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { selectIdStore } from "../../../../../store/states/idStore";
 import { selectUser } from "../../../../../store/states/userSlice";
 import Form from "../../../../../components/form/Form";
+import JAFSchema from "../../../../../configs/JAFSchema";
 
 // export const runtime = "edge";
 
@@ -23,12 +24,12 @@ function IAF() {
   const IdStore = useSelector(selectIdStore);
 
   const fetchIAFData = async () => {
-    const url = `${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/iaf/iaf_id`;
+    const url = `${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/jaf/jaf_id`;
     let token = await User.currentUser.getIdToken();
 
     const response = await axios.get(url, {
       headers: {
-        iaf_id: params ? params.id : "",
+        jaf_id: params ? params.id : "",
         token,
         latest: 1,
       },
@@ -55,9 +56,9 @@ function IAF() {
       {!loading && keyStore && (
         <>
           <Form
-            schema={IAFSchema}
+            schema={JAFSchema}
             edit={{ keyStore }}
-            postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/iaf` || ""}
+            postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/jaf` || ""}
             bodyTemplate={{
               recruiter: IdStore.recruiterId,
             }}
