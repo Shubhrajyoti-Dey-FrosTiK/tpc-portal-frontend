@@ -34,6 +34,7 @@ import { updateCompanyRecruiterId } from "../../../store/states/idStore";
 import axios from "axios";
 
 import { signInWithPopup } from "firebase/auth";
+import { setCurrentUser } from "../../../store/states/userSlice";
 
 // export const runtime = "edge";
 
@@ -55,7 +56,8 @@ export default function Login() {
           result.user.delete();
           setGoogleLoginError(true);
         } else {
-          // getIDToken();
+          dispatch(setCurrentUser({ user: result.user }));
+
           router.push("/", {
             forceOptimisticNavigation: true,
           });

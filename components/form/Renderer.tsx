@@ -147,17 +147,18 @@ function Renderer({
           ReduxFormContext[formKey].keyStore[newBasePath];
         const allOptions = renderElement.options;
         const labels: Array<String> = [];
-        optionKeysSelected.forEach((option: string) => {
-          for (
-            let optionIndex = 0;
-            optionIndex < allOptions.length;
-            optionIndex++
-          ) {
-            if (allOptions[optionIndex].key == option) {
-              labels.push(allOptions[optionIndex].label);
+        if (optionKeysSelected)
+          optionKeysSelected.forEach((option: string) => {
+            for (
+              let optionIndex = 0;
+              optionIndex < allOptions.length;
+              optionIndex++
+            ) {
+              if (allOptions[optionIndex].key == option) {
+                labels.push(allOptions[optionIndex].label);
+              }
             }
-          }
-        });
+          });
         return (
           <Typography order={5} className="font-light">
             {labels.toString()}

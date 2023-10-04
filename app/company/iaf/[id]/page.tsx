@@ -8,24 +8,28 @@ import IAFSchema from "../../../../configs/IAFSchema";
 import Spinner from "../../../../components/spinner/Spinner";
 import { useParams, useRouter } from "next/navigation";
 import { Typography } from "../../../../components/components";
+import { useSelector } from "react-redux";
+import { selectIdStore } from "../../../../store/states/idStore";
+import { selectUser } from "../../../../store/states/userSlice";
 
 // export const runtime = "edge";
 
 function IAF() {
   const [keyStore, setKeyStore] = useState<KeyStore | null>(null);
-  const [laoding, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const params = useParams();
+  const User = useSelector(selectUser);
 
   const fetchIAFData = async () => {
     const url = `${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/iaf/iaf_id`;
-    console.log(url);
+    let token = await User.currentUser.getIdToken();
+
     const response = await axios.get(url, {
       headers: {
         obj_id: params ? params.id : "",
+        token,
       },
     });
-
-    console.log(response.data);
 
     if (
       response.data &&
@@ -38,23 +42,20 @@ function IAF() {
     setLoading(false);
   };
 
-  console.log(keyStore);
-
   useEffect(() => {
-    fetchIAFData();
-  }, []);
+    if (User.currentUser) fetchIAFData();
+  }, [User.currentUser]);
 
   return (
     <div className="max-w-[800px] m-auto p-10">
-      {laoding && (
+      {loading && (
         <div className="h-[60vh]">
           <Spinner />
         </div>
       )}
 
-      {!laoding && keyStore && (
+      {!loading && keyStore && (
         <>
-          <Typography order={3}>Hello</Typography>
           <Viewer schema={IAFSchema} keyStore={keyStore} />
         </>
       )}
