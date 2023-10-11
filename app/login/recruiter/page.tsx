@@ -33,7 +33,7 @@ import { useDispatch } from "react-redux";
 import { updateCompanyRecruiterId } from "../../../store/states/idStore";
 import axios from "axios";
 
-import { signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { setCurrentUser } from "../../../store/states/userSlice";
 
 // export const runtime = "edge";
@@ -65,19 +65,22 @@ export default function Login() {
       })
       .catch(function (error) {
         console.log(error);
+        setError(error);
         // Handle Errors here.
       });
   };
 
   const handlePasswordLogin = async () => {
-    const response = await handleLoginWithEmailPassword(email, password);
-    if (response.error) {
-      setError(true);
-    } else {
-      // getIDToken();
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+
+      dispatch(setCurrentUser({ user: response.user }));
+
       router.push("/", {
         forceOptimisticNavigation: true,
       });
+    } catch (error: any) {
+      setError(true);
     }
   };
 

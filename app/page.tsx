@@ -3,17 +3,14 @@
 import { useDisclosure } from "@mantine/hooks";
 import {
   Typography,
-  Menu,
   Button,
   Tabs,
   Paper,
   Modal,
-  TabsProps,
-  Group,
 } from "../components/components";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import { selectUser, setCurrentUser } from "../store/states/userSlice";
+import { selectUser } from "../store/states/userSlice";
 import { selectIdStore } from "../store/states/idStore";
 import { useEffect, useState } from "react";
 import axios from "axios";
