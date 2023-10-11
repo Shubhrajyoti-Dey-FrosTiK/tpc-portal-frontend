@@ -32,6 +32,7 @@ function IAF() {
         jaf_id: params ? params.id : "",
         token,
         latest: 1,
+        recruiter: 1,
       },
     });
 

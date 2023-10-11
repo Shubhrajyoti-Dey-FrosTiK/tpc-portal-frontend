@@ -31,6 +31,7 @@ function IAF() {
         iaf_id: params ? params.id : "",
         token,
         latest: 1,
+        recruiter: 1,
       },
     });
 
