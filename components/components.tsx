@@ -39,6 +39,10 @@ import {
   Drawer,
   TabsProps,
   PasswordInput,
+  Card,
+  Badge,
+  Image,
+  Timeline
 } from "@mantine/core";
 
 import {
@@ -91,6 +95,10 @@ export {
   Modal,
   TextInput,
   PasswordInput,
+  Card,
+  Image,
+  Badge,
+  Timeline
 };
 
 export type {
