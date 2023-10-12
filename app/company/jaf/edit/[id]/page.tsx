@@ -60,6 +60,7 @@ function IAF() {
             schema={JAFSchema}
             edit={{ keyStore }}
             postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/jaf` || ""}
+            headers={{"jaf_id": params ? params.id : "",}}
             bodyTemplate={{
               recruiter: IdStore.recruiterId,
             }}

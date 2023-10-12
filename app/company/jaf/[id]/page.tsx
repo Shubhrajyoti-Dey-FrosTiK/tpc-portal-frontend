@@ -30,6 +30,8 @@ function JAF() {
       headers: {
         jaf_id: params ? params.id : "",
         token: token,
+        latest: 1,
+        recruiter: 1,
       },
     });
 
