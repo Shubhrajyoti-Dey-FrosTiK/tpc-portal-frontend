@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { Typography } from "@material-tailwind/react";
-import Team from "./TeamComponent";
-import { CreditsDataType } from "./TeamComponent";
+import Team from "../../components/creditcomponents/TeamComponent";
+import { CreditsDataType } from "../../components/creditcomponents/TeamComponent";
 
 const dummyData: CreditsDataType = {
   name: "Soumik Dutta",
