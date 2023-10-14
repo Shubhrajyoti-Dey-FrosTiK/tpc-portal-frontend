@@ -18,26 +18,24 @@ export interface CreditsDataType {
 export default function Team(props: CreditsDataType) {
   const router = useRouter();
   return (
-    <div>
+    <div className="flex justify-center">
       <Card
-        className="flex flex-col justify-center cursor-pointer sm:w-auto w-80 p-4 gap-4"
+        className="flex flex-col justify-center cursor-pointer w-80 p-4 gap-4"
         shadow="sm"
         radius="lg"
         withBorder
       >
-        <div className="flex justify-center">
+        <div className="flex justify-center p-4">
           <img
             src={props.imgURL}
             alt="Your Image"
-            className="w-40 h-40 rounded-full object-cover"
+            className="w-48 h-48 rounded-full object-cover"
           />
         </div>
-        <div>
-          <div className="mt-3">
-            <Typography variant="h3">{props.name}</Typography>
-            <Typography>{props.title}</Typography>
-          </div>
-          <div className="flex flex-row">
+        <div >
+            <Typography className="flex justify-center" variant="h3">{props.name}</Typography>
+            <Typography className="flex justify-center">{props.title}</Typography>
+          <div className="flex flex-row justify-center">
             <IconBrandGithubFilled
               className="pr-3"
               size={40}
@@ -56,12 +54,9 @@ export default function Team(props: CreditsDataType) {
               <IconBrandGmail className="pr-3" size={40} />
             </a>
           </div>
-          <div>
-            <Typography>{props.description}</Typography>
-          </div>
+            <Typography className="flex justify-center p-4 text-center">{props.description}</Typography>
         </div>
       </Card>
-      {/*  */}
       {/* <Progress/> */}
     </div>
   );

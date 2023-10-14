@@ -36,7 +36,7 @@ export default function RootLayout({
         <Analytics />
         <ReduxProvider>
           <RootStyleRegistry>
-            <AuthWrapper>
+            {/* <AuthWrapper> */}
               <div className="sm:hidden">
                 <MobileDrawer ref={targetRef} schema={DemoNavSchema}>
                   <div>{children}</div>
@@ -47,7 +47,7 @@ export default function RootLayout({
                   {children}
                 </NavbarNested>
               </div>
-            </AuthWrapper>
+            {/* </AuthWrapper> */}
           </RootStyleRegistry>
         </ReduxProvider>
       </body>
