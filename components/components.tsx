@@ -42,7 +42,7 @@ import {
   Card,
   Badge,
   Image,
-  Timeline
+  Timeline,
 } from "@mantine/core";
 
 import {
@@ -56,6 +56,11 @@ import {
 import { Button } from "@material-tailwind/react";
 import { MantineLogo } from "@mantine/ds";
 import { NavbarNested } from "./navbar/Navbar";
+import {
+  IconBrandGithubFilled,
+  IconBrandLinkedin,
+  IconBrandGmail,
+} from "@tabler/icons-react";
 export {
   Switch,
   Typography,
@@ -98,7 +103,10 @@ export {
   Card,
   Image,
   Badge,
-  Timeline
+  Timeline,
+  IconBrandGithubFilled,
+  IconBrandLinkedin,
+  IconBrandGmail,
 };
 
 export type {

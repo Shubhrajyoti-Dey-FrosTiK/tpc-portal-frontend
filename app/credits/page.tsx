@@ -3,7 +3,7 @@ import React from "react";
 import { Typography } from "@material-tailwind/react";
 import Team from "../../components/creditcomponents/TeamComponent";
 import { CreditsDataType } from "../../components/creditcomponents/TeamComponent";
-
+import Footer from "../../components/footer/Footer";
 const dummyData: Array<CreditsDataType> = [
   {
     name: "Soumik Dutta",
@@ -49,7 +49,7 @@ const dummyData: Array<CreditsDataType> = [
 
 export default function Credits() {
   return (
-    <div>
+    <div className="border-1 border-purple-500 m-5 grid justify-center">
       <div className="mb-4">
         <Typography variant="h1">Credits</Typography>
       </div>
@@ -66,6 +66,9 @@ export default function Credits() {
               key={key}
             />
           ))}
+      </div>
+      <div >
+        <Footer />
       </div>
     </div>
   );

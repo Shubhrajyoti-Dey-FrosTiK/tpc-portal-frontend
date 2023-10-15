@@ -8,7 +8,7 @@ import {
   IconBrandGithubFilled,
   IconBrandLinkedin,
   IconBrandGmail,
-} from "@tabler/icons-react";
+} from "../components";
 import { useRouter } from "next/navigation";
 // import Progress from "./Timeline";
 export interface CreditsDataType {
@@ -25,7 +25,7 @@ export default function Team(props: CreditsDataType) {
         radius="lg"
         withBorder
       >
-        <div className="flex justify-center p-4">
+        <div className="flex justify-center p-4 ">
           <img
             src={props.imgURL}
             alt="Your Image"
