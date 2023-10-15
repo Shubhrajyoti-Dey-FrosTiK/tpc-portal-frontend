@@ -4,7 +4,7 @@ import RootStyleRegistry from "./emotion";
 import { NavbarNested } from "../components/navbar/Navbar";
 import { MobileDrawer } from "../components/navbar/Drawer";
 import { Analytics } from "@vercel/analytics/react";
-
+import Footer from "../components/footer/Footer";
 import { Affix, Transition, Button } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import { useScrollIntoView, useWindowScroll } from "@mantine/hooks";
@@ -41,13 +41,18 @@ export default function RootLayout({
                 <MobileDrawer ref={targetRef} schema={DemoNavSchema}>
                   <div>{children}</div>
                 </MobileDrawer>
+                <Footer/>
               </div>
               <div className=" hidden sm:block">
                 <NavbarNested ref={targetRef} schema={DemoNavSchema}>
                   {children}
                 </NavbarNested>
+                <Footer/>
               </div>
             {/* </AuthWrapper> */}
+            {/* <div>
+            <Footer />
+            </div> */}
           </RootStyleRegistry>
         </ReduxProvider>
       </body>

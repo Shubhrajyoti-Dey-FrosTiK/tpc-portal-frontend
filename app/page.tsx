@@ -15,6 +15,7 @@ import { selectIdStore } from "../store/states/idStore";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IconEdit } from "@tabler/icons";
+import Footer from "../components/footer/Footer";
 
 export interface FormInterface {
   title: string;

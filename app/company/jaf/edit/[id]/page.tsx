@@ -14,6 +14,7 @@ import { selectUser } from "../../../../../store/states/userSlice";
 import Form from "../../../../../components/form/Form";
 import JAFSchema from "../../../../../configs/JAFSchema";
 
+
 // export const runtime = "edge";
 
 function IAF() {
