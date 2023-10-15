@@ -41,14 +41,13 @@ export default function RootLayout({
                 <MobileDrawer ref={targetRef} schema={DemoNavSchema}>
                   <div>{children}</div>
                 </MobileDrawer>
-                <Footer/>
               </div>
               <div className=" hidden sm:block">
                 <NavbarNested ref={targetRef} schema={DemoNavSchema}>
                   {children}
                 </NavbarNested>
-                <Footer/>
               </div>
+              <Footer/>
             </AuthWrapper>
           </RootStyleRegistry>
         </ReduxProvider>

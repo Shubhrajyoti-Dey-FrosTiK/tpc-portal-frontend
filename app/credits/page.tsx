@@ -3,7 +3,7 @@ import React from "react";
 import { Typography } from "@material-tailwind/react";
 import Team from "../../components/creditcomponents/TeamComponent";
 import { CreditsDataType } from "../../components/creditcomponents/TeamComponent";
-import { dummyData } from "../../configs/creditPeople";
+import { teamMembers } from "../../configs/creditPeople";
 
 export default function Credits() {
   return (
@@ -12,8 +12,8 @@ export default function Credits() {
         <Typography variant="h1">Team Frostik</Typography>
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
-        {dummyData &&
-          dummyData.map((value: CreditsDataType, key: any) => (
+        {teamMembers &&
+          teamMembers.map((value: CreditsDataType, key: any) => (
             <Team
               name={value.name}
               title={value.title}
@@ -25,9 +25,6 @@ export default function Credits() {
               key={key}
             />
           ))}
-      </div>
-      <div>
-        {/* <Footer /> */}
       </div>
     </div>
   );

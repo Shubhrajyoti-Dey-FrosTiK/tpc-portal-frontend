@@ -1,6 +1,6 @@
 import { CreditsDataType } from "../components/creditcomponents/TeamComponent";
 
-export const dummyData: Array<CreditsDataType> = [
+export const teamMembers: Array<CreditsDataType> = [
     {
       name: "Shubhrajyoti Dey",
       title: "Lead Full Stack Developer and Architect",
