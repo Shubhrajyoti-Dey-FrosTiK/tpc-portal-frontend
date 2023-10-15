@@ -16,7 +16,7 @@ export default function Footer() {
   };
   return (
     <div className="flex justify-center items-center flex-col mt-8">
-      <div className="flex mb-7 md:flex-row flex-col w-full justify-evenly items-center border-t border-t-[#3F3E45] p-2">
+      <div className="flex mb-7 md:flex-row flex-col w-full justify-evenly items-center border-t border-t-[#3F3E45] p-4">
         <Avatar
           src={ASSETS.iitbhu_logo}
           size="xl"
@@ -37,7 +37,7 @@ export default function Footer() {
         </div>
       </div>
       <div style={{letterSpacing:"3px",fontWeight:"500"}}>DEVELOPED BY</div>
-      <div  style={{letterSpacing:"5px",fontWeight:"300"}} onClick={handleCredits}>
+      <div  style={{letterSpacing:"5px",fontWeight:"300",cursor:"pointer"}} onClick={handleCredits}>
         TEAM FROSTIK
       </div>
       <div className="border-t w-full mt-2 flex justify-between items-center md:flex-row flex-col pt-2 border-t-[#3F3E45] p-3">

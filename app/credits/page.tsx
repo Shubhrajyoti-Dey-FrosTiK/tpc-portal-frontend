@@ -3,8 +3,7 @@ import React from "react";
 import { Typography } from "@material-tailwind/react";
 import Team from "../../components/creditcomponents/TeamComponent";
 import { CreditsDataType } from "../../components/creditcomponents/TeamComponent";
-import Footer from "../../components/footer/Footer";
-
+// https://avatars.githubusercontent.com/u/96922117?v=4
 const dummyData: Array<CreditsDataType> = [
   {
     name: "Shubhrajyoti Dey",
@@ -89,7 +88,7 @@ export default function Credits() {
   return (
     <div className="border-1 border-purple-500 m-5 grid justify-center">
       <div className="mb-4">
-        <Typography variant="h1">Credits</Typography>
+        <Typography variant="h1">Team Frostik</Typography>
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
         {dummyData &&

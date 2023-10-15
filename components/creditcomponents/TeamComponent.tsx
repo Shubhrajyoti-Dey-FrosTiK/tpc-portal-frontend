@@ -16,14 +16,14 @@ export interface CreditsDataType {
 export default function Team(props: CreditsDataType) {
   const router = useRouter();
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center h-[480px]">
       <Card
-        className="flex flex-col justify-center cursor-pointer w-80 p-4 gap-4"
+        className="flex flex-col justify-center cursor-pointer w-80 p-4 gap-4 h-[480px]"
         shadow="sm"
         radius="lg"
         withBorder
       >
-        <div className="flex justify-center p-4 ">
+        <div className="flex justify-center p-4">
           <img
             src={props.imgURL}
             alt="Your Image"
