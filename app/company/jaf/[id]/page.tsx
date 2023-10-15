@@ -10,7 +10,6 @@ import { useParams, useRouter } from "next/navigation";
 import { Typography, Button, Group } from "../../../../components/components";
 import { useSelector } from "react-redux";
 import { selectUser, setCurrentUser } from "../../../../store/states/userSlice";
-import Footer from "../../../../components/footer/Footer";
 
 // export const runtime = "edge";
 
