@@ -8,7 +8,6 @@ import {
   IconBrandGmail,
 } from "../components";
 import { useRouter } from "next/navigation";
-// import Progress from "./Timeline";
 export interface CreditsDataType {
   [key: string]: string;
 }
@@ -51,7 +50,6 @@ export default function Team(props: CreditsDataType) {
           </Typography>
         </div>
       </Card>
-      {/* <Progress/> */}
     </div>
   );
 }
