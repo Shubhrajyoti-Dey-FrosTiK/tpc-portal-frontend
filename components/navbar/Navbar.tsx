@@ -67,7 +67,7 @@ export function NavbarNested({
   const router = useRouter();
 
   return (
-    <div className="" id="vishisht">
+    <div>
       <Paper shadow={"md"} className={classes.topNav}>
         <div className="p-3 flex flex-row justify-between align-middle">
           <div
