@@ -39,6 +39,10 @@ import {
   Drawer,
   TabsProps,
   PasswordInput,
+  Card,
+  Badge,
+  Image,
+  Timeline,
 } from "@mantine/core";
 
 import {
@@ -52,6 +56,11 @@ import {
 import { Button } from "@material-tailwind/react";
 import { MantineLogo } from "@mantine/ds";
 import { NavbarNested } from "./navbar/Navbar";
+import {
+  IconBrandGithubFilled,
+  IconBrandLinkedin,
+  IconBrandGmail,
+} from "@tabler/icons-react";
 export {
   Switch,
   Typography,
@@ -91,6 +100,13 @@ export {
   Modal,
   TextInput,
   PasswordInput,
+  Card,
+  Image,
+  Badge,
+  Timeline,
+  IconBrandGithubFilled,
+  IconBrandLinkedin,
+  IconBrandGmail,
 };
 
 export type {

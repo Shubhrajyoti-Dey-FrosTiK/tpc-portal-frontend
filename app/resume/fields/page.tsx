@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ProfileLink, selectResume } from "../../../store/states/resumeSlice";
 import { Avatar, Paper, Typography } from "../../../components/components";
-
 export const runtime = "nodejs";
 
 function Page() {
