@@ -17,14 +17,14 @@ import JAFSchema from "../../../../../configs/JAFSchema";
 
 // export const runtime = "edge";
 
-function IAF() {
+function JAF() {
   const [keyStore, setKeyStore] = useState<KeyStore | null>(null);
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const User = useSelector(selectUser);
   const IdStore = useSelector(selectIdStore);
 
-  const fetchIAFData = async () => {
+  const fetchJAFData = async () => {
     const url = `${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/jaf/jaf_id`;
     let token = await User.currentUser.getIdToken();
 
@@ -44,7 +44,7 @@ function IAF() {
   };
 
   useEffect(() => {
-    if (User.currentUser) fetchIAFData();
+    if (User.currentUser) fetchJAFData();
   }, [User.currentUser]);
 
   return (
@@ -60,11 +60,13 @@ function IAF() {
           <Form
             schema={JAFSchema}
             edit={{ keyStore }}
-            postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/jaf` || ""}
             headers={{"jaf_id": params ? params.id : "",}}
             bodyTemplate={{
               recruiter: IdStore.recruiterId,
+              company: IdStore.companyId,
             }}
+            variables={{ companyId: IdStore.companyId }}
+            postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/jaf` || ""}
           />
         </>
       )}
@@ -72,4 +74,4 @@ function IAF() {
   );
 }
 
-export default IAF;
+export default JAF;

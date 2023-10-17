@@ -58,11 +58,13 @@ function IAF() {
           <Form
             schema={IAFSchema}
             edit={{ keyStore }}
-            postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/iaf` || ""}
             headers={{"iaf_id": params ? params.id : "",}}
             bodyTemplate={{
               recruiter: IdStore.recruiterId,
+              company: IdStore.companyId,
             }}
+            variables={{ companyId: IdStore.companyId }}
+            postUrl={`${process.env.NEXT_PUBLIC_IAF_JAF_BACKEND}/iaf` || ""}
           />
         </>
       )}
