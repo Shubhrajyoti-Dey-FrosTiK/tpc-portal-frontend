@@ -4,6 +4,7 @@ import { Failure, FormBuilder, Success } from "../types/Form";
 import { FormInputType, FormType } from "../types/FormType";
 import { Validation } from "../types/Validation";
 
+
 const RecruiterAndCompanyRegisterSchema: FormBuilder = {
   title: "Recruiter and Company Registration",
   description: "Please mention your basic details and the company you belong",

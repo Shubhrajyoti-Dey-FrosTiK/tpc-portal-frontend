@@ -6,7 +6,6 @@ import Form from "../../../components/form/Form";
 import IAFSchema from "../../../configs/IAFSchema";
 import { selectIdStore } from "../../../store/states/idStore";
 import { selectUser } from "../../../store/states/userSlice";
-
 // export const runtime = "edge";
 
 function IAF() {
