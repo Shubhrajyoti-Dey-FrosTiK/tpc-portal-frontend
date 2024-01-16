@@ -43,6 +43,7 @@ import {
   Badge,
   Image,
   Timeline,
+  Pagination
 } from "@mantine/core";
 
 import {
@@ -107,6 +108,7 @@ export {
   IconBrandGithubFilled,
   IconBrandLinkedin,
   IconBrandGmail,
+  Pagination,
 };
 
 export type {
