@@ -106,6 +106,19 @@ const RecruiterAndCompanyRegisterSchema: FormBuilder = {
           required: false,
         },
         {
+          label: "Date of Establishment",
+          key:"dateOfEstablishment",
+          type: FormInputType.NUMBER,
+          required: false,
+          max: 2025,
+        },
+        {
+          label: "Number of Employees",
+          key:"numberOfEmployees",
+          type: FormInputType.SHORT_TEXT,
+          required: false,
+        },
+        {
           label: "Category",
           key: "category",
           type: FormInputType.RADIO,

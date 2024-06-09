@@ -39,6 +39,7 @@ import CurrencyInput from "./input/CurrencyInput";
 import CheckboxInput from "./input/Checkbox";
 import FileInput from "./input/FileInput";
 import PasswordCreation from "./input/PasswordCreation";
+import Switch from "./input/Switch";
 
 function Renderer({
   renderElement,
@@ -366,6 +367,17 @@ function Renderer({
               formBuilderSchema={formBuilderSchema}
             />
           );
+
+        case FormInputType.SWITCH_INPUT:
+          return (
+            <Switch
+              formElement={renderElement}
+              basePath={`${basePath}[${renderElement.key}]`}
+              formKey={formKey}
+              formBuilderSchema={formBuilderSchema}
+            />
+          );
+
         case FormInputType.NUMBER:
           return (
             <NumberInput
