@@ -36,9 +36,9 @@ function Switch({
             label={formElement.label}
             description={formElement.description}
             error={error}
-            value={inputState}
+            checked={inputState}
             onChange={(e) => captureSwitchInputChange(e.currentTarget.checked)}
-            defaultChecked={formElement.initialValue as boolean}
+            defaultChecked={formElement.initialValue as boolean || false}
           />
         </div>
       )}
