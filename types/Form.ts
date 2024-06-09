@@ -19,7 +19,7 @@ export interface Validation {
 
 export interface Visible {
   props: Array<String>;
-  validator(arg0: Array<String>): Boolean;
+  validator(arg0: Array<String> | Array<boolean>): Boolean;
 }
 
 export interface StoragePath {
@@ -59,7 +59,7 @@ export interface FormBuilder {
 // ----------------- Form State -----------------
 
 export interface KeyStore {
-  [key: string]: string | number | Array<string> | Array<number> | Array<File>;
+  [key: string]: string | number | boolean | Array<string> | Array<number> | Array<File>;
 }
 
 export interface RepeatStore {

@@ -16,6 +16,7 @@ export enum FormInputType {
   CHIPBOX = "CHIPBOX",
   CURRENCY = "CURRENCY",
   PASSWORD_CREATION = "PASSWORD_CREATION",
+  SWITCH_INPUT = "SWITCH_INPUT",
 }
 
 export enum InputType {
@@ -47,6 +48,18 @@ export interface LongText {
   id?: String;
   description?: String;
   initialValue?: String;
+}
+
+export interface Switch {
+  label: String;
+  key: String;
+  type: FormInputType.SWITCH_INPUT;
+  required?: Boolean;
+  validation?: Validation;
+  visible?: Visible;
+  id?: String;
+  description?: String;
+  initialValue?: Boolean;
 }
 
 export interface NumberInput {
@@ -109,8 +122,8 @@ export interface CheckboxInput {
 
 export interface Option {
   label: String;
-  key: String;
-  value?: Array<String>;
+  key: String | Number | Boolean;
+  value?: Array<String> | Array<Number> | Array<Boolean>;
   description?: String;
 }
 
@@ -134,6 +147,7 @@ export interface CurrencyInput {
 export type FormElement =
   | ShortText
   | LongText
+  | Switch
   | NumberInput
   | FileInput
   | RadioInput

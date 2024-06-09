@@ -58,6 +58,12 @@ const IAFSchema: FormBuilder = {
           required: true,
         },
         {
+          label: "No of Minimum Hires",
+          key: "minimumHires",
+          type: FormInputType.NUMBER,
+          required: true,
+        },
+        {
           label: "No of Expected Hires",
           key: "expectedHires",
           type: FormInputType.NUMBER,
@@ -87,6 +93,12 @@ const IAFSchema: FormBuilder = {
               return `jd/${companyId}`;
             },
           },
+        },
+        {
+          label: "is minimum CGPA a criteria?",
+          key: "isCGPACriteria",
+          type: FormInputType.SWITCH_INPUT,
+          required: true,
         },
         {
           label: "Eligible Courses",
@@ -143,6 +155,15 @@ const IAFSchema: FormBuilder = {
                   description: "CGPA must be a number between 0 - 10",
                   max: 10,
                   min: 0,
+                  visible: {
+                    props: ["[internshipDescription]-[isCGPACriteria]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
                 {
                   label: "Eligible Branches",
@@ -250,6 +271,27 @@ const IAFSchema: FormBuilder = {
                   type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
+                {
+                  label: "Will PPO be provided after internship based on performance?",
+                  key: "provisionForPPO",
+                  type: FormInputType.SWITCH_INPUT,
+                  required: true,
+                },
+                {
+                  label: "Tentative CTC for the PPO",
+                  key: "tentativeCTC",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                  visible: {
+                    props: ["[internshipDescription]-[btech]-[compensationDetails]-[provisionForPPO]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
+                },
               ],
             },
           ],
@@ -280,6 +322,15 @@ const IAFSchema: FormBuilder = {
                   description: "CGPA must be a number between 0 - 10",
                   max: 10,
                   min: 0,
+                  visible: {
+                    props: ["[internshipDescription]-[isCGPACriteria]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
                 {
                   label: "Eligible Branches",
@@ -402,6 +453,27 @@ const IAFSchema: FormBuilder = {
                   type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
+                {
+                  label: "Will PPO be provided after internship based on performance?",
+                  key: "provisionForPPO",
+                  type: FormInputType.SWITCH_INPUT,
+                  required: true,
+                },
+                {
+                  label: "Tentative CTC for the PPO",
+                  key: "tentativeCTC",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                  visible: {
+                    props: ["[internshipDescription]-[idd]-[compensationDetails]-[provisionForPPO]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
+                },
               ],
             },
           ],
@@ -432,6 +504,15 @@ const IAFSchema: FormBuilder = {
                   description: "CGPA must be a number between 0 - 10",
                   max: 10,
                   min: 0,
+                  visible: {
+                    props: ["[internshipDescription]-[isCGPACriteria]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
                 {
                   label: "Eligible Branches",
@@ -568,6 +649,27 @@ const IAFSchema: FormBuilder = {
                   type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
+                {
+                  label: "Will PPO be provided after internship based on performance?",
+                  key: "provisionForPPO",
+                  type: FormInputType.SWITCH_INPUT,
+                  required: true,
+                },
+                {
+                  label: "Tentative CTC for the PPO",
+                  key: "tentativeCTC",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                  visible: {
+                    props: ["[internshipDescription]-[mtech]-[compensationDetails]-[provisionForPPO]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
+                },
               ],
             },
           ],
@@ -598,6 +700,15 @@ const IAFSchema: FormBuilder = {
                   description: "CGPA must be a number between 0 - 10",
                   max: 10,
                   min: 0,
+                  visible: {
+                    props: ["[internshipDescription]-[isCGPACriteria]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
                 {
                   label: "Eligible Branches",
@@ -730,6 +841,27 @@ const IAFSchema: FormBuilder = {
                   type: FormInputType.SHORT_TEXT,
                   required: false,
                 },
+                {
+                  label: "Will PPO be provided after internship based on performance?",
+                  key: "provisionForPPO",
+                  type: FormInputType.SWITCH_INPUT,
+                  required: true,
+                },
+                {
+                  label: "Tentative CTC for the PPO",
+                  key: "tentativeCTC",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                  visible: {
+                    props: ["[internshipDescription]-[phd]-[compensationDetails]-[provisionForPPO]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
+                },
               ],
             },
           ],
@@ -760,6 +892,15 @@ const IAFSchema: FormBuilder = {
                   description: "CGPA must be a number between 0 - 10",
                   max: 10,
                   min: 0,
+                  visible: {
+                    props: ["[internshipDescription]-[isCGPACriteria]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
                 {
                   label: "Age Limit",
@@ -797,6 +938,27 @@ const IAFSchema: FormBuilder = {
                   key: "incentives",
                   type: FormInputType.SHORT_TEXT,
                   required: false,
+                },
+                {
+                  label: "Will PPO be provided after internship based on performance?",
+                  key: "provisionForPPO",
+                  type: FormInputType.SWITCH_INPUT,
+                  required: true,
+                },
+                {
+                  label: "Tentative CTC for the PPO",
+                  key: "tentativeCTC",
+                  type: FormInputType.NUMBER,
+                  required: false,
+                  visible: {
+                    props: ["[internshipDescription]-[barch]-[compensationDetails]-[provisionForPPO]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
               ],
             },

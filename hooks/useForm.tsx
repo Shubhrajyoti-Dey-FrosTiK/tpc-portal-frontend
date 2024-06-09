@@ -284,6 +284,18 @@ function useForm({
     return input;
   };
 
+  const captureSwitchInputChange = async (state: boolean): Promise<boolean> => {
+    dispatch(
+      updateFormStateContext({
+        formKey,
+        stateKey: basePath,
+        value: state,
+        formBuilderSchema,
+      })
+    );
+    return state;
+  };
+
   return {
     inputState: ReduxFormContext[formKey]?.keyStore[basePath],
     captureCheckboxInputChange,
@@ -298,6 +310,7 @@ function useForm({
     captureRadioInput,
     captureCurrencyInputChange,
     captureFileInputChange,
+    captureSwitchInputChange,
   };
 }
 
