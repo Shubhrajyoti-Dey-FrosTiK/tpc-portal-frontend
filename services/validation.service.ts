@@ -20,6 +20,10 @@ export default class ValidationService {
     };
     let inputState = input;
 
+    if (formInputType === FormInputType.SWITCH_INPUT && typeof input == "boolean") {
+      return validated;
+    }
+
     if (formInputType === FormInputType.CURRENCY && typeof input === "string")
       inputState = input
         ? input.split(" ").length > 1
