@@ -280,7 +280,7 @@ const IAFSchema: FormBuilder = {
                 {
                   label: "Tentative CTC for the PPO",
                   key: "tentativeCTC",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                   visible: {
                     props: ["[internshipDescription]-[btech]-[compensationDetails]-[provisionForPPO]"],
@@ -462,7 +462,7 @@ const IAFSchema: FormBuilder = {
                 {
                   label: "Tentative CTC for the PPO",
                   key: "tentativeCTC",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                   visible: {
                     props: ["[internshipDescription]-[idd]-[compensationDetails]-[provisionForPPO]"],
@@ -658,7 +658,7 @@ const IAFSchema: FormBuilder = {
                 {
                   label: "Tentative CTC for the PPO",
                   key: "tentativeCTC",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                   visible: {
                     props: ["[internshipDescription]-[mtech]-[compensationDetails]-[provisionForPPO]"],
@@ -850,7 +850,7 @@ const IAFSchema: FormBuilder = {
                 {
                   label: "Tentative CTC for the PPO",
                   key: "tentativeCTC",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                   visible: {
                     props: ["[internshipDescription]-[phd]-[compensationDetails]-[provisionForPPO]"],
@@ -948,7 +948,7 @@ const IAFSchema: FormBuilder = {
                 {
                   label: "Tentative CTC for the PPO",
                   key: "tentativeCTC",
-                  type: FormInputType.NUMBER,
+                  type: FormInputType.SHORT_TEXT,
                   required: false,
                   visible: {
                     props: ["[internshipDescription]-[barch]-[compensationDetails]-[provisionForPPO]"],
