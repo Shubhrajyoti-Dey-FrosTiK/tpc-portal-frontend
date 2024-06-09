@@ -65,6 +65,8 @@ export const formSlice = createSlice({
       state,
       action: PayloadAction<InitializeReduxFormState>
     ) => {
+      console.log("Initializing keyStore")
+      console.log(action.payload.keyStore)
       if (!state[action.payload.formKey])
         state[action.payload.formKey] = {
           keyStore: action.payload.keyStore ? action.payload.keyStore : {},
@@ -80,6 +82,8 @@ export const formSlice = createSlice({
       state,
       action: PayloadAction<UpdateReduxFormState>
     ) => {
+      console.log("UPDATING STATE")
+      console.log(action.payload.stateKey, " = ", action.payload.value)
       if (!state[action.payload.formKey])
         state[action.payload.formKey] = {
           posted: false,

@@ -53,6 +53,7 @@ function useForm({
 
     switch (formElement.type) {
       case FormInputType.CHECKBOX:
+        console.log("1")
         dispatch(
           updateFormStateContext({
             formKey,
@@ -65,6 +66,7 @@ function useForm({
 
       // For currency we need to concat the currency and the value for initial value
       case FormInputType.CURRENCY:
+        console.log("2")
         let currencyValue = "INR";
         if (formElement.initialValue)
           currencyValue =
@@ -80,6 +82,7 @@ function useForm({
         break;
 
       case FormInputType.FILE:
+        console.log("3")
         dispatch(
           updateFormStateContext({
             formKey,
@@ -91,6 +94,7 @@ function useForm({
         break;
 
       case FormInputType.NUMBER:
+        console.log("4")
         dispatch(
           updateFormStateContext({
             formKey,
@@ -102,6 +106,7 @@ function useForm({
         break;
 
       case FormInputType.SWITCH_INPUT:
+        console.log("5")
         dispatch(
           updateFormStateContext({
             formKey,
@@ -113,6 +118,7 @@ function useForm({
         break;
 
       default:
+        console.log("6")
         dispatch(
           updateFormStateContext({
             formKey,
@@ -298,6 +304,7 @@ function useForm({
   };
 
   const captureSwitchInputChange = async (state: boolean): Promise<boolean> => {
+    console.log("Inside Switch Input Change ", state)
     dispatch(
       updateFormStateContext({
         formKey,
