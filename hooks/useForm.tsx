@@ -88,16 +88,29 @@ function useForm({
             formBuilderSchema,
           })
         );
+        break;
 
-        case FormInputType.NUMBER:
-          dispatch(
-            updateFormStateContext({
-              formKey,
-              stateKey: basePath,
-              value:  (formElement.initialValue as number) || 0,
-              formBuilderSchema,
-            })
-          );
+      case FormInputType.NUMBER:
+        dispatch(
+          updateFormStateContext({
+            formKey,
+            stateKey: basePath,
+            value: (formElement.initialValue as number) || 0,
+            formBuilderSchema,
+          })
+        );
+        break;
+
+      case FormInputType.SWITCH_INPUT:
+        dispatch(
+          updateFormStateContext({
+            formKey,
+            stateKey: basePath,
+            value: (formElement.initialValue as boolean) || false,
+            formBuilderSchema,
+          })
+        );
+        break;
 
       default:
         dispatch(
@@ -117,7 +130,7 @@ function useForm({
         stateKey: basePath,
         value:
           formElement.type !== FormInputType.FILE &&
-          (formElement.required || formElement.validation)
+            (formElement.required || formElement.validation)
             ? false
             : true,
         formBuilderSchema,
@@ -146,7 +159,7 @@ function useForm({
     if (
       formElement.required &&
       vs.isRequired(inputState, formElement.type).validationStatus ===
-        Validation.FAILURE
+      Validation.FAILURE
     ) {
       finalValidatedState = false;
       setError("This field is required");

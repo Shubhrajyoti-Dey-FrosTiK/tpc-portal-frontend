@@ -90,7 +90,7 @@ export const formSlice = createSlice({
           submitTried: false,
         };
       state[action.payload.formKey].keyStore[action.payload.stateKey] =
-        action.payload.value || "";
+        action.payload.value === undefined ? "" : action.payload.value
     },
 
     updateFormValidationContext: (
@@ -124,7 +124,7 @@ export const formSlice = createSlice({
       state[action.payload.formKey].repeatStore[action.payload.basePath] =
         state[action.payload.formKey].repeatStore[action.payload.basePath]
           ? state[action.payload.formKey].repeatStore[action.payload.basePath] +
-            1
+          1
           : 2;
     },
 
@@ -148,10 +148,10 @@ export const formSlice = createSlice({
       ] = state[action.payload.formKey].repeatStore[
         action.payload.repeatStorePath
       ]
-        ? state[action.payload.formKey].repeatStore[
-            action.payload.repeatStorePath
+          ? state[action.payload.formKey].repeatStore[
+          action.payload.repeatStorePath
           ] - 1
-        : 1;
+          : 1;
     },
 
     trySubmit: (state, action: PayloadAction<{ formKey: string }>) => {
