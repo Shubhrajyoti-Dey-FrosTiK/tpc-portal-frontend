@@ -98,7 +98,7 @@ const IAFSchema: FormBuilder = {
           label: "is minimum CGPA a criteria?",
           key: "isCGPACriteria",
           type: FormInputType.SWITCH_INPUT,
-          required: true,
+          required: false,
         },
         {
           label: "Eligible Courses",
@@ -275,7 +275,7 @@ const IAFSchema: FormBuilder = {
                   label: "Will PPO be provided after internship based on performance?",
                   key: "provisionForPPO",
                   type: FormInputType.SWITCH_INPUT,
-                  required: true,
+                  required: false,
                 },
                 {
                   label: "Tentative CTC for the PPO",
@@ -457,7 +457,7 @@ const IAFSchema: FormBuilder = {
                   label: "Will PPO be provided after internship based on performance?",
                   key: "provisionForPPO",
                   type: FormInputType.SWITCH_INPUT,
-                  required: true,
+                  required: false,
                 },
                 {
                   label: "Tentative CTC for the PPO",
@@ -653,7 +653,7 @@ const IAFSchema: FormBuilder = {
                   label: "Will PPO be provided after internship based on performance?",
                   key: "provisionForPPO",
                   type: FormInputType.SWITCH_INPUT,
-                  required: true,
+                  required: false,
                 },
                 {
                   label: "Tentative CTC for the PPO",
@@ -845,7 +845,7 @@ const IAFSchema: FormBuilder = {
                   label: "Will PPO be provided after internship based on performance?",
                   key: "provisionForPPO",
                   type: FormInputType.SWITCH_INPUT,
-                  required: true,
+                  required: false,
                 },
                 {
                   label: "Tentative CTC for the PPO",
@@ -943,7 +943,7 @@ const IAFSchema: FormBuilder = {
                   label: "Will PPO be provided after internship based on performance?",
                   key: "provisionForPPO",
                   type: FormInputType.SWITCH_INPUT,
-                  required: true,
+                  required: false,
                 },
                 {
                   label: "Tentative CTC for the PPO",
