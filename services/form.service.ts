@@ -255,6 +255,7 @@ export default class FormService {
     exportableFormData:
       | string
       | number
+      | boolean
       | Array<File>
       | Array<number>
       | Array<string>
@@ -364,6 +365,7 @@ export default class FormService {
               exportableFormData[formState.key as string] = files;
             }
           } else {
+            // @ts-ignore
             exportableFormData[formState.key as string] = keyStore[newBasePath];
           }
         }
@@ -381,6 +383,7 @@ export default class FormService {
     exportableFormData:
       | string
       | number
+      | boolean
       | Array<File>
       | Array<number>
       | Array<string>
@@ -480,6 +483,7 @@ export default class FormService {
     exportableFormData:
       | string
       | number
+      | boolean
       | Array<File>
       | Array<number>
       | Array<string>
@@ -546,6 +550,7 @@ export default class FormService {
 
         default: {
           const newBasePath = `${basePath}[${formState.key}]`;
+          // @ts-ignore
           exportableFormData[formState.label as string] = keyStore[newBasePath];
         }
       }

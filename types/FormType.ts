@@ -122,8 +122,8 @@ export interface CheckboxInput {
 
 export interface Option {
   label: String;
-  key: String | Number | Boolean;
-  value?: Array<String> | Array<Number> | Array<Boolean>;
+  key: String;
+  value?: Array<String>;
   description?: String;
 }
 
