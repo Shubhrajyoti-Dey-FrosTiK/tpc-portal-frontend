@@ -28,9 +28,6 @@ function Switch({
     formKey,
     formBuilderSchema,
   });
-
-  console.log("This is is ", formElement.label)
-  console.log("This is ", inputState)
   return (
     <div>
       {visible && (
@@ -39,9 +36,9 @@ function Switch({
             label={formElement.label}
             description={formElement.description}
             error={error}
-            checked={inputState}
+            value={inputState}
             onChange={(e) => captureSwitchInputChange(e.currentTarget.checked)}
-            defaultChecked={formElement.initialValue as boolean || false}
+            defaultChecked={formElement.initialValue as boolean}
           />
         </div>
       )}
