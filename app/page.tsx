@@ -60,13 +60,13 @@ const formTypes: Array<FormInterface> = [
   {
     title: "Internship Announcement Form (IAF)",
     description:
-      "Fill this form to hire interns from IIT BHU for 2025 graduating students",
+      "Fill this form to hire interns from IIT BHU for 2026 graduating students",
     goTo: "/company/iaf",
   },
   {
     title: "Job Announcement Form (JAF)",
     description:
-      "Fill this form to hire full time candidates from IIT BHU for 2024 graduating students",
+      "Fill this form to hire full time candidates from IIT BHU for 2025 graduating students",
     goTo: "/company/jaf",
   },
 ];
@@ -249,14 +249,12 @@ export default function Home() {
                               <a
                                 key={`Form_${formIndex}`}
                                 target="_blank"
-                                href={`/company/${
-                                  form.type == FormType.IAF ? "iaf" : "jaf"
+                                href={`/company/${form.type == FormType.IAF ? "iaf" : "jaf"
                                   // @ts-ignore
-                                }/${
-                                  form.type == FormType.IAF
+                                  }/${form.type == FormType.IAF
                                     ? form.iaf_id
                                     : form.jaf_id
-                                }`}
+                                  }`}
                               >
                                 <Paper className="m-2 p-5 rounded-md shadow-md cursor-pointer flex justify-between">
                                   <div>
@@ -283,16 +281,14 @@ export default function Home() {
                                   <div>
                                     <a
                                       target="_blank"
-                                      href={`/company/${
-                                        form.type == FormType.IAF
+                                      href={`/company/${form.type == FormType.IAF
                                           ? "iaf"
                                           : "jaf"
                                         // @ts-ignore
-                                      }/edit/${
-                                        form.type == FormType.IAF
+                                        }/edit/${form.type == FormType.IAF
                                           ? form.iaf_id
                                           : form.jaf_id
-                                      }`}
+                                        }`}
                                     >
                                       <IconEdit />
                                     </a>
