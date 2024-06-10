@@ -80,7 +80,7 @@ const JAFSchema: FormBuilder = {
           },
         },
         {
-          label: "is minimum CGPA a criteria?",
+          label: "Is there a CGPA criteria?",
           key: "isCGPACriteria",
           type: FormInputType.SWITCH_INPUT,
           required: false,
@@ -944,7 +944,7 @@ const JAFSchema: FormBuilder = {
       type: FormType.SECTION,
       formElements: [
         {
-          label: "are PWD students applicable?",
+          label: "Is the position also open to P.W.D. / D.A.P.?",
           key: "isPWDEligible",
           type: FormInputType.SWITCH_INPUT,
           required: false,
