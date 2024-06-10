@@ -95,7 +95,7 @@ const IAFSchema: FormBuilder = {
           },
         },
         {
-          label: "is minimum CGPA a criteria?",
+          label: "Is there a CGPA criteria?",
           key: "isCGPACriteria",
           type: FormInputType.SWITCH_INPUT,
           required: false,

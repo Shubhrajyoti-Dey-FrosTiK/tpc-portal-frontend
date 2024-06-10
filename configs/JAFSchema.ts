@@ -80,6 +80,12 @@ const JAFSchema: FormBuilder = {
           },
         },
         {
+          label: "Is there a CGPA criteria?",
+          key: "isCGPACriteria",
+          type: FormInputType.SWITCH_INPUT,
+          required: false,
+        },
+        {
           label: "Eligible Courses",
           key: "courses",
           type: FormInputType.CHECKBOX,
@@ -131,6 +137,18 @@ const JAFSchema: FormBuilder = {
                   key: "cgpa",
                   type: FormInputType.NUMBER,
                   required: true,
+                  description: "CGPA must be a number between 0 - 10",
+                  max: 10,
+                  min: 0,
+                  visible: {
+                    props: ["[jobDescription]-[isCGPACriteria]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
                 {
                   label: "Eligible Branches",
@@ -307,6 +325,18 @@ const JAFSchema: FormBuilder = {
                   key: "cgpa",
                   type: FormInputType.NUMBER,
                   required: true,
+                  description: "CGPA must be a number between 0 - 10",
+                  max: 10,
+                  min: 0,
+                  visible: {
+                    props: ["[jobDescription]-[isCGPACriteria]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
                 {
                   label: "Eligible Branches",
@@ -498,6 +528,18 @@ const JAFSchema: FormBuilder = {
                   key: "cgpa",
                   type: FormInputType.NUMBER,
                   required: true,
+                  description: "CGPA must be a number between 0 - 10",
+                  max: 10,
+                  min: 0,
+                  visible: {
+                    props: ["[jobDescription]-[isCGPACriteria]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
                 {
                   label: "Eligible Branches",
@@ -704,6 +746,18 @@ const JAFSchema: FormBuilder = {
                   key: "cgpa",
                   type: FormInputType.NUMBER,
                   required: true,
+                  description: "CGPA must be a number between 0 - 10",
+                  max: 10,
+                  min: 0,
+                  visible: {
+                    props: ["[jobDescription]-[isCGPACriteria]"],
+                    validator(arg0) {
+                      if (arg0[0] == true) {
+                        return true;
+                      }
+                      return false;
+                    },
+                  }
                 },
                 {
                   label: "Eligible Branches",
@@ -889,6 +943,13 @@ const JAFSchema: FormBuilder = {
       key: "medical",
       type: FormType.SECTION,
       formElements: [
+        {
+          label: "Is the position also open to P.W.D. / D.A.P.?",
+          key: "isPWDEligible",
+          type: FormInputType.SWITCH_INPUT,
+          required: false,
+          initialValue: true,
+        },
         {
           label: "Color Blindness",
           key: "colorBlindness",
