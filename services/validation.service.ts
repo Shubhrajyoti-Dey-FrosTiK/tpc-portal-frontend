@@ -20,7 +20,7 @@ export default class ValidationService {
     };
     let inputState = input;
 
-    if (formInputType === FormInputType.SWITCH_INPUT) {
+    if (formInputType === FormInputType.SWITCH_INPUT && typeof input === "boolean") {
       return validated;
     }
 
