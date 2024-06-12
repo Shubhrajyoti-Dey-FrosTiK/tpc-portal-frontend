@@ -22,7 +22,7 @@ export interface UpdateReduxFormState {
   formKey: string;
   stateKey: string;
   formBuilderSchema: FormBuilder;
-  value?:
+  value:
     | string
     | Array<string>
     | number
