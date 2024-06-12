@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Stepper, createStyles } from "@mantine/core";
+import { Stepper, createStyles, getStylesRef } from "@mantine/core";
 
-const useStyles = createStyles((theme, _params, getRef) => ({
+const useStyles = createStyles((theme, _params) => ({
   root: {
     padding: theme.spacing.md,
     backgroundColor:
@@ -29,7 +29,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   },
 
   stepIcon: {
-    ref: getRef("stepIcon"),
+    ref: getStylesRef("stepIcon"),
     borderColor: "transparent",
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.white,

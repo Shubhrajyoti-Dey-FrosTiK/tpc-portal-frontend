@@ -30,9 +30,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
-import { updateCompanyRecruiterId } from "../../../store/states/idStore";
-import axios from "axios";
-
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { setCurrentUser } from "../../../store/states/userSlice";
 

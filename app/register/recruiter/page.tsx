@@ -5,10 +5,11 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Typography } from "../../../components/components";
 import Form from "../../../components/form/Form";
+// import Form from "../../../components/form/types/Form"
 import RecruiterAndCompanyRegisterSchema from "../../../configs/CompanyRegisterSchema";
 import { handleSignUpWithEmailPassword } from "../../../firebase/auth";
-import useExportableFormData from "../../../hooks/useExportableFormData";
-import { selectForm } from "../../../store/states/formSlice";
+import useExportableFormData from "../../../components/form/hooks/useExportableFormData";
+import { selectForm } from "../../../components/form/states/formSlice";
 // export const runtime = "edge";
 
 function Page() {

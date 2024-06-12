@@ -3,7 +3,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Viewer from "../../../../../components/form/Viewer";
-import { KeyStore } from "../../../../../types/Form";
+import { KeyStore } from "../../../../../components/form/types/Form";
 import IAFSchema from "../../../../../configs/IAFSchema";
 import Spinner from "../../../../../components/spinner/Spinner";
 import { useParams, useRouter } from "next/navigation";
@@ -57,8 +57,8 @@ function IAF() {
         <>
           <Form
             schema={IAFSchema}
-            edit={{ keyStore }}
-            headers={{"iaf_id": params ? params.id : "",}}
+            edit={ {keyStore} }
+            headers={{"iaf_id": params ? params.id : ""}}
             bodyTemplate={{
               recruiter: IdStore.recruiterId,
               company: IdStore.companyId,

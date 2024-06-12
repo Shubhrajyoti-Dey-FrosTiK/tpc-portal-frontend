@@ -1,8 +1,9 @@
 "use client";
 
-import { Failure, FormBuilder, Success } from "../types/Form";
-import { FormInputType, FormType } from "../types/FormType";
-import { Validation } from "../types/Validation";
+import { Failure, FormBuilder, Success } from "../components/form/types/Form"
+import { FormInputType, FormType } from "../components/form/types/FormType";
+import { Validation } from "../components/form/types/Validation";
+
 
 const JAFSchema: FormBuilder = {
   title: "Job Announcement Form",

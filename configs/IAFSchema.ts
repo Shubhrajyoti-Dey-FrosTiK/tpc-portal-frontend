@@ -1,9 +1,9 @@
 "use client";
 
-// import { title } from "process";
-import { Failure, FormBuilder, Success } from "../types/Form";
-import { FormInputType, FormType } from "../types/FormType";
-import { Validation } from "../types/Validation";
+import { title } from "process";
+import { Failure,FormBuilder,Success } from "../components/form/types/Form";
+import { FormInputType,FormType } from "../components/form/types/FormType";
+import { Validation } from "../components/form/types/Validation";
 
 const IAFSchema: FormBuilder = {
   title: "Internship Announcement Form",

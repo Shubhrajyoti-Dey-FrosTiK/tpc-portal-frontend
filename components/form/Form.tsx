@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import dynamic from "next/dynamic";
 
 // Types
 import {
@@ -9,10 +8,10 @@ import {
   KeyStore,
   RepeatableSection,
   Section,
-} from "../../types/Form";
+} from "./types/Form";
 
 // Components
-import { Typography, Button, useMantineTheme } from "../components";
+import { Button, Typography, useMantineTheme } from "../components";
 // const Renderer = dynamic(import("./Renderer"));
 import Renderer from "./Renderer";
 
@@ -20,20 +19,21 @@ import Renderer from "./Renderer";
 import { IconCheck } from "@tabler/icons";
 
 // Redux
-import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import Spinner from "../spinner/Spinner";
+import useExportableFormData from "./hooks/useExportableFormData";
 import {
   initializeFormState,
   postForm,
   selectForm,
+  setSandbox,
   trySubmit,
-} from "../../store/states/formSlice";
-import { FormElement } from "../../types/FormType";
-import useExportableFormData from "../../hooks/useExportableFormData";
+} from "./states/formSlice";
 import { StepperComponent } from "./Stepper";
+import { FormElement } from "./types/FormType";
 import Viewer from "./Viewer";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import Spinner from "../spinner/Spinner";
 
 export interface GoToPath {
   name: string;
@@ -50,6 +50,8 @@ function Form({
   bodyTemplate,
   goToPath,
   edit,
+  sandbox,
+  goToButton,
   variables,
   headers,
 }: {
@@ -62,13 +64,15 @@ function Form({
   postError?: string;
   bodyTemplate?: object;
   goToPath?: GoToPath;
+  variables?: object;
+  headers?: { [key: string]: string | string[] };
   edit?: {
     keyStore: KeyStore;
   };
-  variables?: object;
-  headers?: { [key: string]: string };
+  sandbox?: boolean;
+  goToButton?: boolean;
 }) {
-  const formState = useSelector(selectForm);
+  const FormState = useSelector(selectForm);
   const router = useRouter();
   const { exportableFormState, checkValidated, fileUploader } =
     useExportableFormData({
@@ -82,10 +86,9 @@ function Form({
   React.useEffect(() => {
     let keyStore: KeyStore = edit ? edit.keyStore : {};
     if (variables) keyStore = { ...keyStore, ...variables };
-
     dispatch(
       initializeFormState({
-        keyStore,
+        keyStore: keyStore,
         formKey: schema.key as string,
         formBuilderSchema: schema,
       })
@@ -95,20 +98,40 @@ function Form({
   const handleSubmit = async () => {
     if (step === 1) {
       dispatch(trySubmit({ formKey: schema.key as string }));
-      if (checkValidated()) setStep(step + 1);
+      if (checkValidated()) {
+        if (sandbox) {
+          setLoading(true);
+
+          const { exportData, keyStore } = await fileUploader();
+          dispatch(
+            setSandbox({
+              formKey: schema.key as string,
+              sandbox: {
+                submitted: true,
+                keyStore,
+                exportData,
+              },
+            })
+          );
+          setStep(3);
+          setLoading(false);
+        } else {
+          setStep(step + 1);
+        }
+      }
     }
 
     if (step == 2) {
       setLoading(true);
       const { exportData, keyStore } = await fileUploader();
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+
       if (edit && edit.keyStore) {
         await axios.put(
           postUrl,
           bodyTemplate
             ? { ...bodyTemplate, ...exportData, keyStore }
             : { ...exportData, keyStore },
-          { headers: headers }
+            { headers: headers }
         );
       } else {
         await axios.post(
@@ -116,7 +139,7 @@ function Form({
           bodyTemplate
             ? { ...bodyTemplate, ...exportData, keyStore }
             : { ...exportData, keyStore },
-          { headers: headers }
+            { headers: headers }
         );
       }
 
@@ -130,18 +153,20 @@ function Form({
 
   return (
     <div className="m-7">
-      <div className="mb-5">
-        <StepperComponent step={step} />
-      </div>
+      {!sandbox && (
+        <div className="mb-5">
+          <StepperComponent step={step} />
+        </div>
+      )}
 
       {/* Step 1  */}
       <div style={{ display: `${step == 1 ? "block" : "none"}` }}>
         <Typography order={1}>{schema.title}</Typography>
-        <Typography order={4} className="font-light mb-5">
+        <Typography order={4} className="mb-5 font-light">
           {schema.description}
         </Typography>
-        {formState[schema.key as string] &&
-          formState[schema.key as string].formBuilderSchema.sections.map(
+        {FormState[schema.key as string] &&
+          FormState[schema.key as string].formBuilderSchema.sections.map(
             (
               section: FormElement | Section | RepeatableSection,
               sectionIndex: number
@@ -152,7 +177,7 @@ function Form({
                     renderElement={section}
                     basePath={"" as string}
                     formKey={schema.key as string}
-                    formBuilderSchema={formState[schema.key as string]}
+                    formBuilderSchema={FormState[schema.key as string]}
                     keyIndex={[sectionIndex]}
                     initialSchema={schema}
                   />
@@ -166,34 +191,12 @@ function Form({
         {step === 2 && (
           <>
             <div style={{ display: `${loading ? "none" : "block"}` }}>
-              <Typography order={1}>{schema.title}</Typography>
-              {/* {formState[schema.key as string] &&
-                formState[schema.key as string].formBuilderSchema.sections.map(
-                  (
-                    section: FormElement | Section | RepeatableSection,
-                    sectionIndex: number
-                  ): React.ReactNode => {
-                    return (
-                      <React.Fragment key={section.key as React.Key}>
-                        <Renderer
-                          renderElement={section}
-                          basePath={"" as string}
-                          formKey={schema.key as string}
-                          formBuilderSchema={formState[schema.key as string]}
-                          keyIndex={[sectionIndex]}
-                          initialSchema={schema}
-                          viewOnly={true}
-                        />
-                      </React.Fragment>
-                    );
-                  }
-                )} */}
               <Viewer schema={schema} />
             </div>
             <div
               style={{
                 display: `${loading ? "block" : "none"}`,
-                minHeight: "60vh",
+                minHeight: "60dvh",
               }}
             >
               <Spinner />
@@ -226,7 +229,7 @@ function Form({
             color="purple"
             variant="gradient"
           >
-            {step < 2 ? "NEXT" : "SUBMIT"}
+            {step < 2 && !sandbox ? "NEXT" : "SUBMIT"}
           </Button>
         </div>
       )}
@@ -255,27 +258,24 @@ function Form({
                 {successDescription ||
                   "You can fill another JAF or edit and preview in the dashboard !"}
               </Typography>
-              <div className="w-full flex justify-center mt-5">
-                <Button
-                  className="mt-4 m-auto"
-                  ripple={true}
-                  aria-hidden={true}
-                  color="purple"
-                  onClick={() => {
-                    if (goToPath) {
-                      router.push(goToPath.path, {
-                        forceOptimisticNavigation: true,
-                      });
-                    } else
-                      router.push("/", {
-                        forceOptimisticNavigation: true,
-                      });
-                  }}
-                  variant="gradient"
-                >
-                  {goToPath ? goToPath.name : "Go to Dashboard"}
-                </Button>
-              </div>
+              {goToButton && (
+                <div className="mt-5 flex w-full justify-center">
+                  <Button
+                    className="m-auto mt-4"
+                    ripple={true}
+                    aria-hidden={true}
+                    color="purple"
+                    onClick={() => {
+                      if (goToPath) {
+                        router.push(goToPath.path);
+                      } else router.push("/");
+                    }}
+                    variant="gradient"
+                  >
+                    {goToPath ? goToPath.name : "Go to Dashboard"}
+                  </Button>
+                </div>
+              )}
             </div>
           ))}
       </div>
