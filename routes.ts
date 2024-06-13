@@ -3,5 +3,6 @@ export const PUBLIC_ROUTES = {
   "/register": true,
   "/register/recruiter": true,
   "/resume": true,
+  "/credits":true
   // "/": true,
 };
