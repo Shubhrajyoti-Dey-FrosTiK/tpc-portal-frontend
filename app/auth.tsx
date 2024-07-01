@@ -16,13 +16,10 @@ import {
 } from "firebase/auth";
 import { FIREBASE_CONFIG } from "../constants/firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser, setCurrentUser } from "../store/states/userSlice";
+import { selectUser,setCurrentUser } from "../store/states/userSlice";
 import { PUBLIC_ROUTES } from "../routes";
 import axios from "axios";
-import {
-  selectIdStore,
-  updateCompanyRecruiterId,
-} from "../store/states/idStore";
+import { selectIdStore,updateCompanyRecruiterId } from "../store/states/idStore";
 import Spinner from "../components/spinner/Spinner";
 
 export default function AuthWrapper({
@@ -105,11 +102,11 @@ export default function AuthWrapper({
       // Check if the route is public or not
       if (!loggedIn && !(pathName in PUBLIC_ROUTES)) {
         router.push("/register/recruiter", {
-          forceOptimisticNavigation: true,
+          // forceOptimisticNavigation: true,
         });
       } else if (loggedIn && pathName in PUBLIC_ROUTES) {
         router.push("/", {
-          forceOptimisticNavigation: true,
+          // forceOptimisticNavigation: true,
         });
       } else {
         setLoading(false);

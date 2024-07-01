@@ -75,7 +75,7 @@ export function NavbarNested({
             style={{ alignItems: "center" }}
             onClick={() => {
               router.push("/", {
-                forceOptimisticNavigation: true,
+                // forceOptimisticNavigation: true,
               });
             }}
           >

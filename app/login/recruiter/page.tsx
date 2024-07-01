@@ -30,9 +30,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
-import { updateCompanyRecruiterId } from "../../../store/states/idStore";
-import axios from "axios";
-
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { setCurrentUser } from "../../../store/states/userSlice";
 
@@ -59,7 +56,7 @@ export default function Login() {
           dispatch(setCurrentUser({ user: result.user }));
 
           router.push("/", {
-            forceOptimisticNavigation: true,
+            // forceOptimisticNavigation: true,
           });
         }
       })
@@ -77,7 +74,7 @@ export default function Login() {
       dispatch(setCurrentUser({ user: response.user }));
 
       router.push("/", {
-        forceOptimisticNavigation: true,
+        // forceOptimisticNavigation: true,
       });
     } catch (error: any) {
       setError(true);

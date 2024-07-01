@@ -1,14 +1,22 @@
+import { IconDownload, IconFile } from "@tabler/icons-react";
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { initializeFormState, selectForm } from "../../store/states/formSlice";
+import { Typography } from "../components";
+import useExportableFormData from "./hooks/useExportableFormData";
+import Renderer from "./Renderer";
+import { initializeFormState, selectForm } from "./states/formSlice";
 import {
   FormBuilder,
   KeyStore,
   RepeatableSection,
   Section,
-} from "../../types/Form";
-import { FormElement } from "../../types/FormType";
-import Renderer from "./Renderer";
+} from "./types/Form";
+import { FormElement } from "./types/FormType";
+
+// @ts-ignore
+pdfMake.addVirtualFileSystem(pdfFonts);
 
 function Viewer({
   schema,
@@ -17,7 +25,10 @@ function Viewer({
   schema: FormBuilder;
   keyStore?: KeyStore;
 }) {
-  const formState = useSelector(selectForm);
+  const FormState = useSelector(selectForm);
+  const { exportFormDataPDF } = useExportableFormData({
+    formKey: schema.key as string,
+  });
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -32,8 +43,29 @@ function Viewer({
 
   return (
     <div>
-      {formState[schema.key as string] &&
-        formState[schema.key as string].formBuilderSchema.sections.map(
+      <div className="flex flex-col items-center justify-start md:flex-row md:justify-between">
+        <Typography order={2}>{schema.title}</Typography>
+        <div className="flex gap-3">
+          <IconFile
+            color="purple"
+            className="cursor-pointer"
+            onClick={() => {
+              const pdfSchema = exportFormDataPDF();
+              pdfMake.createPdf(pdfSchema).open();
+            }}
+          />
+          <IconDownload
+            color="purple"
+            className="cursor-pointer"
+            onClick={() => {
+              const pdfSchema = exportFormDataPDF();
+              pdfMake.createPdf(pdfSchema).download();
+            }}
+          />
+        </div>
+      </div>
+      {FormState[schema.key as string] &&
+        FormState[schema.key as string].formBuilderSchema.sections.map(
           (
             section: FormElement | Section | RepeatableSection,
             sectionIndex: number
@@ -44,7 +76,7 @@ function Viewer({
                   renderElement={section}
                   basePath={"" as string}
                   formKey={schema.key as string}
-                  formBuilderSchema={formState[schema.key as string]}
+                  formBuilderSchema={FormState[schema.key as string]}
                   keyIndex={[sectionIndex]}
                   initialSchema={schema}
                   viewOnly={true}

@@ -3,7 +3,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Viewer from "../../../../components/form/Viewer";
-import { KeyStore } from "../../../../types/Form";
+import { KeyStore } from "../../../../components/form/types/Form";
 import IAFSchema from "../../../../configs/IAFSchema";
 import Spinner from "../../../../components/spinner/Spinner";
 import { useParams, useRouter } from "next/navigation";

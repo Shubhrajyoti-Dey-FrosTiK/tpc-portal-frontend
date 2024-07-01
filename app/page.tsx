@@ -85,7 +85,7 @@ export default function Home() {
   useEffect(() => {
     if (!User.currentUser)
       router.push("/register/recruiter", {
-        forceOptimisticNavigation: true,
+        // forceOptimisticNavigation: true,
       });
   }, []);
 
@@ -167,7 +167,7 @@ export default function Home() {
             className="rounded-md"
             opened={opened}
             onClose={close}
-            styles={{ modal: { borderRadius: 10 } }}
+            // styles={{ modal: { borderRadius: 10 } }}
             centered
             size="xl"
           >

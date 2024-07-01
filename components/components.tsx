@@ -43,6 +43,8 @@ import {
   Badge,
   Image,
   Timeline,
+  MultiSelect,
+  SelectItem
 } from "@mantine/core";
 
 import {
@@ -107,6 +109,7 @@ export {
   IconBrandGithubFilled,
   IconBrandLinkedin,
   IconBrandGmail,
+  MultiSelect
 };
 
 export type {
@@ -116,4 +119,5 @@ export type {
   DropzoneProps,
   FileWithPath,
   TabsProps,
+  SelectItem
 };

@@ -21,7 +21,7 @@ import {
 // Slices
 import counterSlice from "./states/counterSlice.js";
 import userSlice from "./states/userSlice";
-import formSlice from "./states/formSlice";
+import formSlice from "../components/form/states/formSlice";
 import themeSlice from "./states/themeSlice";
 import idStoreSlice from "./states/idStore";
 import resumeSlice from "./states/resumeSlice";
