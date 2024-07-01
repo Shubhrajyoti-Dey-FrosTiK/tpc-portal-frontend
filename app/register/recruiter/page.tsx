@@ -56,7 +56,7 @@ function Page() {
             color="purple"
             onClick={() => {
               router.push("/login/recruiter", {
-                forceOptimisticNavigation: true,
+                // forceOptimisticNavigation: true,
               });
             }}
             variant="gradient"

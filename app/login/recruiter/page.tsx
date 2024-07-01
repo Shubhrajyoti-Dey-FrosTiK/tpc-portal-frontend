@@ -56,7 +56,7 @@ export default function Login() {
           dispatch(setCurrentUser({ user: result.user }));
 
           router.push("/", {
-            forceOptimisticNavigation: true,
+            // forceOptimisticNavigation: true,
           });
         }
       })
@@ -74,7 +74,7 @@ export default function Login() {
       dispatch(setCurrentUser({ user: response.user }));
 
       router.push("/", {
-        forceOptimisticNavigation: true,
+        // forceOptimisticNavigation: true,
       });
     } catch (error: any) {
       setError(true);

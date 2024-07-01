@@ -102,11 +102,11 @@ export default function AuthWrapper({
       // Check if the route is public or not
       if (!loggedIn && !(pathName in PUBLIC_ROUTES)) {
         router.push("/register/recruiter", {
-          forceOptimisticNavigation: true,
+          // forceOptimisticNavigation: true,
         });
       } else if (loggedIn && pathName in PUBLIC_ROUTES) {
         router.push("/", {
-          forceOptimisticNavigation: true,
+          // forceOptimisticNavigation: true,
         });
       } else {
         setLoading(false);

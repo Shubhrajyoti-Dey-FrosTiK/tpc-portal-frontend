@@ -22,7 +22,7 @@ export interface UpdateReduxFormState {
   formKey: string;
   stateKey: string;
   formBuilderSchema: FormBuilder;
-  value:
+  value?:
     | string
     | Array<string>
     | number
@@ -107,7 +107,7 @@ export const formSlice = createSlice({
           },
         };
       state[action.payload.formKey].keyStore[action.payload.stateKey] =
-        action.payload.value;
+        action.payload.value || "";
     },
 
     updateFormValidationContext: (
