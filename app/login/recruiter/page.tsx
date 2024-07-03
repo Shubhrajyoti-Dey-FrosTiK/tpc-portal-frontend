@@ -137,7 +137,7 @@ export default function Login() {
           </Typography>
         )}
         <Anchor
-          href="/resetPassword"
+          href="/login/resetPassword"
           c={theme.colors["dark"][theme.colorScheme == "light" ? 9 : 0]} // For some reason anchor doesn't change color with theme, so had to do this manually
           className="mt-3 flex flex-row justify-center"
         >

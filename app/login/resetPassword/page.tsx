@@ -8,7 +8,7 @@ import {
     Button,
     Typography,
     showNotification
-} from "../../components/components";
+} from "../../../components/components";
 
 // Hooks
 import { useState } from "react";
@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 
-import { handleSendPasswordResetEmail } from "../../firebase/auth";
+import { handleSendPasswordResetEmail } from "../../../firebase/auth";
 
 // export const runtime = "edge";
 
@@ -59,7 +59,6 @@ export default function ResetPassword() {
             className="flex flex-col justify-center mt-10"
         >
             <Typography order={1} className="mb-1">Password Reset</Typography>
-            <Typography order={6}>Welcome to Training and Placement Cell</Typography>
             <form className="mt-2">
                 <TextInput
                     withAsterisk
