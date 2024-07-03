@@ -22,25 +22,33 @@ import { handleSendPasswordResetEmail } from "../../firebase/auth";
 
 export default function ResetPassword() {
     const [email, setEmail] = useState("");
-    const [error, setError] = useState<boolean>(true);
+    const [error, setError] = useState<boolean>(false);
     const router = useRouter();
     const dispatch = useDispatch();
 
 
     const handlePasswordReset = async () => {
-        const response = await handleSendPasswordResetEmail(email)
-        console.log(response);
-        if (!response.error) {
-            showNotification({
-                title: "Password Reset Email Sent.",
-                message: "Check your inbox.",
-            });
-            router.push("/login/recruiter");
-        } else {
-            showNotification({
-                title: "Error",
-                message: response.error,
-            })
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            const response = await handleSendPasswordResetEmail(email)
+            console.log(response);
+            if (!response.error) {
+                showNotification({
+                    title: "Password Reset Email Sent.",
+                    message: "Check your inbox.",
+                });
+                router.push("/login/recruiter");
+            } else {
+                let message = "Error";
+                if (response.error == "Firebase: Error (auth/invalid-email).") {
+                    message = "Invalid Email";
+                } else if (response.error == "Firebase: Error (auth/user-not-found).") {
+                    message = "User not found"
+                }
+                showNotification({
+                    title: "Error",
+                    message: message,
+                })
+            }
         }
     };
 
@@ -50,7 +58,7 @@ export default function ResetPassword() {
             mx="auto"
             className="flex flex-col justify-center mt-10"
         >
-            <Typography order={2}>Recruiter Login</Typography>
+            <Typography order={1} className="mb-1">Password Reset</Typography>
             <Typography order={6}>Welcome to Training and Placement Cell</Typography>
             <form className="mt-2">
                 <TextInput
@@ -59,22 +67,24 @@ export default function ResetPassword() {
                     value={email}
                     onChange={(event) => {
                         setEmail(event.currentTarget.value);
-                        setError(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.currentTarget.value));
+                        setError(false);
                     }}
                     error={
-                        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-                            ? null
-                            : "invalid email"
+                        error
+                            ? "invalid email"
+                            : null
                     }
                 />
                 <Group position="right" mt="md">
                     <div style={{ width: "100%" }}>
                         <Button
                             className="w-full bg-[#9c36b5]"
-                            onClick={handlePasswordReset}
-                            disabled={error}
+                            onClick={() => {
+                                setError(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+                                handlePasswordReset();
+                            }}
                         >
-                            Login
+                            Send Password Reset Link
                         </Button>
                     </div>
                 </Group>
