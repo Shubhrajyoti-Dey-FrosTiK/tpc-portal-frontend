@@ -43,6 +43,7 @@ import {
   Badge,
   Image,
   Timeline,
+  Anchor
 } from "@mantine/core";
 
 import {
@@ -51,6 +52,10 @@ import {
   MIME_TYPES,
   FileWithPath,
 } from "@mantine/dropzone";
+
+import {
+  showNotification
+} from "@mantine/notifications";
 
 // Switching to Material Tailwind if Mantine is not good
 import { Button } from "@material-tailwind/react";
@@ -107,6 +112,8 @@ export {
   IconBrandGithubFilled,
   IconBrandLinkedin,
   IconBrandGmail,
+  Anchor,
+  showNotification
 };
 
 export type {

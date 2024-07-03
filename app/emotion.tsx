@@ -1,6 +1,7 @@
 "use client";
 import { CacheProvider } from "@emotion/react";
 import { useEmotionCache, MantineProvider, useMantineTheme } from "@mantine/core";
+import { NotificationsProvider } from '@mantine/notifications';
 import { useServerInsertedHTML } from "next/navigation";
 
 import { ThemeProvider } from "@material-tailwind/react";
@@ -40,7 +41,9 @@ export default function RootStyleRegistry({
           primaryColor: "grape",
         }}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <NotificationsProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </NotificationsProvider>
       </MantineProvider>
     </CacheProvider>
   );
