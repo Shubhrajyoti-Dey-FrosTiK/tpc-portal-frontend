@@ -20,7 +20,7 @@ import { handleSendPasswordResetEmail } from "../../firebase/auth";
 
 // export const runtime = "edge";
 
-export default function resetPassword() {
+export default function ResetPassword() {
     const [email, setEmail] = useState("");
     const [error, setError] = useState<boolean>(true);
     const router = useRouter();
