@@ -12,6 +12,8 @@ import {
   Typography,
   Input,
   Alert,
+  Anchor,
+  useMantineTheme
 } from "../../../components/components";
 
 //Tabler Icons
@@ -45,6 +47,7 @@ export default function Login() {
   const [googleLoginError, setGoogleLoginError] = useState<boolean>(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  const theme = useMantineTheme();
 
   const googleLogin = async () => {
     signInWithPopup(auth, provider)
@@ -133,6 +136,13 @@ export default function Login() {
             Invalid Credentials
           </Typography>
         )}
+        <Anchor
+          href="/login/resetPassword"
+          c={theme.colors["dark"][theme.colorScheme == "light" ? 9 : 0]} // For some reason anchor doesn't change color with theme, so had to do this manually
+          className="mt-3 flex flex-row justify-center"
+        >
+          Forgot your password?
+        </Anchor>
         <div className="flex flex-row justify-center p-4">
           <Typography order={3}>OR</Typography>
         </div>

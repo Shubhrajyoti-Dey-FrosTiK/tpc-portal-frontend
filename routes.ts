@@ -4,4 +4,5 @@ export const PUBLIC_ROUTES = {
   "/register/recruiter": true,
   "/resume": true,
   // "/": true,
+  "/login/resetPassword": true,
 };

@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   connectAuthEmulator,
+  sendPasswordResetEmail
 } from "firebase/auth";
 
 // Constants
@@ -58,6 +59,17 @@ export const handleLoginWithEmailPassword = async (
 ) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    return { status: FIREBASE_AUTH_SUCCESS };
+  } catch (error: any) {
+    return { error: error.message as string };
+  }
+};
+
+export const handleSendPasswordResetEmail = async (
+  email: string,
+) => {
+  try {
+    await sendPasswordResetEmail(auth, email)
     return { status: FIREBASE_AUTH_SUCCESS };
   } catch (error: any) {
     return { error: error.message as string };
