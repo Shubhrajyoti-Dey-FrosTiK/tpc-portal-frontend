@@ -1,3 +1,4 @@
+// Supported currencies
 export enum Currency {
   "AFN" = "AFN",
   "EUR" = "EUR",
