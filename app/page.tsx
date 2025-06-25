@@ -60,13 +60,13 @@ const formTypes: Array<FormInterface> = [
   {
     title: "Internship Announcement Form (IAF)",
     description:
-      "Fill this form to hire interns from IIT BHU for 2026 graduating students",
+      "Fill this form to hire interns from IIT BHU for 2027 graduating students",
     goTo: "/company/iaf",
   },
   {
     title: "Job Announcement Form (JAF)",
     description:
-      "Fill this form to hire full time candidates from IIT BHU for 2025 graduating students",
+      "Fill this form to hire full time candidates from IIT BHU for 2026 graduating students",
     goTo: "/company/jaf",
   },
 ];
