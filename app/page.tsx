@@ -227,14 +227,14 @@ export default function Home() {
             <Tabs.Panel value="all" pt="xs">
               <Tabs
                 color="purple"
-                defaultValue="2022-23"
+                defaultValue="2025-26"
                 orientation="vertical"
               >
                 <Tabs.List>
-                  <Tabs.Tab value="2022-23">2022-23</Tabs.Tab>
+                  <Tabs.Tab value="2025-26">2025-26</Tabs.Tab>
                 </Tabs.List>
 
-                <Tabs.Panel value="2022-23" pl="xs">
+                <Tabs.Panel value="2025-26" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
                       [...iafFormList, ...jafFormList].length ? (
@@ -328,14 +328,14 @@ export default function Home() {
             <Tabs.Panel value="iaf" pt="xs">
               <Tabs
                 color="purple"
-                defaultValue="2022-23"
+                defaultValue="2025-26"
                 orientation="vertical"
               >
                 <Tabs.List>
-                  <Tabs.Tab value="2022-23">2022-23</Tabs.Tab>
+                  <Tabs.Tab value="2025-26">2025-26</Tabs.Tab>
                 </Tabs.List>
 
-                <Tabs.Panel value="2022-23" pl="xs">
+                <Tabs.Panel value="2025-26" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
                       iafFormList && iafFormList.length ? (
@@ -404,14 +404,14 @@ export default function Home() {
             <Tabs.Panel value="jaf" pt="xs">
               <Tabs
                 color="purple"
-                defaultValue="2022-23"
+                defaultValue="2025-26"
                 orientation="vertical"
               >
                 <Tabs.List>
-                  <Tabs.Tab value="2022-23">2022-23</Tabs.Tab>
+                  <Tabs.Tab value="2025-26">2025-26</Tabs.Tab>
                 </Tabs.List>
 
-                <Tabs.Panel value="2022-23" pl="xs">
+                <Tabs.Panel value="2025-26" pl="xs">
                   <div className="max-h-[70vh] overflow-scroll">
                     {!formsLoading ? (
                       jafFormList && jafFormList.length ? (
